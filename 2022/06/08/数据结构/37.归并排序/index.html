@@ -6,19 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>各位加油！ | Hexo</title>
+  <title>37.归并排序 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1234567891011QQ : 2625856353wechat : ych18115771958非科班 大三，还在学习中，懂的不多，但如果你有什么不懂的地方也可以联系我多看书，系统的学习书籍下载 这个视频有介绍https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1er4y1i78q?spm_id_from&#x3D;333.851.header_right.fav_list.click&amp;">
+  <meta name="description" content="mergeSort.c 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495#inclu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="各位加油！">
-<meta property="og:url" content="http://example.com/2026/08/23/dream/index.html">
+<meta property="og:title" content="37.归并排序">
+<meta property="og:url" content="http://example.com/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/37.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1234567891011QQ : 2625856353wechat : ych18115771958非科班 大三，还在学习中，懂的不多，但如果你有什么不懂的地方也可以联系我多看书，系统的学习书籍下载 这个视频有介绍https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1er4y1i78q?spm_id_from&#x3D;333.851.header_right.fav_list.click&amp;">
+<meta property="og:description" content="mergeSort.c 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495#inclu">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-08-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-23T12:41:47.959Z">
+<meta property="og:image" content="http://codekenan.icu/img/53.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.png">
+<meta property="og:image" content="http://codekenan.icu/img/54.%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="http://codekenan.icu/img/55.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.png">
+<meta property="article:published_time" content="2022-06-08T09:20:09.000Z">
+<meta property="article:modified_time" content="2022-06-24T11:17:49.667Z">
 <meta property="article:author" content="ych">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://codekenan.icu/img/53.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -124,28 +129,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-dream" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据结构/37.归并排序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      各位加油！
+      37.归并排序
     </h1>
   
 
         
-        <a href="/2026/08/23/dream/" class="archive-article-date">
-  	<time datetime="2026-08-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-08-23</time>
+        <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/37.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2022-06-08T09:20:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QQ : 2625856353</span><br><span class="line">wechat : ych18115771958</span><br><span class="line"></span><br><span class="line">非科班 大三，还在学习中，懂的不多，但如果你有什么不懂的地方也可以联系我</span><br><span class="line"></span><br><span class="line">多看书，系统的学习</span><br><span class="line"></span><br><span class="line">书籍下载 这个视频有介绍</span><br><span class="line">https://www.bilibili.com/video/BV1er4y1i78q?spm_id_from=333.851.header_right.fav_list.click&amp;vd_source=a61be2deacefbb99540fd88c6ba02db9</span><br><span class="line"></span><br><span class="line">github上由于跨域图片无法加载，请访问 http://www.codekenan.icu:81/ </span><br></pre></td></tr></table></figure>
-<h3 id="坚信计算机世界里没有玄学"><a href="#坚信计算机世界里没有玄学" class="headerlink" title="坚信计算机世界里没有玄学"></a>坚信计算机世界里没有玄学</h3><h3 id="机器永远是对的"><a href="#机器永远是对的" class="headerlink" title="机器永远是对的"></a><strong>机器永远是对的</strong></h3><h3 id="未测代码永远是错的"><a href="#未测代码永远是错的" class="headerlink" title="未测代码永远是错的"></a>未测代码永远是错的</h3>
+        <p><img src="http://codekenan.icu/img/53.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F.png"><br><img src="http://codekenan.icu/img/54.%E7%A4%BA%E4%BE%8B.png"></p>
+<p>mergeSort.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 偷个懒，算法实现来源于菜鸟教程，自己分析了一遍</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort1</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort2</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort_recursive</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> reg[], <span class="type">int</span> start, <span class="type">int</span> end)</span>; </span><br><span class="line"><span class="type">int</span> <span class="title function_">min</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> arr1[] = &#123;<span class="number">48</span>,<span class="number">34</span>,<span class="number">60</span>,<span class="number">80</span>,<span class="number">75</span>,<span class="number">12</span>,<span class="number">26</span>,<span class="number">48</span>&#125;;</span><br><span class="line">    <span class="type">int</span> arr2[] = &#123;<span class="number">48</span>,<span class="number">34</span>,<span class="number">60</span>,<span class="number">80</span>,<span class="number">75</span>,<span class="number">12</span>,<span class="number">26</span>,<span class="number">48</span>&#125;;</span><br><span class="line">    <span class="type">int</span> len = <span class="keyword">sizeof</span>(arr1) / <span class="keyword">sizeof</span>(<span class="type">int</span>);</span><br><span class="line"></span><br><span class="line">    merge_sort1(arr1,len);</span><br><span class="line">    merge_sort2(arr2,len);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="comment">// printf(&quot;%d  &quot;,arr[i]);</span></span><br><span class="line">        assert(arr1[i] == arr2[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++)&#123;</span><br><span class="line">        assert(arr1[i] &lt;= arr1[i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 归并排序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort1</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> *a = arr;</span><br><span class="line">    <span class="type">int</span> *b = (<span class="type">int</span> *) <span class="built_in">malloc</span>(len * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="type">int</span> seg, start;</span><br><span class="line">    <span class="keyword">for</span> (seg = <span class="number">1</span>; seg &lt; len; seg += seg) &#123;</span><br><span class="line">        <span class="keyword">for</span> (start = <span class="number">0</span>; start &lt; len; start += seg * <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">int</span> low = start, mid = min(start + seg, len), high = min(start + seg * <span class="number">2</span>, len);</span><br><span class="line">            <span class="type">int</span> k = low;</span><br><span class="line">            <span class="type">int</span> start1 = low, end1 = mid;</span><br><span class="line">            <span class="type">int</span> start2 = mid, end2 = high;</span><br><span class="line">            <span class="keyword">while</span> (start1 &lt; end1 &amp;&amp; start2 &lt; end2)</span><br><span class="line">                b[k++] = a[start1] &lt; a[start2] ? a[start1++] : a[start2++];</span><br><span class="line">            <span class="keyword">while</span> (start1 &lt; end1)</span><br><span class="line">                b[k++] = a[start1++];</span><br><span class="line">            <span class="keyword">while</span> (start2 &lt; end2)</span><br><span class="line">                b[k++] = a[start2++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> *temp = a;</span><br><span class="line">        a = b;</span><br><span class="line">        b = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a != arr) &#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">            b[i] = a[i];</span><br><span class="line">        b = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort_recursive</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> reg[], <span class="type">int</span> start, <span class="type">int</span> end)</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (start &gt;= end)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> len = end - start, mid = (len &gt;&gt; <span class="number">1</span>) + start;</span><br><span class="line">    <span class="type">int</span> start1 = start, end1 = mid;</span><br><span class="line">    <span class="type">int</span> start2 = mid + <span class="number">1</span>, end2 = end;</span><br><span class="line">    merge_sort_recursive(arr, reg, start1, end1);</span><br><span class="line">    merge_sort_recursive(arr, reg, start2, end2);</span><br><span class="line">    <span class="type">int</span> k = start;</span><br><span class="line">    <span class="keyword">while</span> (start1 &lt;= end1 &amp;&amp; start2 &lt;= end2)</span><br><span class="line">        reg[k++] = arr[start1] &lt; arr[start2] ? arr[start1++] : arr[start2++];</span><br><span class="line">    <span class="keyword">while</span> (start1 &lt;= end1)</span><br><span class="line">        reg[k++] = arr[start1++];</span><br><span class="line">    <span class="keyword">while</span> (start2 &lt;= end2)</span><br><span class="line">        reg[k++] = arr[start2++];</span><br><span class="line">    <span class="keyword">for</span> (k = start; k &lt;= end; k++)</span><br><span class="line">        arr[k] = reg[k];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归版本,参数不同，但提供了统一入口</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">merge_sort2</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> reg[len];</span><br><span class="line">    merge_sort_recursive(arr, reg, <span class="number">0</span>, len - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">min</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> x &lt; y ? x : y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://codekenan.icu/img/55.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.png"></p>
+
       
 
       
@@ -153,6 +162,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -203,7 +223,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2026/08/23/dream/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/37.%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -217,9 +237,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/38.%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          38.基数排序
+        
+      </div>
+    </a>
   
-    <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/20.%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">20.哈夫曼编码</div>
+  
+    <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/36.%E5%A0%86%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">36.堆排序</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -329,10 +358,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">数据结构导论</a>
               </li>
              
@@ -341,19 +366,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">串</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -361,7 +378,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线性表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
             
             <div class="clearfix"></div>

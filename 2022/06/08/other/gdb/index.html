@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>hexo | Hexo</title>
+  <title>gdb的使用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263#安装npm 源管理器npm install -g nrm#查看源nrm ls#使用淘宝镜像nrm use taobao#安装hexonpm install -g h">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839yum install gdbgcc -g -o target target.c &#x2F;&#x2F;-g用于包含调试消息gdb targetlayout src &#x2F;&#x2F;源代码layout asm &#x2F;&#x2F;汇编list 源码startrun r 运行程序quit q退出b break">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo">
-<meta property="og:url" content="http://example.com/2022/06/01/hexo/index.html">
+<meta property="og:title" content="gdb的使用">
+<meta property="og:url" content="http://example.com/2022/06/08/other/gdb/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263#安装npm 源管理器npm install -g nrm#查看源nrm ls#使用淘宝镜像nrm use taobao#安装hexonpm install -g h">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839yum install gdbgcc -g -o target target.c &#x2F;&#x2F;-g用于包含调试消息gdb targetlayout src &#x2F;&#x2F;源代码layout asm &#x2F;&#x2F;汇编list 源码startrun r 运行程序quit q退出b break">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-31T16:35:50.000Z">
-<meta property="article:modified_time" content="2022-06-23T07:09:28.650Z">
+<meta property="article:published_time" content="2022-06-08T05:02:42.000Z">
+<meta property="article:modified_time" content="2022-06-23T07:08:29.099Z">
 <meta property="article:author" content="ych">
 <meta property="article:tag" content="other">
 <meta name="twitter:card" content="summary">
@@ -125,27 +125,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hexo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-other/gdb" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      hexo
+      gdb的使用
     </h1>
   
 
         
-        <a href="/2022/06/01/hexo/" class="archive-article-date">
-  	<time datetime="2022-05-31T16:35:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-01</time>
+        <a href="/2022/06/08/other/gdb/" class="archive-article-date">
+  	<time datetime="2022-06-08T05:02:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装npm 源管理器</span></span><br><span class="line">npm install -g nrm</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看源</span></span><br><span class="line">nrm <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用淘宝镜像</span></span><br><span class="line">nrm use taobao</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装hexo</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看版本</span></span><br><span class="line">hexo -v</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建博客目录</span></span><br><span class="line"><span class="built_in">mkdir</span> blog</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"></span><br><span class="line"><span class="comment">#初始化</span></span><br><span class="line">hexo init</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动服务</span></span><br><span class="line">hexo s</span><br><span class="line"></span><br><span class="line"><span class="comment">#指定端口</span></span><br><span class="line">hexo server -p 5000</span><br><span class="line"></span><br><span class="line"><span class="comment">#新建博客</span></span><br><span class="line">hexo new</span><br><span class="line"></span><br><span class="line"><span class="comment">#清理public</span></span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"><span class="comment">#生成资源 public下</span></span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"><span class="comment">#Github创建一个新的仓库 YourGithubName.github.io</span></span><br><span class="line"><span class="comment">#在blog目录下安装git部署插件</span></span><br><span class="line">npm install --save hexo-deployer-git </span><br><span class="line"></span><br><span class="line"><span class="comment">#配置_config.yml </span></span><br><span class="line">	<span class="comment"># Deployment</span></span><br><span class="line">	<span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  	<span class="built_in">type</span>: git</span><br><span class="line"> 	repo:	 			https://github.com/YourGithubName/YourGithubName.github.io.git</span><br><span class="line">  	branch: master</span><br><span class="line">  	</span><br><span class="line"><span class="comment">#部署</span></span><br><span class="line">hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment">#访问这个地址可以查看博客</span></span><br><span class="line">https://YourGithubName.github.io/  </span><br><span class="line"></span><br><span class="line"> git <span class="built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia  <span class="comment">#下载yilia主题到本地</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</span></span><br><span class="line"></span><br><span class="line">hexo c	<span class="comment">#清理一下</span></span><br><span class="line">hexo g	<span class="comment">#生成</span></span><br><span class="line">hexo d	<span class="comment">#部署到远程Github仓库</span></span><br></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">yum install gdb</span><br><span class="line">gcc -g -o target target.c //-g用于包含调试消息</span><br><span class="line"></span><br><span class="line">gdb target</span><br><span class="line"></span><br><span class="line">layout src //源代码</span><br><span class="line">layout asm //汇编</span><br><span class="line">list 源码</span><br><span class="line"></span><br><span class="line">start</span><br><span class="line">run r 运行程序</span><br><span class="line"></span><br><span class="line">quit q退出</span><br><span class="line"></span><br><span class="line">b <span class="built_in">break</span> 打断点</span><br><span class="line"></span><br><span class="line">info b 查看断点</span><br><span class="line">info frame</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> p 打印变量值</span><br><span class="line"></span><br><span class="line">step s进入函数</span><br><span class="line"></span><br><span class="line">shell 命令</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> logging on 记录日志</span><br><span class="line">生成gdb.txt</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> &amp;变量</span><br><span class="line">watchpoint 变量地址</span><br><span class="line">info watchpoint</span><br><span class="line"></span><br><span class="line"><span class="built_in">ulimit</span> -a</span><br><span class="line"></span><br><span class="line">gdb 二进制文件 core文件</span><br><span class="line"></span><br><span class="line"><span class="built_in">ulimit</span> -c <span class="built_in">unlimit</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
       
@@ -216,7 +216,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/06/01/hexo/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/06/08/other/gdb/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -230,15 +230,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/06/01/ssh/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/15.%E4%B8%B2%E7%9A%84%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          windows免密登录linux
+          15.串的匹配算法
         
       </div>
     </a>
   
+  
+    <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/14.%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">14.表达式求值</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -346,10 +351,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">数据结构导论</a>
               </li>
              
@@ -358,19 +359,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">串</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -378,7 +371,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线性表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
             
             <div class="clearfix"></div>
