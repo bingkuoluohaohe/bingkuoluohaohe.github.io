@@ -122,6 +122,673 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据结构/7-有序表合并(数组)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/7-%E6%9C%89%E5%BA%8F%E8%A1%A8%E5%90%88%E5%B9%B6(%E6%95%B0%E7%BB%84)/">7.有序表合并(数组)</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/7-%E6%9C%89%E5%BA%8F%E8%A1%A8%E5%90%88%E5%B9%B6(%E6%95%B0%E7%BB%84)/" class="archive-article-date">
+  	<time datetime="2022-06-10T22:42:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有序表合并，相同元素保留一个，合并后仍然有序</span></span><br><span class="line"><span class="comment">// !!!代码未测试，可能有错误</span></span><br><span class="line">ArrayList <span class="title function_">merge</span><span class="params">(ArrayList* l1, ArrayList* l2)</span></span><br><span class="line">&#123;</span><br><span class="line">	ArrayList merge = initList(l1-&gt;length + l2-&gt;length);</span><br><span class="line">	<span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(i &lt; l1-&gt;length &amp;&amp; j &lt; l2-&gt;length)&#123;</span><br><span class="line">		<span class="keyword">if</span>(l1-&gt;<span class="built_in">array</span>[i] &lt; l2-&gt;<span class="built_in">array</span>[j])&#123;</span><br><span class="line">			insert(&amp;merge,l1-&gt;<span class="built_in">array</span>[i]);</span><br><span class="line">			i++;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(l1-&gt;<span class="built_in">array</span>[i] &gt; l2-&gt;<span class="built_in">array</span>[j])&#123;</span><br><span class="line">			insert(&amp;merge,l2-&gt;<span class="built_in">array</span>[j]);</span><br><span class="line">			j++;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			insert(&amp;merge,l1-&gt;<span class="built_in">array</span>[i]);</span><br><span class="line">			i++;</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(i &lt; l1-&gt;length)&#123;</span><br><span class="line">		insert(&amp;merge,l1-&gt;<span class="built_in">array</span>[i]);</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(j &lt; l2-&gt;length)&#123;</span><br><span class="line">		insert(&amp;merge,l2-&gt;<span class="built_in">array</span>[j]);</span><br><span class="line">		j++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> merge;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线性表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/7-%E6%9C%89%E5%BA%8F%E8%A1%A8%E5%90%88%E5%B9%B6(%E6%95%B0%E7%BB%84)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构/6.线性表链表实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/6.%E7%BA%BF%E6%80%A7%E8%A1%A8%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0/">6.线性表链表实现</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/6.%E7%BA%BF%E6%80%A7%E8%A1%A8%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2022-06-09T21:07:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>LinkedList.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  c语言线性表链表实现 bug能找到的都分析了，可能还有</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;LinkedList.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line">LinkedList <span class="title function_">initList</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	LinkedList <span class="built_in">list</span>;</span><br><span class="line">	<span class="built_in">list</span>.head = (Node*) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">	<span class="built_in">list</span>.rear = <span class="built_in">list</span>.head;</span><br><span class="line">	<span class="built_in">list</span>.length = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyList</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Node* p = <span class="built_in">list</span>-&gt;head;</span><br><span class="line">	Node* temp;</span><br><span class="line">	<span class="keyword">while</span>(p)&#123;</span><br><span class="line">		temp = p-&gt;next;</span><br><span class="line">		<span class="built_in">free</span>(p);</span><br><span class="line">		p = temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">list</span>-&gt;length = <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//清空</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">clearList</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Node* p = <span class="built_in">list</span>-&gt;head-&gt;next;</span><br><span class="line">        Node* temp;</span><br><span class="line">        <span class="keyword">while</span>(p)&#123;</span><br><span class="line">                temp = p-&gt;next;</span><br><span class="line">                <span class="built_in">free</span>(p);</span><br><span class="line">                p = temp;</span><br><span class="line">        &#125;</span><br><span class="line">	<span class="built_in">list</span>-&gt;head-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">list</span>-&gt;rear = <span class="built_in">list</span>-&gt;head;</span><br><span class="line">	<span class="built_in">list</span>-&gt;length = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否为空</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listEmpty</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>-&gt;length == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//链表长度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listLength</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>-&gt;length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取位序i处的节点  1 =&lt; i &lt;= length</span></span><br><span class="line">Node* <span class="title function_">getNode</span><span class="params">(LinkedList* <span class="built_in">list</span>,<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; <span class="built_in">list</span>-&gt;length)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;您输入的位序错误\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;	</span><br><span class="line">	&#125;</span><br><span class="line">	Node* temp = <span class="built_in">list</span>-&gt;head-&gt;next;</span><br><span class="line">	<span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(cnt &lt; i)&#123;</span><br><span class="line">		temp = temp-&gt;next;</span><br><span class="line">		cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取位序i处的元素  1 =&lt; i &lt;= length</span></span><br><span class="line">ElemType <span class="title function_">getElem</span><span class="params">(LinkedList* <span class="built_in">list</span>,<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">	Node* temp = getNode(<span class="built_in">list</span>,i);	</span><br><span class="line">	<span class="keyword">return</span> temp-&gt;elem;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//获取元素e第一次出现的位序,未找到返回-1</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getElemIndex</span><span class="params">(LinkedList* <span class="built_in">list</span>,ElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">	Node* temp = <span class="built_in">list</span>-&gt;head-&gt;next;</span><br><span class="line">	<span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(temp)&#123;</span><br><span class="line">		<span class="keyword">if</span>(temp-&gt;elem == e)&#123;</span><br><span class="line">			<span class="keyword">return</span> cnt;</span><br><span class="line">		&#125;</span><br><span class="line">		temp = temp-&gt;next;</span><br><span class="line">		cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加元素</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(LinkedList* <span class="built_in">list</span>,ElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">	Node* new = (Node*) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">	new-&gt;elem = e;</span><br><span class="line">	new-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">list</span>-&gt;rear-&gt;next = new;</span><br><span class="line">	<span class="built_in">list</span>-&gt;rear = new;</span><br><span class="line">	<span class="built_in">list</span>-&gt;length++;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在位序i处插入元素e  1 =&lt; i &lt;= length + 1</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInsert</span><span class="params">(LinkedList* <span class="built_in">list</span>,<span class="type">int</span> i,ElemType e)</span></span><br><span class="line">&#123;	</span><br><span class="line">	<span class="keyword">if</span>( i &lt; <span class="number">1</span> || i &gt; <span class="built_in">list</span>-&gt;length + <span class="number">1</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;位序错误，插入失败\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i == <span class="number">1</span>)&#123;</span><br><span class="line">		Node* new = (Node*) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">		new-&gt;elem = e;</span><br><span class="line">		new-&gt;next = <span class="built_in">list</span>-&gt;head-&gt;next;</span><br><span class="line">		<span class="built_in">list</span>-&gt;head-&gt;next = new;</span><br><span class="line">		<span class="built_in">list</span>-&gt;length++;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i == <span class="built_in">list</span>-&gt;length + <span class="number">1</span>)&#123;</span><br><span class="line">		insert(<span class="built_in">list</span>,e);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Node* temp = getNode(<span class="built_in">list</span>,i - <span class="number">1</span>); </span><br><span class="line">	Node* new = (Node*) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">	new-&gt;elem = e;</span><br><span class="line">	new-&gt;next = temp-&gt;next;</span><br><span class="line">	temp-&gt;next = new; 	</span><br><span class="line">	<span class="built_in">list</span>-&gt;length++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除链表位序i处的元素并返回  1 =&lt; i &lt;= length</span></span><br><span class="line">ElemType <span class="title function_">listDelete</span><span class="params">(LinkedList* <span class="built_in">list</span>,<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; <span class="built_in">list</span>-&gt;length)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;位序错误\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&#x27;e&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i == <span class="number">1</span>)&#123;</span><br><span class="line">		Node* del = <span class="built_in">list</span>-&gt;head-&gt;next;</span><br><span class="line">		<span class="built_in">list</span>-&gt;head-&gt;next = del-&gt;next;</span><br><span class="line">		ElemType ret = del-&gt;elem;</span><br><span class="line">		<span class="built_in">free</span>(del);</span><br><span class="line">		<span class="built_in">list</span>-&gt;length--;</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i == <span class="built_in">list</span>-&gt;length)&#123;</span><br><span class="line">		Node* temp = getNode(<span class="built_in">list</span>,i - <span class="number">1</span>);</span><br><span class="line">		Node* del = temp-&gt;next;</span><br><span class="line">		temp-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="built_in">list</span>-&gt;rear = temp;</span><br><span class="line">		ElemType ret = del-&gt;elem;</span><br><span class="line">		<span class="built_in">free</span>(del);</span><br><span class="line">		<span class="built_in">list</span>-&gt;length--;</span><br><span class="line">		<span class="keyword">return</span> ret;		</span><br><span class="line">	&#125;</span><br><span class="line">	Node* temp = getNode(<span class="built_in">list</span>,i - <span class="number">1</span>);</span><br><span class="line">	Node* del = temp-&gt;next;</span><br><span class="line">	temp-&gt;next = del-&gt;next;</span><br><span class="line">	ElemType ret = del-&gt;elem;</span><br><span class="line">	<span class="built_in">free</span>(del);</span><br><span class="line">	<span class="built_in">list</span>-&gt;length--;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listTraverse</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Node* temp = <span class="built_in">list</span>-&gt;head-&gt;next;</span><br><span class="line">	<span class="keyword">while</span>(temp)&#123;</span><br><span class="line">		<span class="keyword">if</span>(temp-&gt;next)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%c-&gt;&quot;</span>,temp-&gt;elem);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,temp-&gt;elem);</span><br><span class="line">		&#125;</span><br><span class="line">		temp = temp-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印链表信息</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInfo</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;链表长度length = %d\n&quot;</span>,<span class="built_in">list</span>-&gt;length);</span><br><span class="line">	listTraverse(<span class="built_in">list</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>LinkedList.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//节点元素类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> ElemType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	ElemType elem;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;Node;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	<span class="comment">//头指针</span></span><br><span class="line">	Node* head;</span><br><span class="line">	<span class="comment">//尾指针</span></span><br><span class="line">	Node* rear;</span><br><span class="line">	<span class="comment">//链表长度</span></span><br><span class="line">	<span class="type">int</span> length;</span><br><span class="line">&#125;LinkedList;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line">LinkedList <span class="title function_">initList</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyList</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//清空</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">clearList</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否为空</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listEmpty</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//链表长度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listLength</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取位序i处的节点  1 =&lt; i &lt;= length</span></span><br><span class="line">Node* <span class="title function_">getNode</span><span class="params">(LinkedList*,<span class="type">int</span> i)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取位序i处的元素  1 =&lt; i &lt;= size</span></span><br><span class="line">ElemType <span class="title function_">getElem</span><span class="params">(LinkedList* <span class="built_in">list</span>,<span class="type">int</span> i)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取元素e第一次出现的位序,未找到返回-1</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getElemIndex</span><span class="params">(LinkedList* <span class="built_in">list</span>,ElemType e)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加元素</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(LinkedList* <span class="built_in">list</span>,ElemType e)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在位序i处插入元素e  1 =&lt; i &lt;= size + 1</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInsert</span><span class="params">(LinkedList* <span class="built_in">list</span>,<span class="type">int</span> i,ElemType e)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除链表位序i处的元素并返回  1 =&lt; i &lt;= size</span></span><br><span class="line">ElemType <span class="title function_">listDelete</span><span class="params">(LinkedList* <span class="built_in">list</span>,<span class="type">int</span> i)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listTraverse</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印链表信息</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInfo</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>LinkedListTest.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;LinkedList.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> ElemType;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">panel</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;	</span><br><span class="line">	LinkedList <span class="built_in">list</span> = initList();</span><br><span class="line">	panel(&amp;<span class="built_in">list</span>);		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">panel</span><span class="params">(LinkedList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//循环标志</span></span><br><span class="line">	<span class="type">int</span> flag = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//选择</span></span><br><span class="line">	<span class="type">int</span> choose = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//位序</span></span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="comment">//元素</span></span><br><span class="line">	ElemType e;</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;===================================顺序表数组实现===========================================\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;1 退出\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;2 销毁\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;3 清空\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;4 添加元素e\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;5 在位序i处插入元素e  1 =&lt; i &lt;= size + 1\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;6 获取位序i处的元素  1 =&lt; i &lt;= size\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;7 获取元素e第一次出现的位序\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;8 删除位序i处的元素并返回  1 =&lt; i &lt;= size\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;9 遍历链表\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;10 打印链表信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n请输入您的选择:  \n&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;choose);</span><br><span class="line">		<span class="keyword">switch</span>(choose)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">				flag = <span class="number">0</span>;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;继续加油，再见........\n&quot;</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">				destroyList(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">				clearList(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">				getchar();</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;请输入元素(char) : &quot;</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;e);</span><br><span class="line">				insert(<span class="built_in">list</span>,e);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;请输入位序i: &quot;</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">				getchar();</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;请输入元素(char): &quot;</span>);</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;e);</span><br><span class="line">                listInsert(<span class="built_in">list</span>,i,e);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;输入位序i  1 =&lt; i &lt;= size: &quot;</span>);</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">				ElemType res = getElem(<span class="built_in">list</span>,i);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;位序 %d 处的元素为 %c\n&quot;</span>,i,res);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;输入元素e: &quot;</span>);</span><br><span class="line">				getchar();</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;e);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">				<span class="type">int</span> i = getElemIndex(<span class="built_in">list</span>,e);</span><br><span class="line">				<span class="keyword">if</span>(i != <span class="number">-1</span>)&#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;元素 %c 的位序为 %d\n&quot;</span>,e,i);</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;元素未找到\n&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;请输入位序i: &quot;</span>);				</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">				ElemType e = listDelete(<span class="built_in">list</span>,i);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;删除的元素为%c\n&quot;</span>,e);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">				listTraverse(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">				listInfo(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			defalut:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;<span class="keyword">while</span>(flag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -g -o LinkedList LinkedList.c LinkedListTest.c</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线性表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/6.%E7%BA%BF%E6%80%A7%E8%A1%A8%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构/5.线性表数组实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.%E7%BA%BF%E6%80%A7%E8%A1%A8%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/">5.线性表数组实现</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.%E7%BA%BF%E6%80%A7%E8%A1%A8%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2022-06-08T20:55:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ArrayList.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  c语言线性表数组实现，扩容机制</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ArrayList.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line">ArrayList <span class="title function_">initList</span><span class="params">(<span class="type">int</span> size)</span></span><br><span class="line">&#123;</span><br><span class="line">	ArrayList <span class="built_in">list</span>;</span><br><span class="line">	<span class="built_in">list</span>.<span class="built_in">array</span> = (ElemType*) <span class="built_in">malloc</span>(size * <span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">	<span class="built_in">list</span>.length = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">list</span>.size = size;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyList</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">free</span>(<span class="built_in">list</span>-&gt;<span class="built_in">array</span>);</span><br><span class="line">	<span class="built_in">list</span>-&gt;length = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">list</span>-&gt;size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//清空</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">clearList</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">list</span>-&gt;length = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否为空</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listEmpty</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>-&gt;length == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//元素长度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listLength</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>-&gt;length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组扩容，more为扩容空间</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInflate</span><span class="params">(ArrayList* <span class="built_in">list</span>, <span class="type">int</span> more)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">//新的数组长度</span></span><br><span class="line">        <span class="built_in">list</span>-&gt;size = <span class="built_in">list</span>-&gt;size + more;</span><br><span class="line">        <span class="comment">//申请新的数组空间</span></span><br><span class="line">        ElemType* new = (ElemType*) <span class="built_in">malloc</span>(<span class="built_in">list</span>-&gt;size * <span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">        <span class="comment">//拷贝原数组到新数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">list</span>-&gt;length; i++)&#123;</span><br><span class="line">        	new[i] = <span class="built_in">list</span>-&gt;<span class="built_in">array</span>[i];</span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="comment">//释放原数组    </span></span><br><span class="line">        <span class="built_in">free</span>(<span class="built_in">list</span>-&gt;<span class="built_in">array</span>);</span><br><span class="line">        <span class="built_in">list</span>-&gt;<span class="built_in">array</span> = new;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取位序i处的元素  1 =&lt; i &lt;= length</span></span><br><span class="line">ElemType <span class="title function_">getElem</span><span class="params">(ArrayList* <span class="built_in">list</span>,<span class="type">int</span> i)</span></span><br><span class="line">&#123;	</span><br><span class="line">	<span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; <span class="built_in">list</span>-&gt;length)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;您输入的位序错误\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&#x27;e&#x27;</span>;	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">list</span>-&gt;<span class="built_in">array</span>[i - <span class="number">1</span>];</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//获取元素e第一次出现的位序,未找到返回-1</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getElemIndex</span><span class="params">(ArrayList* <span class="built_in">list</span>,ElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">list</span>-&gt;length; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">list</span>-&gt;<span class="built_in">array</span>[i] == e)&#123;</span><br><span class="line">			<span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加元素</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(ArrayList* <span class="built_in">list</span>,ElemType e)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//如果数组占用率超过80%，扩容100%</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">list</span>-&gt;length &gt;= <span class="number">0.8</span> * <span class="built_in">list</span>-&gt;size)&#123;</span><br><span class="line">		listInflate(<span class="built_in">list</span>,<span class="built_in">list</span>-&gt;length);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">list</span>-&gt;<span class="built_in">array</span>[<span class="built_in">list</span>-&gt;length++] = e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在位序i处插入元素e  1 =&lt; i &lt;= length + 1</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInsert</span><span class="params">(ArrayList* <span class="built_in">list</span>,<span class="type">int</span> i,ElemType e)</span></span><br><span class="line">&#123;	</span><br><span class="line">	<span class="keyword">if</span>( i &lt; <span class="number">1</span> || i &gt; <span class="built_in">list</span>-&gt;length + <span class="number">1</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;位序错误，插入失败\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//如果数组占用率超过80%，扩容100%</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">list</span>-&gt;length &gt;= <span class="number">0.8</span> * <span class="built_in">list</span>-&gt;size)&#123;</span><br><span class="line">		listInflate(<span class="built_in">list</span>,<span class="built_in">list</span>-&gt;length);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j = <span class="built_in">list</span>-&gt;length ; j &gt; i - <span class="number">1</span>; j--)&#123;</span><br><span class="line">		<span class="built_in">list</span>-&gt;<span class="built_in">array</span>[j] = <span class="built_in">list</span>-&gt;<span class="built_in">array</span>[j <span class="number">-1</span>];</span><br><span class="line">	&#125; 	</span><br><span class="line">	<span class="built_in">list</span>-&gt;<span class="built_in">array</span>[i - <span class="number">1</span>] = e;</span><br><span class="line">	<span class="built_in">list</span>-&gt;length++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除数组位序i处的元素并返回  1 =&lt; i &lt;= length</span></span><br><span class="line">ElemType <span class="title function_">listDelete</span><span class="params">(ArrayList* <span class="built_in">list</span>,<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(i &lt; <span class="number">1</span> || i &gt; <span class="built_in">list</span>-&gt;length)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;位序错误\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&#x27;e&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ElemType temp = <span class="built_in">list</span>-&gt;<span class="built_in">array</span>[i - <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j = i - <span class="number">1</span>; j &lt; <span class="built_in">list</span>-&gt;length - <span class="number">1</span>; j++)&#123;</span><br><span class="line">		<span class="built_in">list</span>-&gt;<span class="built_in">array</span>[j] = <span class="built_in">list</span>-&gt;<span class="built_in">array</span>[j + <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">list</span>-&gt;length--;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历数组</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listTraverse</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">list</span>-&gt;length; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(i == <span class="built_in">list</span>-&gt;length - <span class="number">1</span>)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,<span class="built_in">list</span>-&gt;<span class="built_in">array</span>[i]);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%c-&gt;&quot;</span>,<span class="built_in">list</span>-&gt;<span class="built_in">array</span>[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印顺序表信息</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInfo</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;数组长度size = %d\n&quot;</span>,<span class="built_in">list</span>-&gt;size);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;元素长度length = %d\n&quot;</span>,<span class="built_in">list</span>-&gt;length);</span><br><span class="line">	listTraverse(<span class="built_in">list</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>ArrayList.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组元素类型</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> ElemType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	ElemType* <span class="built_in">array</span>;</span><br><span class="line">	<span class="comment">//元素长度</span></span><br><span class="line">	<span class="type">int</span> length;</span><br><span class="line">	<span class="comment">//数组长度</span></span><br><span class="line">	<span class="type">int</span> size;</span><br><span class="line">&#125;ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line">ArrayList <span class="title function_">initList</span><span class="params">(<span class="type">int</span> size)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroyList</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//清空</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">clearList</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否为空</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listEmpty</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//元素长度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">listLength</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组扩容，more为扩容空间</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInflate</span><span class="params">(ArrayList* <span class="built_in">list</span>, <span class="type">int</span> more)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取位序i处的元素  1 =&lt; i &lt;= length</span></span><br><span class="line">ElemType <span class="title function_">getElem</span><span class="params">(ArrayList* <span class="built_in">list</span>,<span class="type">int</span> i)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取元素e第一次出现的位序,未找到返回-1</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getElemIndex</span><span class="params">(ArrayList* <span class="built_in">list</span>,ElemType e)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加元素</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insert</span><span class="params">(ArrayList* <span class="built_in">list</span>,ElemType e)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在位序i处插入元素e  1 =&lt; i &lt;= length + 1</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInsert</span><span class="params">(ArrayList* <span class="built_in">list</span>,<span class="type">int</span> i,ElemType e)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除数组位序i处的元素并返回  1 =&lt; i &lt;= length</span></span><br><span class="line">ElemType <span class="title function_">listDelete</span><span class="params">(ArrayList* <span class="built_in">list</span>,<span class="type">int</span> i)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历数组</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listTraverse</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印顺序表信息</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">listInfo</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>ArrayListTest.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ArrayList.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> ElemType;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">panel</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;	</span><br><span class="line">	ArrayList <span class="built_in">list</span> = initList(<span class="number">10</span>);</span><br><span class="line">	panel(&amp;<span class="built_in">list</span>);		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">panel</span><span class="params">(ArrayList* <span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//循环标志</span></span><br><span class="line">	<span class="type">int</span> flag = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//选择</span></span><br><span class="line">	<span class="type">int</span> choose = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//位序</span></span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	<span class="comment">//元素</span></span><br><span class="line">	ElemType e;</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;===================================顺序表数组实现===========================================\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;1 退出\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;2 销毁\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;3 清空\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;4 添加元素e\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;5 在位序i处插入元素e  1 =&lt; i &lt;= length + 1\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;6 获取位序i处的元素  1 =&lt; i &lt;= length\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;7 获取元素e第一次出现的位序\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;8 删除数组位序i处的元素并返回  1 =&lt; i &lt;= length\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;9 遍历数组\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;10 打印顺序表信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n请输入您的选择:  \n&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;choose);</span><br><span class="line">		<span class="keyword">switch</span>(choose)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">				flag = <span class="number">0</span>;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;继续加油，再见........\n&quot;</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">				destroyList(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">				clearList(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">				getchar();</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;请输入元素(char) : &quot;</span>);</span><br><span class="line">                                <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;e);</span><br><span class="line">				insert(<span class="built_in">list</span>,e);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                                <span class="built_in">printf</span>(<span class="string">&quot;请输入位序i: &quot;</span>);</span><br><span class="line">                                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">				getchar();</span><br><span class="line">                                <span class="built_in">printf</span>(<span class="string">&quot;请输入元素(char): &quot;</span>);</span><br><span class="line">                                <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;e);</span><br><span class="line">                                listInsert(<span class="built_in">list</span>,i,e);</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;输入位序i  1 =&lt; i &lt;= length: &quot;</span>);</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">				ElemType res = getElem(<span class="built_in">list</span>,i);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;位序 %d 处的元素为 %c\n&quot;</span>,i,res);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;输入元素e: &quot;</span>);</span><br><span class="line">				getchar();</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>,&amp;e);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">				<span class="type">int</span> i = getElemIndex(<span class="built_in">list</span>,e);</span><br><span class="line">				<span class="keyword">if</span>(i != <span class="number">-1</span>)&#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;元素 %c 的位序为 %d\n&quot;</span>,e,i);</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;元素未找到\n&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;请输入位序i: &quot;</span>);				</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">				ElemType e = listDelete(<span class="built_in">list</span>,i);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;删除的元素为%c\n&quot;</span>,e);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">				listTraverse(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">				listInfo(<span class="built_in">list</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			defalut:</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;<span class="keyword">while</span>(flag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -g -o ArrayList ArrayList.c ArrayListTest.c</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线性表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/5.%E7%BA%BF%E6%80%A7%E8%A1%A8%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-other/gdb" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/08/other/gdb/">gdb的使用</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/08/other/gdb/" class="archive-article-date">
+  	<time datetime="2022-06-08T05:02:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">yum install gdb</span><br><span class="line">gcc -g -o target target.c //-g用于包含调试消息</span><br><span class="line"></span><br><span class="line">gdb target</span><br><span class="line"></span><br><span class="line">layout src //源代码</span><br><span class="line">layout asm //汇编</span><br><span class="line">list 源码</span><br><span class="line"></span><br><span class="line">start</span><br><span class="line">run r 运行程序</span><br><span class="line"></span><br><span class="line">quit q退出</span><br><span class="line"></span><br><span class="line">b <span class="built_in">break</span> 打断点</span><br><span class="line"></span><br><span class="line">info b 查看断点</span><br><span class="line">info frame</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> p 打印变量值</span><br><span class="line"></span><br><span class="line">step s进入函数</span><br><span class="line"></span><br><span class="line">shell 命令</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> logging on 记录日志</span><br><span class="line">生成gdb.txt</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> &amp;变量</span><br><span class="line">watchpoint 变量地址</span><br><span class="line">info watchpoint</span><br><span class="line"></span><br><span class="line"><span class="built_in">ulimit</span> -a</span><br><span class="line"></span><br><span class="line">gdb 二进制文件 core文件</span><br><span class="line"></span><br><span class="line"><span class="built_in">ulimit</span> -c <span class="built_in">unlimit</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/08/other/gdb/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构/4.算法与算法分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/4.%E7%AE%97%E6%B3%95%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/">4.算法与算法分析</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/4.%E7%AE%97%E6%B3%95%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-06-07T19:02:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
+<li>算法的定义<blockquote>
+<p>对特定问题求解方法和步骤的一种描述，它是指令的有限序列。其中每个指令表示一个或多个操作</p>
+</blockquote>
+</li>
+<li>算法的描述<blockquote>
+<p>自然语言<br>流程图<br>伪代码<br>程序代码</p>
+</blockquote>
+</li>
+<li>算法特性<blockquote>
+<p>有穷性<br>确定性<br>可行性<br>输入<br>输出</p>
+</blockquote>
+</li>
+<li>算法设计的要求<blockquote>
+<p>正确性<br>可读性<br>健壮性 鲁棒性<br>高效性</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h3><ul>
+<li><p>算法效率</p>
+<blockquote>
+<p>时间效率<br>空间效率</p>
+</blockquote>
+</li>
+<li><p>算法时间效率的度量</p>
+<ul>
+<li>事后统计</li>
+<li>事前分析<blockquote>
+<p>算法运行时间 = 一个简单操作所需的时间 * 简单操作次数<br>算法运行时间 = sum 每条语句的执行次数 * 该语句执行一次所需的时间<br>算法运行时间 = sum 每条语句频度 * 该语句执行一次所需的时间 （相同）<br>算法运行时间 = 每条语句频度之和<br>算法时间复杂度的渐进表示法  O(f(n))   T(n) = O(n)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>算法空间效率</p>
+<ul>
+<li>渐进空间复杂度  S(n) = O(f(n))</li>
+<li>算法要占据的空间<blockquote>
+<p>算法本身要占据的空间，输入输出，指令，常数，变量等<br>算法要使用的辅助空间</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构导论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/4.%E7%AE%97%E6%B3%95%E4%B8%8E%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构/3.基本概念和术语" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/">3.基本概念和术语</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/" class="archive-article-date">
+  	<time datetime="2022-06-07T18:02:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-数据，数据元素，数据项和数据对象"><a href="#1-数据，数据元素，数据项和数据对象" class="headerlink" title="1.数据，数据元素，数据项和数据对象"></a>1.数据，数据元素，数据项和数据对象</h3><ul>
+<li><p>数据（Data)</p>
+<ul>
+<li><p>是能输入计算机且能被计算机处理的各种符号的集合</p>
+<blockquote>
+<p>信息的载体<br>是对客观事物符号化的表示<br>能够被计算机识别，存储和加工</p>
+</blockquote>
+</li>
+<li><p>包括</p>
+<blockquote>
+<p>数值型的数据：整数，实数等</p>
+<p>非数值型的数据：文字，图像，图形，声音等  </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>数据元素（Data element）</p>
+<ul>
+<li>是数据的基本单位，是集合的个体，在一个计算机程序中通常作为一个整体进行考虑和处理</li>
+<li>也简称为元素，或称为记录，结点或顶点</li>
+<li>一个数据元素可由若干个数据项组成</li>
+</ul>
+</li>
+<li><p>数据项（Data item）</p>
+<ul>
+<li>构成数据元素的不可分割的最小单位</li>
+</ul>
+</li>
+<li><p>数据对象（Data Object）</p>
+<ul>
+<li>是性质相同的数据元素的集合，是数据的一个子集</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-数据结构（Data-Structure）"><a href="#2-数据结构（Data-Structure）" class="headerlink" title="2.数据结构（Data Structure）"></a>2.数据结构（Data Structure）</h3><ul>
+<li><p>数据结构包括以下三个方面的内容</p>
+<ul>
+<li>1.数据元素之间的逻辑关系，也称为逻辑结构</li>
+<li>2.数据元素及其关系在计算机内存中的表示（又称为映像），称为数据的物理结构或数据的存储结构</li>
+<li>3.数据的运算和实现，即对数据元素可以施加的操作以及这些操作在相应的存储结构上的实现</li>
+</ul>
+</li>
+<li><p>数据结构的两个层次</p>
+<ul>
+<li><p>逻辑结构</p>
+<blockquote>
+<p>描述数据元素之间的逻辑关系<br>与数据的存储无关，独立于计算机<br>是从具体问题抽象出来的数学模型</p>
+</blockquote>
+</li>
+<li><p>物理结构（存储结构）</p>
+<blockquote>
+<p>数据元素及其关系在计算机存储器中的结构（存储方式）</p>
+</blockquote>
+</li>
+<li><p>逻辑结构与存储结构的关系</p>
+<blockquote>
+<p>存储结构是逻辑关系的映像与元素本身的映像<br>逻辑结构是数据结构的抽象，存储结构是数据结构的实现<br>两者综合起来建立了数据元素之间的结构关系</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>逻辑结构的种类</p>
+<ul>
+<li>划分方式一<blockquote>
+<p>线性结构 例如线性表，栈，队列，串<br>非线性结构 树，图</p>
+</blockquote>
+</li>
+<li>划分方式二<blockquote>
+<p>集合结构<br>线性结构<br>树形结构<br>图形结构</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>存储结构的种类</p>
+<ul>
+<li><p>顺序存储结构</p>
+<blockquote>
+<p>数组</p>
+</blockquote>
+</li>
+<li><p>链式存储结构</p>
+<blockquote>
+<p>指针 链表</p>
+</blockquote>
+</li>
+<li><p>索引存储结构</p>
+<blockquote>
+<p>在存储结点信息的同时，建立附加的索引表 index</p>
+</blockquote>
+</li>
+<li><p>散列存储结构</p>
+<blockquote>
+<p>根据结点的关键字直接计算出该结点的存储地址 hash</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据类型和抽象数据类型"><a href="#数据类型和抽象数据类型" class="headerlink" title="数据类型和抽象数据类型"></a>数据类型和抽象数据类型</h3><ul>
+<li><p>数据类型</p>
+<ul>
+<li><p>数据类型的作用</p>
+<blockquote>
+<p>约束变量或常量的取值范围</p>
+</blockquote>
+<blockquote>
+<p>约束变量或常量的操作</p>
+</blockquote>
+</li>
+<li><p>数据类型（Data Type）</p>
+<blockquote>
+<p>数据类型是一组性质相同的值的集合以及定义于这个值集合上的一组操作的总称</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>抽象数据类型（Abstract Data Type, ADT)</p>
+<ul>
+<li>是指一个数学模型以及定义在此数学模型上的一组操作<blockquote>
+<p>由用户定义，从问题抽象出数据模型（逻辑结构）<br>包括定义在数据模型上的一组抽象运算（相关操作）<br>不考虑计算机内的具体存储结构与运算的具体实现算法</p>
+</blockquote>
+</li>
+<li>抽象数据类型的形式定义<blockquote>
+<p>抽象数据类型可用（D,S,P)三元组表示<br>其中：</p>
+<p>D是数据对象</p>
+</blockquote>
+<pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">S是D上的关系集</span><br><span class="line">P是对D的基本操作集</span><br><span class="line">		基本操作名（参数表）</span><br><span class="line">		初始条件（初始条件描述）</span><br><span class="line">		操作结果（操作结果描述）</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构导论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/3.%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数据结构/2.数据结构的研究内容" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -158,11 +825,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构导论</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构导论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
@@ -255,11 +922,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构导论</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构导论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
@@ -319,7 +986,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​        文本编辑器加上gcc就可以运行所有代码，有不懂的地方可以联系我。</p>
+        <p>​        文本编辑器加上gcc就可以运行所有代码，有不懂的地方或发现了bug可以和我交流。大部分代码都经过了测试，有些部分偷懒了但注释了未测试，大家可以自己测试一下</p>
 <p>​        如果你没有基础，请先去看一下视频，接下来的内容只有算法实现，没有具体步骤的解释，这不是我在短时间内能完成的，注释我尽量写清楚，没写的地方你看了视频就懂了，大家一起加油！！！</p>
 <h4 id="推荐MOOC"><a href="#推荐MOOC" class="headerlink" title="推荐MOOC"></a>推荐MOOC</h4><p>数据结构与算法基础（青岛大学-王卓）(多数算法来源)</p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nJ411V7bd">https://www.bilibili.com/video/BV1nJ411V7bd</a></p>
@@ -329,6 +996,7 @@
 <h2 id="bug写得挺好啊"><a href="#bug写得挺好啊" class="headerlink" title="bug写得挺好啊"></a>bug写得挺好啊</h2><p>写代码一定要全神贯注，不然debug几个小时</p>
 <p>面向编译器编程  通过编译器的提示修改代码</p>
 <p>小心  ‘ ; ‘ 号 ，漏掉编译器会报一大堆错</p>
+<p>scanf 不要忘记 变量前的 &amp;</p>
 
       
 
@@ -456,176 +1124,9 @@
 
 
   
-    <article id="post-other/ssh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/01/other/ssh/">windows免密登录linux</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/01/other/ssh/" class="archive-article-date">
-  	<time datetime="2022-06-01T11:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>一、生成公钥和私钥</li>
-<li>二、在客户端编辑配置文件</li>
-<li>三、将公钥拷贝到服务器</li>
-<li>四、重启ssh服务</li>
-<li>五、关闭再打开cmd进行登录</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在windows用户目录下/.ssh目录，打开cmd,输入</span></span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在windows用户目录下/.ssh目录，打开config文件，如果没有自己新建一个</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将来可以 ssh aaaa 进行连接，这里可以写IP也可以写域名</span></span><br><span class="line">Host www.aaa.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以是域名也可以是IP</span></span><br><span class="line">HostName  59.110.XX.XXX</span><br><span class="line"></span><br><span class="line"><span class="comment"># 登录时的用户名</span></span><br><span class="line">User root</span><br><span class="line">             </span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地文件</span></span><br><span class="line">IdentityFile C:\Users\windows用户名\.ssh\</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#cmd先密码登录一次服务器，在服务器目录下执行下面的命令</span></span><br><span class="line"><span class="built_in">cd</span> /root/.ssh</span><br><span class="line"><span class="built_in">cat</span> authorized_keys</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#去用户/.ssh 目录下使用cmd命令将公钥进行拷贝,scp命令后面不能加中文</span></span><br><span class="line"><span class="comment"># 注意下面的root后面跟的IP或者是域名，必须和config中的Host一致</span></span><br><span class="line">&gt; scp burning.pub root@www.aaa.com:/root/.ssh</span><br><span class="line"><span class="comment"># 目录下有了公钥的文件，内容追加到authorized_keys中</span></span><br><span class="line">&gt; <span class="built_in">cat</span> &gt;&gt; authorized_keys &lt; burning.pub</span><br><span class="line">&gt; <span class="built_in">cat</span> authorized_keys </span><br><span class="line"><span class="comment"># 查看内容可以看到公钥已经存进去了</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拷贝完成之后，要重启ssh服务</span></span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭再打开cmd进行登录</span><br><span class="line">ssh root@www.aaa.com</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/01/other/ssh/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-other/hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/01/other/hexo/">hexo</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/01/other/hexo/" class="archive-article-date">
-  	<time datetime="2022-05-31T16:35:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装npm 源管理器</span></span><br><span class="line">npm install -g nrm</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看源</span></span><br><span class="line">nrm <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用淘宝镜像</span></span><br><span class="line">nrm use taobao</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装hexo</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看版本</span></span><br><span class="line">hexo -v</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建博客目录</span></span><br><span class="line"><span class="built_in">mkdir</span> blog</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"></span><br><span class="line"><span class="comment">#初始化</span></span><br><span class="line">hexo init</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动服务</span></span><br><span class="line">hexo s</span><br><span class="line"></span><br><span class="line"><span class="comment">#指定端口</span></span><br><span class="line">hexo server -p 5000</span><br><span class="line"></span><br><span class="line"><span class="comment">#新建博客</span></span><br><span class="line">hexo new</span><br><span class="line"></span><br><span class="line"><span class="comment">#清理public</span></span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"><span class="comment">#生成资源 public下</span></span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"><span class="comment">#Github创建一个新的仓库 YourGithubName.github.io</span></span><br><span class="line"><span class="comment">#在blog目录下安装git部署插件</span></span><br><span class="line">npm install --save hexo-deployer-git </span><br><span class="line"></span><br><span class="line"><span class="comment">#配置_config.yml </span></span><br><span class="line">	<span class="comment"># Deployment</span></span><br><span class="line">	<span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  	<span class="built_in">type</span>: git</span><br><span class="line"> 	repo:	 			https://github.com/YourGithubName/YourGithubName.github.io.git</span><br><span class="line">  	branch: master</span><br><span class="line">  	</span><br><span class="line"><span class="comment">#部署</span></span><br><span class="line">hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment">#访问这个地址可以查看博客</span></span><br><span class="line">https://YourGithubName.github.io/  </span><br><span class="line"></span><br><span class="line"> git <span class="built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia  <span class="comment">#下载yilia主题到本地</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</span></span><br><span class="line"></span><br><span class="line">hexo c	<span class="comment">#清理一下</span></span><br><span class="line">hexo g	<span class="comment">#生成</span></span><br><span class="line">hexo d	<span class="comment">#部署到远程Github仓库</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/01/other/hexo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -704,7 +1205,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color2">数据结构导论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,11 +1213,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据结构导论</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,6 +1230,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">图</a>
               </li>
              
               <li class="article-tag-list-item">
