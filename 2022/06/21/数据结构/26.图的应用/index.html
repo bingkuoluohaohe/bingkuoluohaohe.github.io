@@ -6,32 +6,44 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.codekenan.icu:81">
-  <title>31.直接插入排序和折半插入排序 | Hexo</title>
+  <title>26.图的应用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="insertionSort.c 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969">
+  <meta name="description" content="最小生成树 普里姆(Prim)算法 克鲁斯卡尔(Kruskal)算法 最短路径 Dijkstra（迪杰斯特拉）算法 Floyd （弗洛伊德）算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="31.直接插入排序和折半插入排序">
-<meta property="og:url" content="http://www.codekenan.icu:81/2022/06/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/31.%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="26.图的应用">
+<meta property="og:url" content="http://www.codekenan.icu:81/2022/06/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/26.%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="insertionSort.c 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969">
+<meta property="og:description" content="最小生成树 普里姆(Prim)算法 克鲁斯卡尔(Kruskal)算法 最短路径 Dijkstra（迪杰斯特拉）算法 Floyd （弗洛伊德）算法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.codekenan.icu/img/11.%E6%9C%89%E5%BA%8F%E6%8F%92%E5%85%A5%E6%96%B9%E6%B3%95.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/12.%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/13.%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F-%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/18.%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/14.%E6%9C%80%E5%A5%BD%E6%83%85%E5%86%B5.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/15.%E6%9C%80%E5%9D%8F%E6%83%85%E5%86%B5.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/16.%E5%B9%B3%E5%9D%87%E6%83%85%E5%86%B5.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/17.%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%BB%93%E8%AE%BA.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/19.%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/20.%E7%BB%93%E8%AE%BA.png">
-<meta property="article:published_time" content="2022-06-23T08:56:09.000Z">
-<meta property="article:modified_time" content="2022-06-25T06:47:37.026Z">
+<meta property="og:image" content="http://codekenan.icu/img/54.%E7%94%9F%E6%88%90%E6%A0%91.png">
+<meta property="og:image" content="http://codekenan.icu/img/54.%E7%94%9F%E6%88%90%E6%A0%912.png">
+<meta property="og:image" content="http://codekenan.icu/img/55.%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E7%94%9F%E6%88%90%E6%A0%91.png">
+<meta property="og:image" content="http://codekenan.icu/img/56.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91.png">
+<meta property="og:image" content="http://codekenan.icu/img/57.MST%E6%80%A7%E8%B4%A8.png">
+<meta property="og:image" content="http://codekenan.icu/img/58.prim.png">
+<meta property="og:image" content="http://codekenan.icu/img/59.%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%951.png">
+<meta property="og:image" content="http://codekenan.icu/img/59.%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%952.png">
+<meta property="og:image" content="http://codekenan.icu/img/59.%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%953.png">
+<meta property="og:image" content="http://codekenan.icu/img/60.%E6%AF%94%E8%BE%83.png">
+<meta property="og:image" content="http://codekenan.icu/img/61.%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.png">
+<meta property="og:image" content="http://codekenan.icu/img/62.%E7%AC%AC%E4%B8%80%E7%B1%BB%E9%97%AE%E9%A2%98.png">
+<meta property="og:image" content="http://codekenan.icu/img/63.%E7%AC%AC%E4%BA%8C%E7%B1%BB%E9%97%AE%E9%A2%98.png">
+<meta property="og:image" content="http://codekenan.icu/img/64.%E8%A7%A3%E5%86%B3%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="http://codekenan.icu/img/65.%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89.png">
+<meta property="og:image" content="http://codekenan.icu/img/66.Dijkstra%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="http://codekenan.icu/img/66.Dijkstra%E7%AE%97%E6%B3%952.png">
+<meta property="og:image" content="http://codekenan.icu/img/66.Dijkstra%E7%AE%97%E6%B3%953.png">
+<meta property="og:image" content="http://codekenan.icu/img/67.%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.png">
+<meta property="og:image" content="http://codekenan.icu/img/67.%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%842.png">
+<meta property="og:image" content="http://codekenan.icu/img/67.%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%843.png">
+<meta property="og:image" content="http://codekenan.icu/img/68.%E5%BC%97%E6%B4%9B%E4%BC%8A%E5%BE%B7%E7%AE%97%E6%B3%95.png">
+<meta property="article:published_time" content="2022-06-21T07:52:09.000Z">
+<meta property="article:modified_time" content="2022-06-26T02:55:44.247Z">
 <meta property="article:author" content="ych">
 <meta property="article:tag" content="数据结构">
-<meta property="article:tag" content="排序">
+<meta property="article:tag" content="图">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.codekenan.icu/img/11.%E6%9C%89%E5%BA%8F%E6%8F%92%E5%85%A5%E6%96%B9%E6%B3%95.png">
+<meta name="twitter:image" content="http://codekenan.icu/img/54.%E7%94%9F%E6%88%90%E6%A0%91.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -137,30 +149,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-数据结构/31.直接插入排序和折半插入排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据结构/26.图的应用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      31.直接插入排序和折半插入排序
+      26.图的应用
     </h1>
   
 
         
-        <a href="/2022/06/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/31.%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2022-06-23T08:56:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-23</time>
+        <a href="/2022/06/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/26.%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2022-06-21T07:52:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://www.codekenan.icu/img/11.%E6%9C%89%E5%BA%8F%E6%8F%92%E5%85%A5%E6%96%B9%E6%B3%95.png"><br><img src="http://www.codekenan.icu/img/12.%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.png"><br><img src="http://www.codekenan.icu/img/13.%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F-%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6.png"><br><img src="http://www.codekenan.icu/img/18.%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F.png"><br>insertionSort.c</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入排序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort1</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span>;</span><br><span class="line"><span class="comment">// 直接插入排序 采用顺序查找法查找插入位置</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort2</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span>;</span><br><span class="line"><span class="comment">// 哨兵机制</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort3</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span>;</span><br><span class="line"><span class="comment">// 折半插入排序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort4</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">printArray</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// arr[0] 为哨兵位置</span></span><br><span class="line">	<span class="type">int</span> arr1[] = &#123;<span class="number">0</span>,<span class="number">23</span>,<span class="number">45</span>,<span class="number">12</span>,<span class="number">34</span>,<span class="number">8</span>,<span class="number">56</span>,<span class="number">44</span>,<span class="number">62</span>&#125;;</span><br><span class="line">	<span class="type">int</span> arr2[] = &#123;<span class="number">0</span>,<span class="number">23</span>,<span class="number">45</span>,<span class="number">12</span>,<span class="number">34</span>,<span class="number">8</span>,<span class="number">56</span>,<span class="number">44</span>,<span class="number">62</span>&#125;;</span><br><span class="line">	<span class="type">int</span> arr3[] = &#123;<span class="number">0</span>,<span class="number">23</span>,<span class="number">45</span>,<span class="number">12</span>,<span class="number">34</span>,<span class="number">8</span>,<span class="number">56</span>,<span class="number">44</span>,<span class="number">62</span>&#125;;</span><br><span class="line">	<span class="type">int</span> arr4[] = &#123;<span class="number">0</span>,<span class="number">23</span>,<span class="number">45</span>,<span class="number">12</span>,<span class="number">34</span>,<span class="number">8</span>,<span class="number">56</span>,<span class="number">44</span>,<span class="number">62</span>&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> len = <span class="keyword">sizeof</span>(arr1) / <span class="keyword">sizeof</span>(<span class="type">int</span>);</span><br><span class="line">	insertion_sort1(arr1,len);</span><br><span class="line">	insertion_sort2(arr2,len);</span><br><span class="line">	insertion_sort3(arr3,len);</span><br><span class="line">	insertion_sort4(arr4,len);</span><br><span class="line">	printArray(arr1,len);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 检查多个算法之间有没有错误</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)&#123;</span><br><span class="line">		assert(arr1[i] == arr2[i]);</span><br><span class="line">		assert(arr1[i] == arr3[i]);</span><br><span class="line">		assert(arr1[i] == arr4[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自己写的，比较傻</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort1</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i] &lt; arr[j])&#123;</span><br><span class="line">				<span class="type">int</span> temp = arr[i];</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> k = i; k &gt; j; k--)&#123;</span><br><span class="line">					arr[k] = arr[k - <span class="number">1</span>];</span><br><span class="line">				&#125;</span><br><span class="line">				arr[j] = temp;</span><br><span class="line">				<span class="keyword">break</span>; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接插入排序 采用顺序查找法查找插入位置</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort2</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> j;</span><br><span class="line">	<span class="type">int</span> temp;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt; len; i++)&#123;</span><br><span class="line">		j = i <span class="number">-1</span>;</span><br><span class="line">		temp = arr[i];</span><br><span class="line">		<span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; temp &lt; arr[j])&#123;</span><br><span class="line">			arr[j + <span class="number">1</span>] = arr[j];</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		arr[j + <span class="number">1</span>] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 哨兵机制</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort3</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> j;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(arr[i - <span class="number">1</span>] &gt; arr[i])&#123;</span><br><span class="line">			arr[<span class="number">0</span>] = arr[i]; <span class="comment">// 哨兵</span></span><br><span class="line">			<span class="keyword">for</span>(j = i - <span class="number">1</span>; arr[<span class="number">0</span>] &lt; arr[j]; j--)&#123;</span><br><span class="line">				arr[j + <span class="number">1</span>] = arr[j];</span><br><span class="line">			&#125;</span><br><span class="line">			arr[j + <span class="number">1</span>] = arr[<span class="number">0</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 折半插入排序</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertion_sort4</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> j;</span><br><span class="line">	<span class="type">int</span> low;</span><br><span class="line">	<span class="type">int</span> high;</span><br><span class="line">	<span class="type">int</span> mid;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(arr[i - <span class="number">1</span>] &gt; arr[i])&#123;</span><br><span class="line">			arr[<span class="number">0</span>] = arr[i]; <span class="comment">// 哨兵	</span></span><br><span class="line">			low = <span class="number">1</span>;</span><br><span class="line">			high = i - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">while</span>(low &lt;= high)&#123;</span><br><span class="line">				mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">				<span class="keyword">if</span>(arr[<span class="number">0</span>] &lt; arr[mid])&#123;</span><br><span class="line">					high = mid - <span class="number">1</span>;</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					low = mid + <span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(j = i; j &gt; high + <span class="number">1</span>; j--)&#123;</span><br><span class="line">				arr[j] = arr[j - <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			arr[high + <span class="number">1</span>] = arr[<span class="number">0</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printArray</span><span class="params">(<span class="type">int</span> arr[],<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d  &quot;</span>,arr[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://www.codekenan.icu/img/14.%E6%9C%80%E5%A5%BD%E6%83%85%E5%86%B5.png"><br><img src="http://www.codekenan.icu/img/15.%E6%9C%80%E5%9D%8F%E6%83%85%E5%86%B5.png"><br><img src="http://www.codekenan.icu/img/16.%E5%B9%B3%E5%9D%87%E6%83%85%E5%86%B5.png"><br><img src="http://www.codekenan.icu/img/17.%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%BB%93%E8%AE%BA.png"></p>
-<p><img src="http://www.codekenan.icu/img/19.%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90.png"><br><img src="http://www.codekenan.icu/img/20.%E7%BB%93%E8%AE%BA.png"></p>
+        <h2 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h2><p><img src="http://codekenan.icu/img/54.%E7%94%9F%E6%88%90%E6%A0%91.png"><br><img src="http://codekenan.icu/img/54.%E7%94%9F%E6%88%90%E6%A0%912.png"><br><img src="http://codekenan.icu/img/55.%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E7%94%9F%E6%88%90%E6%A0%91.png"><br><img src="http://codekenan.icu/img/56.%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91.png"><br><img src="http://codekenan.icu/img/57.MST%E6%80%A7%E8%B4%A8.png"></p>
+<h4 id="普里姆-Prim-算法"><a href="#普里姆-Prim-算法" class="headerlink" title="普里姆(Prim)算法"></a>普里姆(Prim)算法</h4><p><img src="http://codekenan.icu/img/58.prim.png"></p>
+<h4 id="克鲁斯卡尔-Kruskal-算法"><a href="#克鲁斯卡尔-Kruskal-算法" class="headerlink" title="克鲁斯卡尔(Kruskal)算法"></a>克鲁斯卡尔(Kruskal)算法</h4><p><img src="http://codekenan.icu/img/59.%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%951.png"><br><img src="http://codekenan.icu/img/59.%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%952.png"><br><img src="http://codekenan.icu/img/59.%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94%E7%AE%97%E6%B3%953.png"><br><img src="http://codekenan.icu/img/60.%E6%AF%94%E8%BE%83.png"></p>
+<h2 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h2><p><img src="http://codekenan.icu/img/61.%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.png"><br><img src="http://codekenan.icu/img/62.%E7%AC%AC%E4%B8%80%E7%B1%BB%E9%97%AE%E9%A2%98.png"><br><img src="http://codekenan.icu/img/63.%E7%AC%AC%E4%BA%8C%E7%B1%BB%E9%97%AE%E9%A2%98.png"><br><img src="http://codekenan.icu/img/64.%E8%A7%A3%E5%86%B3%E7%AE%97%E6%B3%95.png"></p>
+<h4 id="Dijkstra（迪杰斯特拉）算法"><a href="#Dijkstra（迪杰斯特拉）算法" class="headerlink" title="Dijkstra（迪杰斯特拉）算法"></a>Dijkstra（迪杰斯特拉）算法</h4><p><img src="http://codekenan.icu/img/65.%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89.png"><br><img src="http://codekenan.icu/img/66.Dijkstra%E7%AE%97%E6%B3%95.png"><br><img src="http://codekenan.icu/img/66.Dijkstra%E7%AE%97%E6%B3%952.png"><br><img src="http://codekenan.icu/img/66.Dijkstra%E7%AE%97%E6%B3%953.png"></p>
+<h4 id="Floyd-（弗洛伊德）算法"><a href="#Floyd-（弗洛伊德）算法" class="headerlink" title="Floyd （弗洛伊德）算法"></a>Floyd （弗洛伊德）算法</h4><p><img src="http://codekenan.icu/img/67.%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84.png"><br><img src="http://codekenan.icu/img/67.%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%842.png"><br><img src="http://codekenan.icu/img/67.%E6%89%80%E6%9C%89%E9%A1%B6%E7%82%B9%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%843.png"><br><img src="http://codekenan.icu/img/68.%E5%BC%97%E6%B4%9B%E4%BC%8A%E5%BE%B7%E7%AE%97%E6%B3%95.png"></p>
 
       
 
@@ -178,7 +192,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
         		</li>
       		
 		</ul>
@@ -234,7 +248,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.codekenan.icu:81/2022/06/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/31.%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.codekenan.icu:81/2022/06/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/26.%E5%9B%BE%E7%9A%84%E5%BA%94%E7%94%A8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -248,18 +262,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/06/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/32.%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/06/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/30.%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          32.希尔排序
+          30.排序
         
       </div>
     </a>
   
   
-    <a href="/2022/06/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/30.%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">30.排序</div>
+    <a href="/2022/06/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/25.%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">25.图的遍历</div>
       <i class="icon-circle-right"></i>
     </a>
   
