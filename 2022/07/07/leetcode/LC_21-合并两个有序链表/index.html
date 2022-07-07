@@ -16,9 +16,10 @@
 <meta property="og:description" content="21. 合并两个有序链表 - 力扣（LeetCode） 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.codekenan.icu/img/leetcode/21.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.jpg">
+<meta property="og:image" content="http://www.codekenan.icu/img/leetcode/21.%E9%80%92%E5%BD%92.png">
 <meta property="og:image" content="http://www.codekenan.icu/img/leetcode/21.%E4%B8%80%E7%82%B9%E4%B9%90%E8%B6%A3.png">
 <meta property="article:published_time" content="2022-07-07T13:06:09.000Z">
-<meta property="article:modified_time" content="2022-07-07T13:06:24.129Z">
+<meta property="article:modified_time" content="2022-07-07T13:43:40.514Z">
 <meta property="article:author" content="ych">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="线性表">
@@ -169,7 +170,7 @@
 
 
 
-<h3 id="2-递归"><a href="#2-递归" class="headerlink" title="2.递归"></a>2.递归</h3><p><img src="http://www.codekenan.icu/img/leetcode/21.%E4%B8%80%E7%82%B9%E4%B9%90%E8%B6%A3.png"></p>
+<h3 id="2-递归"><a href="#2-递归" class="headerlink" title="2.递归"></a>2.递归</h3><p><img src="http://www.codekenan.icu/img/leetcode/21.%E9%80%92%E5%BD%92.png"><br><img src="http://www.codekenan.icu/img/leetcode/21.%E4%B8%80%E7%82%B9%E4%B9%90%E8%B6%A3.png"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(list1 != <span class="literal">null</span> &amp;&amp; list2 != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(list1.val &lt; list2.val)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(list1.val,mergeTwoLists(list1.next,list2));</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(list1.val &gt; list2.val)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(list2.val,mergeTwoLists(list1,list2.next));</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(list1.val,<span class="literal">null</span>);</span><br><span class="line">        temp.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(list2.val,<span class="literal">null</span>);</span><br><span class="line">        temp.next.next = mergeTwoLists(list1.next,list2.next);</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(list1 != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> list1;</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(list2 != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> list2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
 
 <p>官方</p>
@@ -211,11 +212,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/08/23/other/dream/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/07/07/leetcode/LC_22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          各位加油！
+          LC_22.括号生成
         
       </div>
     </a>
@@ -357,6 +358,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
@@ -365,11 +370,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">导论</a>
+                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
+                <a href="javascript:void(0)" class="js-tag color3">导论</a>
               </li>
              
               <li class="article-tag-list-item">
