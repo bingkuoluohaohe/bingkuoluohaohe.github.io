@@ -16,7 +16,7 @@
 <meta property="og:description" content="22. 括号生成 - 力扣（LeetCode） 数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-07T13:44:09.000Z">
-<meta property="article:modified_time" content="2022-07-07T14:43:21.848Z">
+<meta property="article:modified_time" content="2022-07-08T12:10:16.293Z">
 <meta property="article:author" content="ych">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="DP">
@@ -158,7 +158,14 @@
 
 
 
-<h3 id="1-回溯"><a href="#1-回溯" class="headerlink" title="1.回溯"></a>1.回溯</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;String&gt; <span class="title function_">generateParenthesis</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        backTracking(n,list,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">backTracking</span><span class="params">(<span class="type">int</span> n,List&lt;String&gt; list,<span class="type">int</span> left,<span class="type">int</span> right,StringBuilder str)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(right &gt; left)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(right == left &amp;&amp; left == n)&#123;</span><br><span class="line">            list.add(str.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(left &lt; n)&#123;</span><br><span class="line">            backTracking(n,list,left + <span class="number">1</span>,right,str.append(<span class="string">&quot;(&quot;</span>));</span><br><span class="line">            str.deleteCharAt(str.length() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(right &lt; left)&#123;</span><br><span class="line">            backTracking(n,list,left,right + <span class="number">1</span>,str.append(<span class="string">&quot;)&quot;</span>));</span><br><span class="line">            str.deleteCharAt(str.length() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-回溯"><a href="#1-回溯" class="headerlink" title="1.回溯"></a>1.回溯</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;String&gt; <span class="title function_">generateParenthesis</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    backTracking(n,list,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;&quot;</span>));</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">backTracking</span><span class="params">(<span class="type">int</span> n,List&lt;String&gt; list,<span class="type">int</span> left,<span class="type">int</span> right,StringBuilder str)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(right &gt; left)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(right == left &amp;&amp; left == n)&#123;</span><br><span class="line">        list.add(str.toString());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(left &lt; n)&#123;</span><br><span class="line">        backTracking(n,list,left + <span class="number">1</span>,right,str.append(<span class="string">&quot;(&quot;</span>));</span><br><span class="line">        str.deleteCharAt(str.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(right &lt; left)&#123;</span><br><span class="line">        backTracking(n,list,left,right + <span class="number">1</span>,str.append(<span class="string">&quot;)&quot;</span>));</span><br><span class="line">        str.deleteCharAt(str.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-非递归"><a href="#2-非递归" class="headerlink" title="2.非递归"></a>2.非递归</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/generate-parentheses/solution/zui-jian-dan-yi-dong-de-dong-tai-gui-hua-bu-lun-da/">【最简单易懂的】动态规划 - 括号生成 - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;String&gt; <span class="title function_">generateParenthesis</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    LinkedList&lt;LinkedList&lt;String&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;LinkedList&lt;String&gt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> result.get(<span class="number">0</span>);</span><br><span class="line">    LinkedList&lt;String&gt; list0 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;String&gt;();</span><br><span class="line">    list0.add(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    result.add(list0);</span><br><span class="line">    LinkedList&lt;String&gt; list1 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;String&gt;();</span><br><span class="line">    list1.add(<span class="string">&quot;()&quot;</span>);</span><br><span class="line">    result.add(list1);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        LinkedList&lt;String&gt; temp = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;String&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            List&lt;String&gt; str1 = result.get(j);</span><br><span class="line">            List&lt;String&gt; str2 = result.get(i - <span class="number">1</span> - j);</span><br><span class="line">            <span class="keyword">for</span> (String s1 : str1) &#123;</span><br><span class="line">                <span class="keyword">for</span> (String s2 : str2) &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">el</span> <span class="operator">=</span> <span class="string">&quot;(&quot;</span> + s1 + <span class="string">&quot;)&quot;</span> + s2;</span><br><span class="line">                    temp.add(el);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        result.add(temp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result.get(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -194,11 +201,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/08/23/other/dream/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/07/08/leetcode/LC_24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          各位加油！
+          LC_24.两两交换链表中的节点
         
       </div>
     </a>
@@ -232,7 +239,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9B%9E%E6%BA%AF"><span class="toc-number">1.</span> <span class="toc-text">1.回溯</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9B%9E%E6%BA%AF"><span class="toc-number">1.</span> <span class="toc-text">1.回溯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%9D%9E%E9%80%92%E5%BD%92"><span class="toc-number">2.</span> <span class="toc-text">2.非递归</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -336,11 +343,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">leetcode，线性表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -349,10 +360,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
               </li>
              
               <li class="article-tag-list-item">

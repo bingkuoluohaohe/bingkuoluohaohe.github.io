@@ -122,6 +122,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据结构/8-有序表合并(链表)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8-%E6%9C%89%E5%BA%8F%E8%A1%A8%E5%90%88%E5%B9%B6(%E9%93%BE%E8%A1%A8)/">8.有序表合并(链表)</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/11/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/8-%E6%9C%89%E5%BA%8F%E8%A1%A8%E5%90%88%E5%B9%B6(%E9%93%BE%E8%A1%A8)/" class="archive-article-date">
+  	<time datetime="2022-06-10T23:42:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有序表合并，相同元素保留一个，合并后仍然有序</span></span><br><span class="line"><span class="comment">// !!!代码未测试，可能有错误</span></span><br><span class="line">LinkedList <span class="title function_">merge</span><span class="params">(LinkedList* l1, LinkedList* l2)</span></span><br><span class="line">&#123;</span><br><span class="line">	LinkedList merge = initList();</span><br><span class="line">	Node* p = l1-&gt;head-&gt;next;</span><br><span class="line">	Node* q = l2-&gt;head-&gt;next;</span><br><span class="line">	<span class="keyword">while</span>(p &amp;&amp; q)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;elem &lt; q-&gt;elem)&#123;</span><br><span class="line">			insert(&amp;merge,p-&gt;elem);</span><br><span class="line">			p = p-&gt;next;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(p-&gt;elem &gt; q-&gt;elem)&#123;</span><br><span class="line">			insert(&amp;merge,q-&gt;elem);</span><br><span class="line">			q = q-&gt;next;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			insert(&amp;merge,p-&gt;elem);</span><br><span class="line">			p = p-&gt;next;</span><br><span class="line">			q = q-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p)&#123;</span><br><span class="line">		insert(&amp;merge,p-&gt;elem);</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(q)&#123;</span><br><span class="line">		insert(&amp;merge,q-&gt;elem);</span><br><span class="line">		q = q-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> merge;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线性表</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数据结构/7-有序表合并(数组)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -848,94 +923,6 @@
 
 
   
-    <article id="post-other/ssh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/01/other/ssh/">windows免密登录linux</a>
-    </h1>
-  
-
-        
-        <a href="/2022/06/01/other/ssh/" class="archive-article-date">
-  	<time datetime="2022-06-01T11:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>一、生成公钥和私钥</li>
-<li>二、在客户端编辑配置文件</li>
-<li>三、将公钥拷贝到服务器</li>
-<li>四、重启ssh服务</li>
-<li>五、关闭再打开cmd进行登录</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在windows用户目录下/.ssh目录，打开cmd,输入</span></span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在windows用户目录下/.ssh目录，打开config文件，如果没有自己新建一个</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将来可以 ssh aaaa 进行连接，这里可以写IP也可以写域名</span></span><br><span class="line">Host www.aaa.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以是域名也可以是IP</span></span><br><span class="line">HostName  59.110.XX.XXX</span><br><span class="line"></span><br><span class="line"><span class="comment"># 登录时的用户名</span></span><br><span class="line">User root</span><br><span class="line">             </span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地文件</span></span><br><span class="line">IdentityFile C:\Users\windows用户名\.ssh\</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#cmd先密码登录一次服务器，在服务器目录下执行下面的命令</span></span><br><span class="line"><span class="built_in">cd</span> /root/.ssh</span><br><span class="line"><span class="built_in">cat</span> authorized_keys</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#去用户/.ssh 目录下使用cmd命令将公钥进行拷贝,scp命令后面不能加中文</span></span><br><span class="line"><span class="comment"># 注意下面的root后面跟的IP或者是域名，必须和config中的Host一致</span></span><br><span class="line">&gt; scp burning.pub root@www.aaa.com:/root/.ssh</span><br><span class="line"><span class="comment"># 目录下有了公钥的文件，内容追加到authorized_keys中</span></span><br><span class="line">&gt; <span class="built_in">cat</span> &gt;&gt; authorized_keys &lt; burning.pub</span><br><span class="line">&gt; <span class="built_in">cat</span> authorized_keys </span><br><span class="line"><span class="comment"># 查看内容可以看到公钥已经存进去了</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拷贝完成之后，要重启ssh服务</span></span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭再打开cmd进行登录</span><br><span class="line">ssh root@www.aaa.com</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1025,11 +1012,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">leetcode，线性表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1038,10 +1029,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
               </li>
              
               <li class="article-tag-list-item">

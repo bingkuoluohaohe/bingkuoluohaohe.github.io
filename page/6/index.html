@@ -122,6 +122,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-other/ssh" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/01/other/ssh/">windows免密登录linux</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/01/other/ssh/" class="archive-article-date">
+  	<time datetime="2022-06-01T11:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>一、生成公钥和私钥</li>
+<li>二、在客户端编辑配置文件</li>
+<li>三、将公钥拷贝到服务器</li>
+<li>四、重启ssh服务</li>
+<li>五、关闭再打开cmd进行登录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在windows用户目录下/.ssh目录，打开cmd,输入</span></span><br><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在windows用户目录下/.ssh目录，打开config文件，如果没有自己新建一个</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将来可以 ssh aaaa 进行连接，这里可以写IP也可以写域名</span></span><br><span class="line">Host www.aaa.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以是域名也可以是IP</span></span><br><span class="line">HostName  59.110.XX.XXX</span><br><span class="line"></span><br><span class="line"><span class="comment"># 登录时的用户名</span></span><br><span class="line">User root</span><br><span class="line">             </span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地文件</span></span><br><span class="line">IdentityFile C:\Users\windows用户名\.ssh\</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#cmd先密码登录一次服务器，在服务器目录下执行下面的命令</span></span><br><span class="line"><span class="built_in">cd</span> /root/.ssh</span><br><span class="line"><span class="built_in">cat</span> authorized_keys</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#去用户/.ssh 目录下使用cmd命令将公钥进行拷贝,scp命令后面不能加中文</span></span><br><span class="line"><span class="comment"># 注意下面的root后面跟的IP或者是域名，必须和config中的Host一致</span></span><br><span class="line">&gt; scp burning.pub root@www.aaa.com:/root/.ssh</span><br><span class="line"><span class="comment"># 目录下有了公钥的文件，内容追加到authorized_keys中</span></span><br><span class="line">&gt; <span class="built_in">cat</span> &gt;&gt; authorized_keys &lt; burning.pub</span><br><span class="line">&gt; <span class="built_in">cat</span> authorized_keys </span><br><span class="line"><span class="comment"># 查看内容可以看到公钥已经存进去了</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拷贝完成之后，要重启ssh服务</span></span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">关闭再打开cmd进行登录</span><br><span class="line">ssh root@www.aaa.com</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-other/hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -282,11 +370,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">leetcode，线性表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -295,10 +387,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">栈和队列</a>
               </li>
              
               <li class="article-tag-list-item">
