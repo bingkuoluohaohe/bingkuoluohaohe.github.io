@@ -6,25 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.codekenan.icu:81">
-  <title>LC_21.合并两个有序链表 | Hexo</title>
+  <title>Tag: leetcode | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="21. 合并两个有序链表 - 力扣（LeetCode） 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="LC_21.合并两个有序链表">
-<meta property="og:url" content="http://www.codekenan.icu:81/2022/07/07/leetcode/LC_21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://www.codekenan.icu:81/tags/leetcode/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="21. 合并两个有序链表 - 力扣（LeetCode） 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.codekenan.icu/img/leetcode/21.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.jpg">
-<meta property="og:image" content="http://www.codekenan.icu/img/leetcode/21.%E9%80%92%E5%BD%92.png">
-<meta property="og:image" content="http://www.codekenan.icu/img/leetcode/21.%E4%B8%80%E7%82%B9%E4%B9%90%E8%B6%A3.png">
-<meta property="article:published_time" content="2022-07-07T13:06:09.000Z">
-<meta property="article:modified_time" content="2022-07-07T13:43:40.514Z">
 <meta property="article:author" content="ych">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="线性表">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.codekenan.icu/img/leetcode/21.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -130,60 +120,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-leetcode/LC_21-合并两个有序链表" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      LC_21.合并两个有序链表
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2022/07/03/leetcode/LC_1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2022-07-03T14:21:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-03</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/07/03/leetcode/LC_1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">LC_1.两数之和</a>
     </h1>
   
 
-        
-        <a href="/2022/07/07/leetcode/LC_21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="archive-article-date">
-  	<time datetime="2022-07-07T13:06:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/">21. 合并两个有序链表 - 力扣（LeetCode）</a></p>
-<p>将两个升序链表合并为一个新的 <strong>升序</strong> 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
-<span id="more"></span>
-
-<p>示例 1：</p>
-<p><img src="http://www.codekenan.icu/img/leetcode/21.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8.jpg"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>], l2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">输出：[<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-
-<p>示例 2：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [], l2 = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
-
-<p>示例 3：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [], l2 = [<span class="number">0</span>]</span><br><span class="line">输出：[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-迭代"><a href="#1-迭代" class="headerlink" title="1.迭代"></a>1.迭代</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">mergeTwoLists</span><span class="params">(ListNode list1, ListNode list2)</span> &#123;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">ret</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>,<span class="literal">null</span>);</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> ret;</span><br><span class="line">    <span class="keyword">while</span>(list1 != <span class="literal">null</span> &amp;&amp; list2 != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(list1.val &lt; list2.val)&#123;</span><br><span class="line">            temp.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(list1.val,<span class="literal">null</span>);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">            list1 = list1.next;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(list1.val &gt; list2.val)&#123;</span><br><span class="line">            temp.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(list2.val,<span class="literal">null</span>);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">            list2 = list2.next;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            temp.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(list1.val,<span class="literal">null</span>);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">            temp.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(list2.val,<span class="literal">null</span>);</span><br><span class="line">            temp = temp.next;</span><br><span class="line">            list1 = list1.next;</span><br><span class="line">            list2 = list2.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(list1 != <span class="literal">null</span>)&#123;</span><br><span class="line">        temp.next = list1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(list2 != <span class="literal">null</span>)&#123;</span><br><span class="line">        temp.next = list2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-递归"><a href="#2-递归" class="headerlink" title="2.递归"></a>2.递归</h3><p><img src="http://www.codekenan.icu/img/leetcode/21.%E9%80%92%E5%BD%92.png"><br><img src="http://www.codekenan.icu/img/leetcode/21.%E4%B8%80%E7%82%B9%E4%B9%90%E8%B6%A3.png"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(list1 != <span class="literal">null</span> &amp;&amp; list2 != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(list1.val &lt; list2.val)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(list1.val,mergeTwoLists(list1.next,list2));</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(list1.val &gt; list2.val)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(list2.val,mergeTwoLists(list1,list2.next));</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(list1.val,<span class="literal">null</span>);</span><br><span class="line">        temp.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(list2.val,<span class="literal">null</span>);</span><br><span class="line">        temp.next.next = mergeTwoLists(list1.next,list2.next);</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(list1 != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> list1;</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(list2 != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> list2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-
-<p>官方</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (l1 == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> l2;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (l2 == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> l1;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;</span><br><span class="line">        l1.next = mergeTwoLists(l1.next, l2);</span><br><span class="line">        <span class="keyword">return</span> l1;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        l2.next = mergeTwoLists(l1, l2.next);</span><br><span class="line">        <span class="keyword">return</span> l2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,84 +157,26 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线性表</a>
-        		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2022/07/07/leetcode/LC_22-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          LC_22.括号生成
-        
-      </div>
-    </a>
   
   
-    <a href="/2022/07/07/leetcode/LC_20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">LC_20.有效的括号</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%AD%E4%BB%A3"><span class="toc-number">1.</span> <span class="toc-text">1.迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%92%E5%BD%92"><span class="toc-number">2.</span> <span class="toc-text">2.递归</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/tags/leetcode/">&amp;laquo; Prev</a><a class="page-number" href="/tags/leetcode/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -292,9 +200,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -346,10 +254,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
@@ -362,15 +266,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">查找</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">导论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -383,10 +295,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">图</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">查找</a>
               </li>
              
               <li class="article-tag-list-item">
