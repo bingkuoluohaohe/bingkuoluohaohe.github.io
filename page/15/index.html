@@ -122,30 +122,29 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-spring/9.IOC DI 注解开发管理第三方bean" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-面试题/5.希尔排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/9.IOC%20DI%20%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9bean/">9.IOC DI 注解开发管理第三方bean</a>
+      <a class="article-title" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/5.%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/9.IOC%20DI%20%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9bean/" class="archive-article-date">
-  	<time datetime="2022-08-28T06:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/5.%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2022-09-09T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面定义bean的时候都是在自己开发的类上面写个注解就完成了，但如果是第三方的类，这些类都是在jar包中，我们没有办法在类上面添加注解，这个时候该怎么办?</p>
-        
-          <a class="article-more-a" href="/2022/08/28/spring/9.IOC%20DI%20%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9bean/#more">more >></a>
-        
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">shellSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span>[] dlta)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dlta.length; i++) &#123;</span><br><span class="line">        shellInsert(arr, dlta[i]);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">shellInsert</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> dk)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> dk; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt; arr[i - dk]) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j = i - dk; j &gt;= <span class="number">0</span>; j = j - dk) &#123;</span><br><span class="line">                <span class="keyword">if</span> (temp &lt; arr[j]) &#123;</span><br><span class="line">                    arr[j + dk] = arr[j];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[j + dk] = temp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -158,7 +157,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
         		</li>
       		
 		</ul>
@@ -194,29 +193,29 @@
 
 
   
-    <article id="post-spring/8.IOC DI 注解开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-面试题/4.插入排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/8.IOC%20DI%20%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">8.IOC DI 注解开发</a>
+      <a class="article-title" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/4.%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">插入排序</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/8.IOC%20DI%20%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2022-08-28T06:03:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/4.%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2022-09-09T01:49:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Spring的IOC/DI对应的配置开发就已经讲解完成，但是使用起来相对来说还是比较复杂的，复杂的地方在==配置文件==。</p>
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">insertSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt; arr[i - <span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">            <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (temp &lt; arr[j]) &#123;</span><br><span class="line">                    arr[j + <span class="number">1</span>] = arr[j];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[j + <span class="number">1</span>] = temp;</span><br><span class="line">            System.out.println(Arrays.toString(arr));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2022/08/28/spring/8.IOC%20DI%20%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/4.%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/#more">more >></a>
         
       
 
@@ -230,7 +229,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
         		</li>
       		
 		</ul>
@@ -266,29 +265,29 @@
 
 
   
-    <article id="post-spring/7.核心容器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-面试题/3.选择排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/7.%E6%A0%B8%E5%BF%83%E5%AE%B9%E5%99%A8/">7.核心容器</a>
+      <a class="article-title" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/3.%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/7.%E6%A0%B8%E5%BF%83%E5%AE%B9%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2022-08-28T06:02:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/3.%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2022-09-09T00:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面已经完成bean与依赖注入的相关知识学习，接下来我们主要学习的是IOC容器中的==核心容器==。</p>
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">selectSort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> min(arr, i, len - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (i != min) &#123;</span><br><span class="line">            swap(arr, i, min);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">min</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> start;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start + <span class="number">1</span>; i &lt;= end; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt; arr[ans]) &#123;</span><br><span class="line">            ans = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2022/08/28/spring/7.%E6%A0%B8%E5%BF%83%E5%AE%B9%E5%99%A8/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/3.%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/#more">more >></a>
         
       
 
@@ -302,7 +301,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
         		</li>
       		
 		</ul>
@@ -338,29 +337,29 @@
 
 
   
-    <article id="post-spring/6.IOC DI 配置管理第三方bean" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-面试题/2.冒泡排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/6.IOC%20DI%20%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9bean/">6.IOC DI 配置管理第三方bean</a>
+      <a class="article-title" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/2.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/6.IOC%20DI%20%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9bean/" class="archive-article-date">
-  	<time datetime="2022-08-28T06:01:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/2.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2022-09-08T23:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面所讲的知识点都是基于我们自己写的类，现在如果有需求让我们去管理第三方jar包中的类，该如何管理?</p>
+        <p>如果某一轮冒泡没有发生交换，则表示所有数据有序，可以结束外层循环</p>
         
-          <a class="article-more-a" href="/2022/08/28/spring/6.IOC%20DI%20%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9bean/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/2.%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/#more">more >></a>
         
       
 
@@ -374,7 +373,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
         		</li>
       		
 		</ul>
@@ -410,29 +409,34 @@
 
 
   
-    <article id="post-spring/5.DI相关内容" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-面试题/1.二分查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/5.DI%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/">5.DI相关内容</a>
+      <a class="article-title" href="/2022/09/08/%E9%9D%A2%E8%AF%95%E9%A2%98/1.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/5.DI%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/" class="archive-article-date">
-  	<time datetime="2022-08-28T05:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/08/%E9%9D%A2%E8%AF%95%E9%A2%98/1.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="archive-article-date">
+  	<time datetime="2022-09-08T07:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前面我们已经完成了bean相关操作的讲解，接下来就进入第二个大的模块<code>DI依赖注入</code>，首先来介绍下Spring中有哪些注入方式?</p>
+        <p><strong>解决整数溢出问题</strong></p>
+<p>当 l 和 r 都较大时，<code>l + r</code> 有可能超过整数范围，造成运算错误，解决方法有两种：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> l + (r - l) / <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>还有一种是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> (l + r) &gt;&gt;&gt; <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2022/08/28/spring/5.DI%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/08/%E9%9D%A2%E8%AF%95%E9%A2%98/1.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/#more">more >></a>
         
       
 
@@ -446,7 +450,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
         		</li>
       		
 		</ul>
@@ -482,30 +486,28 @@
 
 
   
-    <article id="post-spring/4.IOC相关内容" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-面试题/0.前言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/4.IOC%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/">4.IOC相关内容</a>
+      <a class="article-title" href="/2022/09/08/%E9%9D%A2%E8%AF%95%E9%A2%98/0.%E5%89%8D%E8%A8%80/">前言</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/4.IOC%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/" class="archive-article-date">
-  	<time datetime="2022-08-28T04:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/08/%E9%9D%A2%E8%AF%95%E9%A2%98/0.%E5%89%8D%E8%A8%80/" class="archive-article-date">
+  	<time datetime="2022-09-08T07:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通过前面两个案例，我们已经学习了<code>bean如何定义配置</code>，<code>DI如何定义配置</code>以及<code>容器对象如何获取</code>的内容，接下来主要是把这三块内容展开进行详细的讲解，深入的学习下这三部分的内容，首先是bean基础配置。</p>
-        
-          <a class="article-more-a" href="/2022/08/28/spring/4.IOC%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/#more">more >></a>
-        
+        <p>笔记来源 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15b4y117RJ/?spm_id_from=333.851.header_right.fav_list.click&vd_source=a61be2deacefbb99540fd88c6ba02db9">Java八股文面试题视频教程，Java面试八股文宝典（含阿里、腾迅大厂java面试真题，java数据结构，java并发，jvm等最新java面试真题）_哔哩哔哩_bilibili</a></p>
+
       
 
       
@@ -518,7 +520,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
         		</li>
       		
 		</ul>
@@ -554,29 +556,38 @@
 
 
   
-    <article id="post-spring/3.入门案例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/5.NIO vs BIO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/3.%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/">3.入门案例</a>
+      <a class="article-title" href="/2022/09/05/netty/5.NIO%20vs%20BIO/">5.NIO vs BIO</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/3.%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/" class="archive-article-date">
-  	<time datetime="2022-08-28T03:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/05/netty/5.NIO%20vs%20BIO/" class="archive-article-date">
+  	<time datetime="2022-09-05T03:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>介绍完Spring的核心概念后，接下来我们得思考一个问题就是，Spring到底是如何来实现IOC和DI的，那接下来就通过一些简单的入门案例，来演示下具体实现过程:</p>
+        <h3 id="5-1-stream-vs-channel"><a href="#5-1-stream-vs-channel" class="headerlink" title="5.1 stream vs channel"></a>5.1 stream vs channel</h3><ul>
+<li>stream 不会自动缓冲数据，channel 会利用系统提供的发送缓冲区、接收缓冲区（更为底层）</li>
+<li>stream 仅支持阻塞 API，channel 同时支持阻塞、非阻塞 API，网络 channel 可配合 selector 实现多路复用</li>
+<li>二者均为全双工，即读写可以同时进行</li>
+</ul>
+<h3 id="5-2-IO-模型"><a href="#5-2-IO-模型" class="headerlink" title="5.2 IO 模型"></a>5.2 IO 模型</h3><p>同步阻塞、同步非阻塞、同步多路复用、异步阻塞（没有此情况）、异步非阻塞</p>
+<ul>
+<li>同步：线程自己去获取结果（一个线程）</li>
+<li>异步：线程自己不去获取结果，而是由其它线程送结果（至少两个线程）</li>
+</ul>
         
-          <a class="article-more-a" href="/2022/08/28/spring/3.%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/05/netty/5.NIO%20vs%20BIO/#more">more >></a>
         
       
 
@@ -590,7 +601,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -626,29 +637,42 @@
 
 
   
-    <article id="post-spring/2.Spring相关概念" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/4. 网络编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/2.Spring%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">2.Spring相关概念</a>
+      <a class="article-title" href="/2022/09/05/netty/4.%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">4.网络编程</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/2.Spring%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="archive-article-date">
-  	<time datetime="2022-08-28T02:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/05/netty/4.%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2022-09-05T02:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="2-1-初识Spring"><a href="#2-1-初识Spring" class="headerlink" title="2.1 初识Spring"></a>2.1 初识Spring</h3><p>在这一节，主要通过以下两个点来了解下Spring:</p>
+        <h3 id="4-1-非阻塞-vs-阻塞"><a href="#4-1-非阻塞-vs-阻塞" class="headerlink" title="4.1 非阻塞 vs 阻塞"></a>4.1 非阻塞 vs 阻塞</h3><h4 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h4><ul>
+<li>阻塞模式下，相关方法都会导致线程暂停<ul>
+<li>ServerSocketChannel.accept 会在没有连接建立时让线程暂停</li>
+<li>SocketChannel.read 会在没有数据可读时让线程暂停</li>
+<li>阻塞的表现其实就是线程暂停了，暂停期间不会占用 cpu，但线程相当于闲置</li>
+</ul>
+</li>
+<li>单线程下，阻塞方法之间相互影响，几乎不能正常工作，需要多线程支持</li>
+<li>但多线程下，有新的问题，体现在以下方面<ul>
+<li>32 位 jvm 一个线程 320k，64 位 jvm 一个线程 1024k，如果连接数过多，必然导致 OOM，并且线程太多，反而会因为频繁上下文切换导致性能降低</li>
+<li>可以采用线程池技术来减少线程数和线程上下文切换，但治标不治本，如果有很多连接建立，但长时间 inactive，会阻塞线程池中所有线程，因此不适合长连接，只适合短连接</li>
+</ul>
+</li>
+</ul>
         
-          <a class="article-more-a" href="/2022/08/28/spring/2.Spring%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/05/netty/4.%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/#more">more >></a>
         
       
 
@@ -662,7 +686,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -698,31 +722,31 @@
 
 
   
-    <article id="post-spring/1.课程介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/3.文件编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/28/spring/1.%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/">1.课程介绍</a>
+      <a class="article-title" href="/2022/09/05/netty/3.%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B/">3.文件编程</a>
     </h1>
   
 
         
-        <a href="/2022/08/28/spring/1.%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
-  	<time datetime="2022-08-28T01:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-28</time>
+        <a href="/2022/09/05/netty/3.%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2022-09-05T01:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>来源</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1WZ4y1P7Bp?from=search&seid=7768265410655910235&spm_id_from=333.337.0.0&vd_source=a61be2deacefbb99540fd88c6ba02db9">黑马程序员最全SSM框架教程|Spring+SpringMVC+MyBatis全套教程(spring+springmvc+mybatis)_哔哩哔哩_bilibili</a></p>
-<p>对于一门新技术，我们需要从<code>为什么要学</code>、<code>学什么</code>以及<code>怎么学</code>这三个方向入手来学习。那对于Spring来说:</p>
+        <h3 id="3-1-FileChannel"><a href="#3-1-FileChannel" class="headerlink" title="3.1 FileChannel"></a>3.1 FileChannel</h3><h4 id="⚠️-FileChannel-工作模式"><a href="#⚠️-FileChannel-工作模式" class="headerlink" title="⚠️ FileChannel 工作模式"></a>⚠️ FileChannel 工作模式</h4><blockquote>
+<p>FileChannel 只能工作在阻塞模式下</p>
+</blockquote>
         
-          <a class="article-more-a" href="/2022/08/28/spring/1.%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/05/netty/3.%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B/#more">more >></a>
         
       
 
@@ -736,7 +760,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -772,32 +796,30 @@
 
 
   
-    <article id="post-leetcode/1600/LC_1455. 检查单词是否为句中其他单词的前缀" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/2.ByteBuffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/08/21/leetcode/1600/LC_1455.%20%E6%A3%80%E6%9F%A5%E5%8D%95%E8%AF%8D%E6%98%AF%E5%90%A6%E4%B8%BA%E5%8F%A5%E4%B8%AD%E5%85%B6%E4%BB%96%E5%8D%95%E8%AF%8D%E7%9A%84%E5%89%8D%E7%BC%80/">LC_1455.检查单词是否为句中其他单词的前缀</a>
+      <a class="article-title" href="/2022/09/05/netty/2.ByteBuffer/">2.ByteBuffer</a>
     </h1>
   
 
         
-        <a href="/2022/08/21/leetcode/1600/LC_1455.%20%E6%A3%80%E6%9F%A5%E5%8D%95%E8%AF%8D%E6%98%AF%E5%90%A6%E4%B8%BA%E5%8F%A5%E4%B8%AD%E5%85%B6%E4%BB%96%E5%8D%95%E8%AF%8D%E7%9A%84%E5%89%8D%E7%BC%80/" class="archive-article-date">
-  	<time datetime="2022-08-21T01:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-21</time>
+        <a href="/2022/09/05/netty/2.ByteBuffer/" class="archive-article-date">
+  	<time datetime="2022-09-05T00:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/">1455. 检查单词是否为句中其他单词的前缀 - 力扣（LeetCode）</a></p>
-<p>给你一个字符串 sentence 作为句子并指定检索词为 searchWord ，其中句子由若干用 单个空格 分隔的单词组成。请你检查检索词 searchWord 是否为句子 sentence 中任意单词的前缀。</p>
-<p>如果 searchWord 是某一个单词的前缀，则返回句子 sentence 中该单词所对应的下标（下标从 1 开始）。如果 searchWord 是多个单词的前缀，则返回匹配的第一个单词的下标（最小下标）。如果 searchWord 不是任何单词的前缀，则返回 -1 。</p>
-<p>字符串 s 的 前缀 是 s 的任何前导连续子字符串。</p>
+        <p>有一普通文本文件 data.txt，内容为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1234567890abcd</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2022/08/21/leetcode/1600/LC_1455.%20%E6%A3%80%E6%9F%A5%E5%8D%95%E8%AF%8D%E6%98%AF%E5%90%A6%E4%B8%BA%E5%8F%A5%E4%B8%AD%E5%85%B6%E4%BB%96%E5%8D%95%E8%AF%8D%E7%9A%84%E5%89%8D%E7%BC%80/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/05/netty/2.ByteBuffer/#more">more >></a>
         
       
 
@@ -811,7 +833,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -849,7 +871,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -928,11 +950,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -940,15 +958,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -956,15 +966,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">南京大学jyy-操作系统</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">南京大学蒋炎岩-操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1004,15 +1026,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1020,23 +1034,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">递归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1044,19 +1046,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">分治</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">桶排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">递归</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1068,7 +1058,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">快速排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
             
             <div class="clearfix"></div>

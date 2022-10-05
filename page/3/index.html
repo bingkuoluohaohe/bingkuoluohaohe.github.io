@@ -122,35 +122,40 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-mybatis/5.MyBatis的增删改查" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-汇编语言(实模式)/8.显卡与显存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/mybatis/5.MyBatis%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/">5.MyBatis的增删改查</a>
+      <a class="article-title" href="/2022/10/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/8.%E6%98%BE%E5%8D%A1%E4%B8%8E%E6%98%BE%E5%AD%98/">8.显卡与显存</a>
     </h1>
   
 
         
-        <a href="/2022/10/02/mybatis/5.MyBatis%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/" class="archive-article-date">
-  	<time datetime="2022-10-02T13:55:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
+        <a href="/2022/10/04/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/8.%E6%98%BE%E5%8D%A1%E4%B8%8E%E6%98%BE%E5%AD%98/" class="archive-article-date">
+  	<time datetime="2022-10-04T01:33:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li><p>添加</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--int insertUser();--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertUser&quot;</span>&gt;</span></span><br><span class="line">	insert into t_user values(null,&#x27;admin&#x27;,&#x27;123456&#x27;,23,&#x27;男&#x27;,&#x27;12345@qq.com&#x27;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<ol start="2">
-<li><p>删除
-        
-          <a class="article-more-a" href="/2022/10/02/mybatis/5.MyBatis%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/#more">more >></a>
-        
+        <span id="more"></span>
+
+<h3 id="2-在屏幕中央显示字符串"><a href="#2-在屏幕中央显示字符串" class="headerlink" title="2.在屏幕中央显示字符串"></a>2.在屏幕中央显示字符串</h3><p><img src="http://www.codekenan.icu/img/asm/22.png"></img></p>
+<p><img src="http://www.codekenan.icu/img/asm/23.png"></img></p>
+<p><img src="http://www.codekenan.icu/img/asm/24.png"></img></p>
+<p><img src="http://www.codekenan.icu/img/asm/25.png"></img></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code,ds:code</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line">  db &#x27;hello  world&#x27;</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line">start:</span><br><span class="line">  mov ax,data</span><br><span class="line">  mov ds,ax</span><br><span class="line">  mov ax,0b800h</span><br><span class="line">  mov es,ax</span><br><span class="line"></span><br><span class="line">  ; 清空屏幕输出</span><br><span class="line">  mov cx,80 * 25</span><br><span class="line">  mov di,0</span><br><span class="line">  s0:</span><br><span class="line">    mov ax,0</span><br><span class="line">    mov es:[di],ax</span><br><span class="line">    add di,2</span><br><span class="line">  loop s0  </span><br><span class="line"></span><br><span class="line">  ; 在屏幕中央显示 ‘hello world’</span><br><span class="line">  mov si,0</span><br><span class="line">  mov di,160 * 12 + 80 - 12</span><br><span class="line">  mov cx,12</span><br><span class="line">  s:</span><br><span class="line">    mov al,[si]</span><br><span class="line">    mov ah,01001010B</span><br><span class="line">    mov es:[di],ax</span><br><span class="line">    inc si</span><br><span class="line">    add di,2</span><br><span class="line">  loop s</span><br><span class="line"></span><br><span class="line">  mov ax,4c00h</span><br><span class="line">  int 21h</span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-显示字符串子程序"><a href="#3-显示字符串子程序" class="headerlink" title="3.显示字符串子程序"></a>3.显示字符串子程序</h3><p><img src="http://www.codekenan.icu/img/asm/26.png"></img></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">assume cs:code,ds:data,ss:stack</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line">  db &#x27;hello  world&#x27;,0</span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">stack segment</span><br><span class="line">  db 32 dup (0)</span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line">code segment </span><br><span class="line">start: </span><br><span class="line">  mov ax,data</span><br><span class="line">  mov ds,ax</span><br><span class="line">  mov ax,stack</span><br><span class="line">  mov ss,ax</span><br><span class="line">  mov sp,20h</span><br><span class="line">  ; 行号 共25行(0-24)</span><br><span class="line">  mov dh,12</span><br><span class="line">  ; 列号 共80列(0-79)</span><br><span class="line">  mov dl,34</span><br><span class="line">  ; 颜色</span><br><span class="line">  mov cl,11001010B</span><br><span class="line">  ; ds:si 指向字符串首地址</span><br><span class="line">  mov si,0</span><br><span class="line">  </span><br><span class="line">  call show_str</span><br><span class="line">  </span><br><span class="line">  mov ax,4c00h</span><br><span class="line">  int 21h</span><br><span class="line"></span><br><span class="line">  show_str:</span><br><span class="line">    ; 保存子程序使用的寄存器  </span><br><span class="line">    push ax</span><br><span class="line">    push bx</span><br><span class="line">    push cx</span><br><span class="line">    push dx</span><br><span class="line">    push ds</span><br><span class="line">    push es</span><br><span class="line">    push di</span><br><span class="line">    push si</span><br><span class="line">    </span><br><span class="line">    mov ax,0B800h</span><br><span class="line">    mov es,ax</span><br><span class="line">    ; 保存颜色</span><br><span class="line">    mov bx,cx</span><br><span class="line">    ; 清空屏幕输出</span><br><span class="line">    mov di,0</span><br><span class="line">    mov cx,25*80</span><br><span class="line">    mov ax,0</span><br><span class="line">  s2:  </span><br><span class="line">    mov es:[di],ax</span><br><span class="line">    add di,2</span><br><span class="line">  loop s2</span><br><span class="line"></span><br><span class="line">    ; 行数减1,计算偏移地址</span><br><span class="line">    dec dh</span><br><span class="line">    mov al,160</span><br><span class="line">    ; 160 * (行数 - 1)</span><br><span class="line">    mul dh</span><br><span class="line">    mov dh,0</span><br><span class="line">    ; 列数 * 2</span><br><span class="line">    add dx,dx</span><br><span class="line">    ; 偏移地址</span><br><span class="line">    add ax,dx</span><br><span class="line">    mov di,ax  </span><br><span class="line">  s1:  </span><br><span class="line">    mov cl,ds:[si]</span><br><span class="line">    mov ch,0</span><br><span class="line">    ; 读到0时结束</span><br><span class="line">    jcxz ok</span><br><span class="line">    mov es:[di],cl</span><br><span class="line">    inc di</span><br><span class="line">    ; 颜色保存在bl</span><br><span class="line">    mov al,bl</span><br><span class="line">    mov es:[di],ax </span><br><span class="line">    inc si</span><br><span class="line">    inc di</span><br><span class="line">    jmp short s1</span><br><span class="line"></span><br><span class="line">  ok:</span><br><span class="line">    pop si</span><br><span class="line">    pop di</span><br><span class="line">    pop es</span><br><span class="line">    pop ds</span><br><span class="line">    pop dx</span><br><span class="line">    pop cx</span><br><span class="line">    pop bx</span><br><span class="line">    pop ax</span><br><span class="line">    ret</span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line">end start </span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -163,7 +168,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">汇编语言(实模式)</a>
         		</li>
       		
 		</ul>
@@ -199,574 +204,29 @@
 
 
   
-    <article id="post-mybatis/4.默认的类型别名" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-汇编语言(实模式)/7.转移指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/mybatis/4.%E9%BB%98%E8%AE%A4%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D/">4.默认的类型别名</a>
+      <a class="article-title" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/7.%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/">7.转移指令</a>
     </h1>
   
 
         
-        <a href="/2022/10/02/mybatis/4.%E9%BB%98%E8%AE%A4%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D/" class="archive-article-date">
-  	<time datetime="2022-10-02T13:50:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
+        <a href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/7.%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2022-10-03T15:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://www.codekenan.icu/img/mybatis/%E9%BB%98%E8%AE%A4%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D1.png"><br><img src="http://www.codekenan.icu/img/mybatis/%E9%BB%98%E8%AE%A4%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D2.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
+        <p><img src="http://www.codekenan.icu/img/asm/3.png"></img></p>
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mybatis/3.核心配置文件详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/mybatis/3.%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/">3.核心配置文件详解</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/02/mybatis/3.%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2022-10-02T13:44:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>核心配置文件中的标签必须按照固定的顺序(有的标签可以不写，但顺序一定不能乱)：<br>properties、settings、typeAliases、typeHandlers、objectFactory、objectWrapperFactory、reflectorFactory、plugins、environments、databaseIdProvider、mappers</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2022/10/02/mybatis/3.%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mybatis/2.搭建MyBatis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/mybatis/2.%E6%90%AD%E5%BB%BAMyBatis/">2.搭建MyBatis</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/02/mybatis/2.%E6%90%AD%E5%BB%BAMyBatis/" class="archive-article-date">
-  	<time datetime="2022-10-02T13:41:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="2-1-创建maven工程"><a href="#2-1-创建maven工程" class="headerlink" title="2.1 创建maven工程"></a>2.1 创建maven工程</h3><ul>
-<li><p>打包方式：jar</p>
-</li>
-<li><p>引入依赖</p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- Mybatis核心 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- junit测试 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- MySQL驱动 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-        
-          <a class="article-more-a" href="/2022/10/02/mybatis/2.%E6%90%AD%E5%BB%BAMyBatis/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mybatis/1.Mybatis简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/mybatis/1.Mybatis%E7%AE%80%E4%BB%8B/">1.Mybatis简介</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/02/mybatis/1.Mybatis%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2022-10-02T13:31:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-1-MyBatis历史"><a href="#1-1-MyBatis历史" class="headerlink" title="1.1 MyBatis历史"></a>1.1 MyBatis历史</h3><ul>
-<li>   MyBatis最初是Apache的一个开源项目iBatis, 2010年6月这个项目由Apache Software Foundation迁移到了Google Code。随着开发团队转投Google Code旗下，iBatis3.x正式更名为MyBatis。代码于2013年11月迁移到Github</li>
-<li>   iBatis一词来源于“internet”和“abatis”的组合，是一个基于Java的持久层框架。iBatis提供的持久层框架包括SQL Maps和Data Access Objects（DAO）</li>
-</ul>
-        
-          <a class="article-more-a" href="/2022/10/02/mybatis/1.Mybatis%E7%AE%80%E4%BB%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/100/LC_75. 颜色分类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/leetcode/100/LC_75.%20%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/">LC_75.颜色分类</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/02/leetcode/100/LC_75.%20%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/" class="archive-article-date">
-  	<time datetime="2022-10-02T12:52:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-colors/">75. 颜色分类 - 力扣（LeetCode）</a></p>
-<p>给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。</p>
-<p>我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。</p>
-<p>必须在不使用库的sort函数的情况下解决这个问题。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">输出：[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-快速排序"><a href="#1-快速排序" class="headerlink" title="1.快速排序"></a>1.快速排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sortColors</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">zero</span> <span class="operator">=</span> -<span class="number">1</span>, one = <span class="number">0</span>, two = nums.length;</span><br><span class="line">    <span class="keyword">while</span> (one &lt; two) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[one] == <span class="number">0</span>) &#123;</span><br><span class="line">            swap(nums, ++zero, one++);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[one] == <span class="number">2</span>) &#123;</span><br><span class="line">            swap(nums, --two, one);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ++one;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> nums[i];</span><br><span class="line">    nums[i] = nums[j];</span><br><span class="line">    nums[j] = t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">快速排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/600/LC_451.根据字符出现频率排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/leetcode/600/LC_451.%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/">LC_451.根据字符出现频率排序</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/02/leetcode/600/LC_451.%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2022-10-02T12:46:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-characters-by-frequency/">451. 根据字符出现频率排序 - 力扣（LeetCode）</a></p>
-<p>给定一个字符串 s ，根据字符出现的 频率 对其进行 降序排序 。一个字符出现的 频率 是它出现在字符串中的次数。</p>
-<p>返回 已排序的字符串 。如果有多个答案，返回其中任何一个。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;tree&quot;</span></span><br><span class="line">输出: <span class="string">&quot;eert&quot;</span></span><br><span class="line">解释: <span class="string">&#x27;e&#x27;</span>出现两次，<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>都只出现一次。</span><br><span class="line">因此<span class="string">&#x27;e&#x27;</span>必须出现在<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>之前。此外，<span class="string">&quot;eetr&quot;</span>也是一个有效的答案。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-桶排序"><a href="#1-桶排序" class="headerlink" title="1.桶排序"></a>1.桶排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">frequencySort</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    Map&lt;Character, Integer&gt; frequencyForNum = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : s.toCharArray())</span><br><span class="line">        frequencyForNum.put(c, frequencyForNum.getOrDefault(c, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    List&lt;Character&gt;[] frequencyBucket = <span class="keyword">new</span> <span class="title class_">ArrayList</span>[s.length() + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : frequencyForNum.keySet()) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">f</span> <span class="operator">=</span> frequencyForNum.get(c);</span><br><span class="line">        <span class="keyword">if</span> (frequencyBucket[f] == <span class="literal">null</span>) &#123;</span><br><span class="line">            frequencyBucket[f] = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        frequencyBucket[f].add(c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> frequencyBucket.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (frequencyBucket[i] == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : frequencyBucket[i]) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                str.append(c);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">桶排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/400/LC_347.前 K 个高频元素" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/leetcode/400/LC_347.%E5%89%8D%20K%20%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/">LC_347.前 K 个高频元素</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/02/leetcode/400/LC_347.%E5%89%8D%20K%20%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/" class="archive-article-date">
-  	<time datetime="2022-10-02T12:38:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/">347. 前 K 个高频元素 - 力扣（LeetCode）</a></p>
-<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，请你返回其中出现频率前 <code>k</code> 高的元素。你可以按 <strong>任意顺序</strong> 返回答案。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>], k = <span class="number">2</span></span><br><span class="line">输出: [<span class="number">1</span>,<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-桶排序"><a href="#1-桶排序" class="headerlink" title="1.桶排序"></a>1.桶排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; frequencyForNum = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        frequencyForNum.put(num, frequencyForNum.getOrDefault(num, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;Integer&gt;[] buckets = <span class="keyword">new</span> <span class="title class_">ArrayList</span>[nums.length + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> key : frequencyForNum.keySet()) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">frequency</span> <span class="operator">=</span> frequencyForNum.get(key);</span><br><span class="line">        <span class="keyword">if</span> (buckets[frequency] == <span class="literal">null</span>) &#123;</span><br><span class="line">            buckets[frequency] = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">        buckets[frequency].add(key);</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;Integer&gt; topK = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> buckets.length - <span class="number">1</span>; i &gt;= <span class="number">0</span> &amp;&amp; topK.size() &lt; k; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (buckets[i] == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (buckets[i].size() &lt;= (k - topK.size())) &#123;</span><br><span class="line">            topK.addAll(buckets[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            topK.addAll(buckets[i].subList(<span class="number">0</span>, k - topK.size()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] res = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">        res[i] = topK.get(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-汇编语言(实模式)/1.寄存器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/1.%E5%AF%84%E5%AD%98%E5%99%A8/">1.寄存器</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/1.%E5%AF%84%E5%AD%98%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2022-10-02T12:16:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-通用寄存器"><a href="#1-通用寄存器" class="headerlink" title="1.通用寄存器"></a>1.通用寄存器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">AX 		accumulator  			累加寄存器</span><br><span class="line">BX		base					基址寄存器</span><br><span class="line">CX 		count					计数寄存器</span><br><span class="line">DX 		data					数据寄存器</span><br><span class="line"></span><br><span class="line">SI		Source Index			源变址寄存器</span><br><span class="line">DI		Destination Index		目的变址寄存器  </span><br><span class="line">BP		Base Pointer			基址指针寄存器</span><br><span class="line">SP 		Stack Pointer			堆栈指针寄存器</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2022/10/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/1.%E5%AF%84%E5%AD%98%E5%99%A8/#more">more >></a>
+          <a class="article-more-a" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/7.%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/#more">more >></a>
         
       
 
@@ -816,29 +276,27 @@
 
 
   
-    <article id="post-汇编语言(实模式)/0.前言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-汇编语言(实模式)/6.逻辑指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/0.%E5%89%8D%E8%A8%80/">0.前言</a>
+      <a class="article-title" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/6.%E9%80%BB%E8%BE%91%E6%8C%87%E4%BB%A4/">6.逻辑指令</a>
     </h1>
   
 
         
-        <a href="/2022/10/02/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/0.%E5%89%8D%E8%A8%80/" class="archive-article-date">
-  	<time datetime="2022-10-02T12:00:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
+        <a href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/6.%E9%80%BB%E8%BE%91%E6%8C%87%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2022-10-03T15:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://item.jd.com/12841436.html">《汇编语言(第4版）(王爽)》</a></p>
-<p><a target="_blank" rel="noopener" href="https://item.jd.com/12938897.html">《x86汇编语言：从实模式到保护模式》(李忠))</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Wu411B72F/?from=search&seid=16067090733146544857&spm_id_from=333.337.0.0&vd_source=a61be2deacefbb99540fd88c6ba02db9">通俗易懂的汇编语言（王爽老师的书）_哔哩哔哩_bilibili</a></p>
+        <h3 id="1-and"><a href="#1-and" class="headerlink" title="1.and"></a>1.and</h3><h3 id="2-or"><a href="#2-or" class="headerlink" title="2.or"></a>2.or</h3><p><img src="http://www.codekenan.icu/img/asm/57.png"></img></p>
 
       
 
@@ -853,6 +311,539 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">汇编语言(实模式)</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-汇编语言(实模式)/5.算术运算指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/5.%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/">5.算术运算指令</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/5.%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2022-10-03T07:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-add"><a href="#1-add" class="headerlink" title="1.add"></a>1.add</h3><h3 id="2-sub"><a href="#2-sub" class="headerlink" title="2.sub"></a>2.sub</h3><p><img src="http://www.codekenan.icu/img/asm/52.png"></img></p>
+<p>8086的段寄存器不可以直接做为算术运算指令的操作数。</p>
+        
+          <a class="article-more-a" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/5.%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">汇编语言(实模式)</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-汇编语言(实模式)/4.传送指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/4.%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4/">4.传送指令</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/4.%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2022-10-03T05:51:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-mov"><a href="#1-mov" class="headerlink" title="1.mov"></a>1.mov</h3><p><img src="http://www.codekenan.icu/img/asm/51.png"></img></p>
+<ul>
+<li>mov 寄存器，段寄存器</li>
+<li>mov 内存单元，段寄存器</li>
+<li>mov 段寄存器，内存单元</li>
+</ul>
+        
+          <a class="article-more-a" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/4.%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">汇编语言(实模式)</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/600/LC_435.无重叠区间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/03/leetcode/600/LC_435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/">LC_435.无重叠区间</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/03/leetcode/600/LC_435.%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/" class="archive-article-date">
+  	<time datetime="2022-10-03T04:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">435. 无重叠区间 - 力扣（LeetCode）</a></p>
+<p>给定一个区间的集合 intervals ，其中 intervals[i] = [starti, endi] 。返回 需要移除区间的最小数量，使剩余区间互不重叠 。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: intervals = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">3</span>]]</span><br><span class="line">输出: <span class="number">1</span></span><br><span class="line">解释: 移除 [<span class="number">1</span>,<span class="number">3</span>] 后，剩下的区间没有重叠。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-贪心"><a href="#1-贪心" class="headerlink" title="1.贪心"></a>1.贪心</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">eraseOverlapIntervals</span><span class="params">(<span class="type">int</span>[][] intervals)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (intervals.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Arrays.sort(intervals, Comparator.comparingInt(o -&gt; o[<span class="number">1</span>]));</span><br><span class="line">    <span class="type">int</span> <span class="variable">cnt</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; intervals.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (intervals[i][<span class="number">0</span>] &lt; end) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        end = intervals[i][<span class="number">1</span>];</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> intervals.length - cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-汇编语言(实模式)/3.指令总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/3.%E6%8C%87%E4%BB%A4%E6%80%BB%E7%BB%93/">3.指令总结</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/3.%E6%8C%87%E4%BB%A4%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2022-10-03T04:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://www.codekenan.icu/img/asm/35.png"></img></p>
+        
+          <a class="article-more-a" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/3.%E6%8C%87%E4%BB%A4%E6%80%BB%E7%BB%93/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">汇编语言(实模式)</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/600/LC_455.分发饼干" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/03/leetcode/600/LC_455.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/">LC_455.分发饼干</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/03/leetcode/600/LC_455.%E5%88%86%E5%8F%91%E9%A5%BC%E5%B9%B2/" class="archive-article-date">
+  	<time datetime="2022-10-03T02:52:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">455. 分发饼干 - 力扣（LeetCode）</a></p>
+<p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
+<p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: g = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], s = [<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">输出: <span class="number">1</span></span><br><span class="line">解释: </span><br><span class="line">你有三个孩子和两块小饼干，<span class="number">3</span>个孩子的胃口值分别是：<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>。</span><br><span class="line">虽然你有两块小饼干，由于他们的尺寸都是<span class="number">1</span>，你只能让胃口值是<span class="number">1</span>的孩子满足。</span><br><span class="line">所以你应该输出<span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-贪心"><a href="#1-贪心" class="headerlink" title="1.贪心"></a>1.贪心</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findContentChildren</span><span class="params">(<span class="type">int</span>[] g, <span class="type">int</span>[] s)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    Arrays.sort(g);</span><br><span class="line">    Arrays.sort(s);</span><br><span class="line">    <span class="type">int</span> <span class="variable">pos1</span> <span class="operator">=</span> g.length - <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">pos2</span> <span class="operator">=</span> s.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(; pos1 &gt;= <span class="number">0</span> &amp;&amp; pos2 &gt;= <span class="number">0</span>; pos1--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[pos2] &gt;= g[pos1])&#123;</span><br><span class="line">            ans++;</span><br><span class="line">            pos2--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findContentChildren</span><span class="params">(<span class="type">int</span>[] grid, <span class="type">int</span>[] size)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (grid == <span class="literal">null</span> || size == <span class="literal">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Arrays.sort(grid);</span><br><span class="line">    Arrays.sort(size);</span><br><span class="line">    <span class="type">int</span> <span class="variable">gi</span> <span class="operator">=</span> <span class="number">0</span>, si = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (gi &lt; grid.length &amp;&amp; si &lt; size.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (grid[gi] &lt;= size[si]) &#123;</span><br><span class="line">            gi++;</span><br><span class="line">        &#125;</span><br><span class="line">        si++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> gi;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-汇编语言(实模式)/2.寻址" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/2.%E5%AF%BB%E5%9D%80/">2.寻址</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/2.%E5%AF%BB%E5%9D%80/" class="archive-article-date">
+  	<time datetime="2022-10-03T02:10:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-8086PC机内存地址空间分配"><a href="#1-8086PC机内存地址空间分配" class="headerlink" title="1.8086PC机内存地址空间分配"></a>1.8086PC机内存地址空间分配</h3><p><img src="http://www.codekenan.icu/img/asm/1.png"></img></p>
+        
+          <a class="article-more-a" href="/2022/10/03/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80(%E5%AE%9E%E6%A8%A1%E5%BC%8F)/2.%E5%AF%BB%E5%9D%80/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">汇编语言(实模式)</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-mybatis/13.分页插件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/02/mybatis/13.%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/">13.分页插件</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/02/mybatis/13.%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/" class="archive-article-date">
+  	<time datetime="2022-10-02T14:35:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="13-1-分页插件使用步骤"><a href="#13-1-分页插件使用步骤" class="headerlink" title="13.1 分页插件使用步骤"></a>13.1 分页插件使用步骤</h3><h4 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/10/02/mybatis/13.%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
         		</li>
       		
 		</ul>
@@ -890,7 +881,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -969,11 +960,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -981,15 +968,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -997,15 +976,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">南京大学jyy-操作系统</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">南京大学蒋炎岩-操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1045,15 +1036,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1061,23 +1044,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">递归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1085,19 +1056,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">分治</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">桶排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">递归</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1109,7 +1068,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">快速排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
             
             <div class="clearfix"></div>

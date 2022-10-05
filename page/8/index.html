@@ -122,38 +122,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-leetcode/1600/LC_1456. 定长子串中元音的最大数目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-other/shell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/1600/LC_1456.%20%E5%AE%9A%E9%95%BF%E5%AD%90%E4%B8%B2%E4%B8%AD%E5%85%83%E9%9F%B3%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE/">LC_1456.定长子串中元音的最大数目</a>
+      <a class="article-title" href="/2022/09/26/other/shell/">shell</a>
     </h1>
   
 
         
-        <a href="/2022/09/25/leetcode/1600/LC_1456.%20%E5%AE%9A%E9%95%BF%E5%AD%90%E4%B8%B2%E4%B8%AD%E5%85%83%E9%9F%B3%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2022-09-25T06:32:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
+        <a href="/2022/09/26/other/shell/" class="archive-article-date">
+  	<time datetime="2022-09-26T08:02:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-number-of-vowels-in-a-substring-of-given-length/">1456. 定长子串中元音的最大数目 - 力扣（LeetCode）</a></p>
-<p>给你字符串 s 和整数 k 。</p>
-<p>请返回字符串 s 中长度为 k 的单个子字符串中可能包含的最大元音字母数。</p>
-<p>英文中的 元音字母 为（a, e, i, o, u）。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;abciiidef&quot;</span>, k = <span class="number">3</span></span><br><span class="line">输出：<span class="number">3</span></span><br><span class="line">解释：子字符串 <span class="string">&quot;iii&quot;</span> 包含 <span class="number">3</span> 个元音字母。</span><br></pre></td></tr></table></figure>
+        <h4 id="Linux-提供的-Shell-解析器有"><a href="#Linux-提供的-Shell-解析器有" class="headerlink" title="Linux 提供的 Shell 解析器有"></a><strong>Linux</strong> <strong>提供的</strong> <strong>Shell</strong> <strong>解析器有</strong></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/shells</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="1-滑动窗口"><a href="#1-滑动窗口" class="headerlink" title="1.滑动窗口"></a>1.滑动窗口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxVowels</span><span class="params">(String s, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">    <span class="type">char</span>[] arr = s.toCharArray();</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; k; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(contains(arr[i]))&#123;</span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> ans;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> k; i &lt; s.length(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(contains(arr[left++]))&#123;</span><br><span class="line">            temp--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(contains(arr[i]))&#123;</span><br><span class="line">            temp++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; ans)&#123;</span><br><span class="line">            ans = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> Boolean <span class="title function_">contains</span><span class="params">(<span class="type">char</span> ch)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ch == <span class="string">&#x27;a&#x27;</span> || ch == <span class="string">&#x27;e&#x27;</span> || ch == <span class="string">&#x27;i&#x27;</span> || ch == <span class="string">&#x27;o&#x27;</span> || ch == <span class="string">&#x27;u&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<h4 id="默认的解析器是"><a href="#默认的解析器是" class="headerlink" title="默认的解析器是"></a>默认的解析器是</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/other/shell/#more">more >></a>
+        
       
 
       
@@ -166,11 +162,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滑动窗口</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
         		</li>
       		
 		</ul>
@@ -206,38 +198,77 @@
 
 
   
-    <article id="post-leetcode/100/LC_74. 搜索二维矩阵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-other/linux命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/100/LC_74.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/">LC_74.搜索二维矩阵</a>
+      <a class="article-title" href="/2022/09/26/other/linux%E5%91%BD%E4%BB%A4/">linux命令</a>
     </h1>
   
 
         
-        <a href="/2022/09/25/leetcode/100/LC_74.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/" class="archive-article-date">
-  	<time datetime="2022-09-25T05:37:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
+        <a href="/2022/09/26/other/linux%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2022-09-26T06:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix/">74. 搜索二维矩阵 - 力扣（LeetCode）</a></p>
-<p>编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：</p>
-<p>每行中的整数从左到右按升序排列。<br>每行的第一个整数大于前一行的最后一个整数。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>],[<span class="number">10</span>,<span class="number">11</span>,<span class="number">16</span>,<span class="number">20</span>],[<span class="number">23</span>,<span class="number">30</span>,<span class="number">34</span>,<span class="number">60</span>]], target = <span class="number">3</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-二分查找"><a href="#1-二分查找" class="headerlink" title="1.二分查找"></a>1.二分查找</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/">240. 搜索二维矩阵 II - 力扣（LeetCode）</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">searchMatrix</span><span class="params">(<span class="type">int</span>[][] matrix, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>, r = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + r &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][mid] == target)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (matrix[i][mid] &lt; target)&#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="关机-重启-注销"><a href="#关机-重启-注销" class="headerlink" title="关机/重启/注销"></a>关机/重启/注销</h3><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shutdown -h now</td>
+<td>即刻关机</td>
+</tr>
+<tr>
+<td>shutdown -h 10</td>
+<td>10分钟后关机</td>
+</tr>
+<tr>
+<td>shutdown -h 11:00</td>
+<td>11：00关机</td>
+</tr>
+<tr>
+<td>shutdown -h +10</td>
+<td>预定时间关机（10分钟后）</td>
+</tr>
+<tr>
+<td>shutdown -c</td>
+<td>取消指定时间关机</td>
+</tr>
+<tr>
+<td>shutdown -r now</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>reboot</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>halt</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>sync</td>
+<td>buff数据同步到磁盘</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>退出登录Shell</td>
+</tr>
+</tbody></table>
+        
+          <a class="article-more-a" href="/2022/09/26/other/linux%E5%91%BD%E4%BB%A4/#more">more >></a>
+        
       
 
       
@@ -250,11 +281,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">二分</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
         		</li>
       		
 		</ul>
@@ -290,41 +317,31 @@
 
 
   
-    <article id="post-leetcode/400/LC_264. 丑数 II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/14.源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/400/LC_264.%20%E4%B8%91%E6%95%B0%20II/">LC_264.丑数 II</a>
+      <a class="article-title" href="/2022/09/26/netty/14.%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">14.源码分析</a>
     </h1>
   
 
         
-        <a href="/2022/09/25/leetcode/400/LC_264.%20%E4%B8%91%E6%95%B0%20II/" class="archive-article-date">
-  	<time datetime="2022-09-25T04:37:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
+        <a href="/2022/09/26/netty/14.%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:48:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ugly-number-ii/">264.丑数 II - 力扣（LeetCode）</a></p>
-<p>给你一个整数 <code>n</code> ，请你找出并返回第 <code>n</code> 个 <strong>丑数</strong> 。</p>
-<p><strong>丑数</strong> 就是只包含质因数 <code>2</code>、<code>3</code> 和/或 <code>5</code> 的正整数。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">10</span></span><br><span class="line">输出：<span class="number">12</span></span><br><span class="line">解释：[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">12</span>] 是由前 <span class="number">10</span> 个丑数组成的序列。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-优先队列"><a href="#1-优先队列" class="headerlink" title="1.优先队列"></a>1.优先队列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">nthUglyNumber</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] factors = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    Set&lt;Long&gt; seen = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;Long&gt;();</span><br><span class="line">    PriorityQueue&lt;Long&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;Long&gt;();</span><br><span class="line">    seen.add(<span class="number">1L</span>);</span><br><span class="line">    heap.offer(<span class="number">1L</span>);</span><br><span class="line">    <span class="type">int</span> <span class="variable">ugly</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">curr</span> <span class="operator">=</span> heap.poll();</span><br><span class="line">        ugly = (<span class="type">int</span>) curr;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> factor : factors) &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">next</span> <span class="operator">=</span> curr * factor;</span><br><span class="line">            <span class="keyword">if</span> (seen.add(next)) &#123;</span><br><span class="line">                heap.offer(next);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ugly;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-动态规划"><a href="#2-动态规划" class="headerlink" title="2.动态规划"></a>2.动态规划</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">nthUglyNumber</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="number">1</span>, p3 = <span class="number">1</span>, p5 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> dp[p2] * <span class="number">2</span>, num3 = dp[p3] * <span class="number">3</span>, num5 = dp[p5] * <span class="number">5</span>;</span><br><span class="line">        dp[i] = Math.min(Math.min(num2, num3), num5);</span><br><span class="line">        <span class="keyword">if</span> (dp[i] == num2) &#123;</span><br><span class="line">            p2++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[i] == num3) &#123;</span><br><span class="line">            p3++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[i] == num5) &#123;</span><br><span class="line">            p5++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="14-1-启动剖析"><a href="#14-1-启动剖析" class="headerlink" title="14.1 启动剖析"></a>14.1 启动剖析</h3><p>我们就来看看 netty 中对下面的代码是怎样进行处理的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1 netty 中使用 NioEventLoopGroup （简称 nio boss 线程）来封装线程和 selector</span></span><br><span class="line"><span class="type">Selector</span> <span class="variable">selector</span> <span class="operator">=</span> Selector.open(); </span><br><span class="line"></span><br><span class="line"><span class="comment">//2 创建 NioServerSocketChannel，同时会初始化它关联的 handler，以及为原生 ssc 存储 config</span></span><br><span class="line"><span class="type">NioServerSocketChannel</span> <span class="variable">attachment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioServerSocketChannel</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//3 创建 NioServerSocketChannel 时，创建了 java 原生的 ServerSocketChannel</span></span><br><span class="line"><span class="type">ServerSocketChannel</span> <span class="variable">serverSocketChannel</span> <span class="operator">=</span> ServerSocketChannel.open(); </span><br><span class="line">serverSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//4 启动 nio boss 线程执行接下来的操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//5 注册（仅关联 selector 和 NioServerSocketChannel），未关注事件</span></span><br><span class="line"><span class="type">SelectionKey</span> <span class="variable">selectionKey</span> <span class="operator">=</span> serverSocketChannel.register(selector, <span class="number">0</span>, attachment);</span><br><span class="line"></span><br><span class="line"><span class="comment">//6 head -&gt; 初始化器 -&gt; ServerBootstrapAcceptor -&gt; tail，初始化器是一次性的，只为添加 acceptor</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//7 绑定端口</span></span><br><span class="line">serverSocketChannel.bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">8080</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//8 触发 channel active 事件，在 head 中关注 op_accept 事件</span></span><br><span class="line">selectionKey.interestOps(SelectionKey.OP_ACCEPT);</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/14.%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">more >></a>
+        
       
 
       
@@ -337,11 +354,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -377,37 +390,35 @@
 
 
   
-    <article id="post-leetcode/800/LC_797. 所有可能的路径" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/13.优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/800/LC_797.%20%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/">LC_797.所有可能的路径</a>
+      <a class="article-title" href="/2022/09/26/netty/13.%E4%BC%98%E5%8C%96/">13.优化</a>
     </h1>
   
 
         
-        <a href="/2022/09/25/leetcode/800/LC_797.%20%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/" class="archive-article-date">
-  	<time datetime="2022-09-25T02:33:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
+        <a href="/2022/09/26/netty/13.%E4%BC%98%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:47:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/all-paths-from-source-to-target/">797. 所有可能的路径 - 力扣（LeetCode）</a></p>
-<p>给你一个有 n 个节点的 有向无环图（DAG），请你找出所有从节点 0 到节点 n-1 的路径并输出（不要求按特定顺序）</p>
-<p> graph[i] 是一个从节点 i 可以访问的所有节点的列表（即从节点 i 到节点 graph[i][j]存在一条有向边）。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>],[<span class="number">3</span>],[]]</span><br><span class="line">输出：[[<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">解释：有两条路径 <span class="number">0</span> -&gt; <span class="number">1</span> -&gt; <span class="number">3</span> 和 <span class="number">0</span> -&gt; <span class="number">2</span> -&gt; <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1.DFS"></a>1.DFS</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">allPathsSourceTarget</span><span class="params">(<span class="type">int</span>[][] graph)</span> &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    List&lt;Integer&gt; temp = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    temp.add(<span class="number">0</span>);</span><br><span class="line">    DFS(graph,result,<span class="number">0</span>,temp);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span>[][] graph,List&lt;List&lt;Integer&gt;&gt; result,<span class="type">int</span> v,List&lt;Integer&gt; temp)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(v == graph.length - <span class="number">1</span>)&#123;</span><br><span class="line">        result.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>(temp));</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : graph[v])&#123;</span><br><span class="line">        temp.add(i);</span><br><span class="line">        DFS(graph,result,i,temp);</span><br><span class="line">        temp.remove((Integer) i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="13-1-扩展序列化算法"><a href="#13-1-扩展序列化算法" class="headerlink" title="13.1 扩展序列化算法"></a>13.1 扩展序列化算法</h3><p>序列化，反序列化主要用在消息正文的转换上</p>
+<ul>
+<li>序列化时，需要将 Java 对象变为要传输的数据（可以是 byte[]，或 json 等，最终都需要变成 byte[]）</li>
+<li>反序列化时，需要将传入的正文数据还原成 Java 对象，便于处理</li>
+</ul>
+<p>目前的代码仅支持 Java 自带的序列化，反序列化机制，核心代码如下</p>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/13.%E4%BC%98%E5%8C%96/#more">more >></a>
+        
       
 
       
@@ -420,11 +431,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -460,37 +467,30 @@
 
 
   
-    <article id="post-leetcode/800/LC_692. 前K个高频单词" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/12.聊天室案例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/800/LC_692.%20%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/">LC_692.前K个高频单词</a>
+      <a class="article-title" href="/2022/09/26/netty/12.%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%A1%88%E4%BE%8B/">12.聊天室案例</a>
     </h1>
   
 
         
-        <a href="/2022/09/24/leetcode/800/LC_692.%20%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/" class="archive-article-date">
-  	<time datetime="2022-09-24T10:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+        <a href="/2022/09/26/netty/12.%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%A1%88%E4%BE%8B/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:45:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-words/">692. 前K个高频单词 - 力扣（LeetCode）</a></p>
-<p>给定一个单词列表 words 和一个整数 k ，返回前 k 个出现次数最多的单词。</p>
-<p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率， 按字典顺序 排序。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: words = [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;leetcode&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;coding&quot;</span>], k = <span class="number">2</span></span><br><span class="line">输出: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;i&quot;</span> 和 <span class="string">&quot;love&quot;</span> 为出现次数最多的两个单词，均为<span class="number">2</span>次。</span><br><span class="line">    注意，按字母顺序 <span class="string">&quot;i&quot;</span> 在 <span class="string">&quot;love&quot;</span> 之前</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-哈希，优先队列"><a href="#1-哈希，优先队列" class="headerlink" title="1.哈希，优先队列"></a>1.哈希，优先队列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;String&gt; <span class="title function_">topKFrequent</span><span class="params">(String[] ws, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">    Map&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (String w : ws) map.put(w, map.getOrDefault(w, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">    PriorityQueue&lt;Object[]&gt; q = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(k, (a, b)-&gt;&#123; </span><br><span class="line">        <span class="comment">// 如果词频不同，根据词频升序</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">c1</span> <span class="operator">=</span> (Integer)a[<span class="number">0</span>], c2 = (Integer)b[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span> (c1 != c2) <span class="keyword">return</span> c1 - c2;</span><br><span class="line">        <span class="comment">// 如果词频相同，根据字典序倒序</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> (String)a[<span class="number">1</span>], s2 = (String)b[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> s2.compareTo(s1);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">for</span> (String s : map.keySet()) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cnt</span> <span class="operator">=</span> map.get(s);</span><br><span class="line">        <span class="keyword">if</span> (q.size() &lt; k) &#123; <span class="comment">// 不足 k 个，直接入堆</span></span><br><span class="line">            q.add(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;cnt, s&#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Object[] peek = q.peek();</span><br><span class="line">            <span class="keyword">if</span> (cnt &gt; (Integer)peek[<span class="number">0</span>]) &#123; <span class="comment">// 词频比堆顶元素大，弹出堆顶元素，入堆</span></span><br><span class="line">                q.poll();</span><br><span class="line">                q.add(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;cnt, s&#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cnt == (Integer)peek[<span class="number">0</span>]) &#123; <span class="comment">// 词频与堆顶元素相同</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">top</span> <span class="operator">=</span> (String)peek[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (s.compareTo(top) &lt; <span class="number">0</span>) &#123; <span class="comment">// 且字典序大小比堆顶元素小，弹出堆顶元素，入堆</span></span><br><span class="line">                    q.poll();</span><br><span class="line">                    q.add(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;cnt, s&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;String&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (!q.isEmpty()) ans.add((String)q.poll()[<span class="number">1</span>]);</span><br><span class="line">    Collections.reverse(ans);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="12-1-聊天室业务介绍"><a href="#12-1-聊天室业务介绍" class="headerlink" title="12.1 聊天室业务介绍"></a>12.1 聊天室业务介绍</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用户管理接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 登录</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> password 密码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 登录成功返回 true, 否则返回 false</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">login</span><span class="params">(String username, String password)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/12.%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%A1%88%E4%BE%8B/#more">more >></a>
+        
       
 
       
@@ -503,15 +503,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">哈希</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -547,31 +539,33 @@
 
 
   
-    <article id="post-leetcode/200/LC_145. 二叉树的后序遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/11.协议设计与解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/200/LC_145.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">LC_145.二叉树的后序遍历</a>
+      <a class="article-title" href="/2022/09/26/netty/11.%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%A7%A3%E6%9E%90/">11.协议设计与解析</a>
     </h1>
   
 
         
-        <a href="/2022/09/24/leetcode/200/LC_145.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/" class="archive-article-date">
-  	<time datetime="2022-09-24T08:10:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+        <a href="/2022/09/26/netty/11.%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%A7%A3%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:43:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145. 二叉树的后序遍历 - 力扣（LeetCode）</a></p>
-<p>给你一棵二叉树的根节点 <code>root</code> ，返回其节点值的 <strong>后序遍历</strong> 。</p>
-<h3 id="1-递归"><a href="#1-递归" class="headerlink" title="1.递归"></a>1.递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">postorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">    postorderTraversal(root,list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postorderTraversal</span><span class="params">(TreeNode root,List&lt;Integer&gt; list)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">null</span>) &#123;</span><br><span class="line">        postorderTraversal(root.left,list);</span><br><span class="line">        postorderTraversal(root.right,list);</span><br><span class="line">        list.add(root.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="11-1-为什么需要协议？"><a href="#11-1-为什么需要协议？" class="headerlink" title="11.1 为什么需要协议？"></a>11.1 为什么需要协议？</h3><p>TCP/IP 中消息传输基于流的方式，没有边界。</p>
+<p>协议的目的就是划定消息的边界，制定通信双方要共同遵守的通信规则</p>
+<p>例如：在网络上传输</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">下雨天留客天留我不留</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/11.%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%A7%A3%E6%9E%90/#more">more >></a>
+        
       
 
       
@@ -584,11 +578,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -624,31 +614,30 @@
 
 
   
-    <article id="post-leetcode/200/LC_144. 二叉树的前序遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/10.粘包与半包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/200/LC_144.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/">LC_144.二叉树的前序遍历</a>
+      <a class="article-title" href="/2022/09/26/netty/10.%E7%B2%98%E5%8C%85%E4%B8%8E%E5%8D%8A%E5%8C%85/">10.粘包与半包</a>
     </h1>
   
 
         
-        <a href="/2022/09/24/leetcode/200/LC_144.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/" class="archive-article-date">
-  	<time datetime="2022-09-24T08:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+        <a href="/2022/09/26/netty/10.%E7%B2%98%E5%8C%85%E4%B8%8E%E5%8D%8A%E5%8C%85/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:41:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144. 二叉树的前序遍历 - 力扣（LeetCode）</a></p>
-<p>给你二叉树的根节点 <code>root</code> ，返回它节点值的 <strong>前序</strong> 遍历。</p>
-<h3 id="1-递归"><a href="#1-递归" class="headerlink" title="1.递归"></a>1.递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">    preorderTraversal(root,list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root,List&lt;Integer&gt; list)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">null</span>) &#123;</span><br><span class="line">        list.add(root.val);</span><br><span class="line">        preorderTraversal(root.left,list);</span><br><span class="line">        preorderTraversal(root.right,list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="10-1-粘包现象"><a href="#10-1-粘包现象" class="headerlink" title="10.1 粘包现象"></a>10.1 粘包现象</h3><p>服务端代码</p>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/10.%E7%B2%98%E5%8C%85%E4%B8%8E%E5%8D%8A%E5%8C%85/#more">more >></a>
+        
       
 
       
@@ -661,11 +650,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -701,38 +686,32 @@
 
 
   
-    <article id="post-leetcode/200/LC_136. 只出现一次的数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/9.双向通信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/200/LC_136.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/">LC_136.只出现一次的数字</a>
+      <a class="article-title" href="/2022/09/26/netty/9.%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1/">9.双向通信</a>
     </h1>
   
 
         
-        <a href="/2022/09/24/leetcode/200/LC_136.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2022-09-24T07:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+        <a href="/2022/09/26/netty/9.%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:39:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字 - 力扣（LeetCode）</a></p>
-<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
-<p>说明：</p>
-<p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">输出: <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-位运算"><a href="#1-位运算" class="headerlink" title="1.位运算"></a>1.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">singleNumber</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        ans ^= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="9-1-练习"><a href="#9-1-练习" class="headerlink" title="9.1 练习"></a>9.1 练习</h3><p>实现一个 echo server</p>
+<p>编写 server</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>()</span><br><span class="line">    .group(<span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>())</span><br><span class="line">    .channel(NioServerSocketChannel.class)</span><br><span class="line">    .childHandler(<span class="keyword">new</span> <span class="title class_">ChannelInitializer</span>&lt;NioSocketChannel&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">initChannel</span><span class="params">(NioSocketChannel ch)</span> &#123;</span><br><span class="line">            ch.pipeline().addLast(<span class="keyword">new</span> <span class="title class_">ChannelInboundHandlerAdapter</span>()&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> &#123;</span><br><span class="line">                    <span class="type">ByteBuf</span> <span class="variable">buffer</span> <span class="operator">=</span> (ByteBuf) msg;</span><br><span class="line">                    System.out.println(buffer.toString(Charset.defaultCharset()));</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 建议使用 ctx.alloc() 创建 ByteBuf</span></span><br><span class="line">                    <span class="type">ByteBuf</span> <span class="variable">response</span> <span class="operator">=</span> ctx.alloc().buffer();</span><br><span class="line">                    response.writeBytes(buffer);</span><br><span class="line">                    ctx.writeAndFlush(response);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 思考：需要释放 buffer 吗</span></span><br><span class="line">                    <span class="comment">// 思考：需要释放 response 吗</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).bind(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/9.%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1/#more">more >></a>
+        
       
 
       
@@ -745,11 +724,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -785,38 +760,40 @@
 
 
   
-    <article id="post-leetcode/400/LC_389. 找不同" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/8.组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/400/LC_389.%20%E6%89%BE%E4%B8%8D%E5%90%8C/">LC_389.找不同</a>
+      <a class="article-title" href="/2022/09/26/netty/8.%E7%BB%84%E4%BB%B6/">8.组件</a>
     </h1>
   
 
         
-        <a href="/2022/09/24/leetcode/400/LC_389.%20%E6%89%BE%E4%B8%8D%E5%90%8C/" class="archive-article-date">
-  	<time datetime="2022-09-24T06:54:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+        <a href="/2022/09/26/netty/8.%E7%BB%84%E4%BB%B6/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:38:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-difference/">389. 找不同 - 力扣（LeetCode）</a></p>
-<p>给定两个字符串 <code>s</code> 和 <code>t</code> ，它们只包含小写字母。</p>
-<p>字符串 <code>t</code> 由字符串 <code>s</code> 随机重排，然后在随机位置添加一个字母。</p>
-<p>请找出在 <code>t</code> 中被添加的字母。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;abcd&quot;</span>, t = <span class="string">&quot;abcde&quot;</span></span><br><span class="line">输出：<span class="string">&quot;e&quot;</span></span><br><span class="line">解释：<span class="string">&#x27;e&#x27;</span> 是那个被添加的字母。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-位运算"><a href="#1-位运算" class="headerlink" title="1.位运算"></a>1.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">char</span> <span class="title function_">findTheDifference</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ret</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); ++i) &#123;</span><br><span class="line">        ret ^= s.charAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; t.length(); ++i) &#123;</span><br><span class="line">        ret ^= t.charAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">char</span>) ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="8-1-EventLoop"><a href="#8-1-EventLoop" class="headerlink" title="8.1 EventLoop"></a>8.1 EventLoop</h3><p>事件循环对象</p>
+<p>EventLoop 本质是一个单线程执行器（同时维护了一个 Selector），里面有 run 方法处理 Channel 上源源不断的 io 事件。</p>
+<p>它的继承关系比较复杂</p>
+<ul>
+<li>一条线是继承自 j.u.c.ScheduledExecutorService 因此包含了线程池中所有的方法</li>
+<li>另一条线是继承自 netty 自己的 OrderedEventExecutor，<ul>
+<li>提供了 boolean inEventLoop(Thread thread) 方法判断一个线程是否属于此 EventLoop</li>
+<li>提供了 parent 方法来看看自己属于哪个 EventLoopGroup</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/8.%E7%BB%84%E4%BB%B6/#more">more >></a>
+        
       
 
       
@@ -829,11 +806,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -869,40 +842,36 @@
 
 
   
-    <article id="post-leetcode/600/LC_496. 下一个更大元素 I" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-netty/7.Hello World" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/600/LC_496.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20I/">LC_496.下一个更大元素 I</a>
+      <a class="article-title" href="/2022/09/26/netty/7.Hello%20World/">7.Hello World</a>
     </h1>
   
 
         
-        <a href="/2022/09/24/leetcode/600/LC_496.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20I/" class="archive-article-date">
-  	<time datetime="2022-09-24T06:10:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+        <a href="/2022/09/26/netty/7.Hello%20World/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/">496. 下一个更大元素 I - 力扣（LeetCode）</a></p>
-<p>nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。</p>
-<p>给你两个 没有重复元素 的数组 nums1 和 nums2 ，下标从 0 开始计数，其中nums1 是 nums2 的子集。</p>
-<p>对于每个 0 &lt;= i &lt; nums1.length ，找出满足 nums1[i] == nums2[j] 的下标 j ，并且在 nums2 确定 nums2[j] 的 下一个更大元素 。如果不存在下一个更大元素，那么本次查询的答案是 -1 。</p>
-<p>返回一个长度为 nums1.length 的数组 ans 作为答案，满足 ans[i] 是如上所述的 下一个更大元素 。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：nums1 = [<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>], nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>].</span><br><span class="line">输出：[-<span class="number">1</span>,<span class="number">3</span>,-<span class="number">1</span>]</span><br><span class="line">解释：nums1 中每个值的下一个更大元素如下所述：</span><br><span class="line">- <span class="number">4</span> ，用加粗斜体标识，nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>]。不存在下一个更大元素，所以答案是 -<span class="number">1</span> 。</span><br><span class="line">- <span class="number">1</span> ，用加粗斜体标识，nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>]。下一个更大元素是 <span class="number">3</span> 。</span><br><span class="line">- <span class="number">2</span> ，用加粗斜体标识，nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>]。不存在下一个更大元素，所以答案是 -<span class="number">1</span> </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-单调栈"><a href="#1-单调栈" class="headerlink" title="1.单调栈"></a>1.单调栈</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/solution/gong-shui-san-xie-yi-ti-shuang-jie-bian-n6nwz/">【宫水三叶】一题双解 :「遍历」&amp;「单调栈」 - 下一个更大元素 I - 力扣（LeetCode）</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] nextGreaterElement(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums1.length;</span><br><span class="line">    <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> nums2.length;</span><br><span class="line">    Deque&lt;Integer&gt; d = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">    Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i : nums2) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!d.isEmpty() &amp;&amp; d.peekLast() &lt; i) &#123;</span><br><span class="line">            map.put(d.pollLast(), i);</span><br><span class="line">        &#125;</span><br><span class="line">        d.addLast(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        ans[i] = map.getOrDefault(nums1[i], -<span class="number">1</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="7-1-目标"><a href="#7-1-目标" class="headerlink" title="7.1 目标"></a>7.1 目标</h3><p>开发一个简单的服务器端和客户端</p>
+<ul>
+<li>客户端向服务器端发送 hello, world</li>
+<li>服务器仅接收，不返回</li>
+</ul>
+<p>加入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.netty<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>netty-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.39.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/7.Hello%20World/#more">more >></a>
+        
       
 
       
@@ -915,11 +884,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
         		</li>
       		
 		</ul>
@@ -957,7 +922,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/9/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1036,11 +1001,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1048,15 +1009,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1064,15 +1017,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">南京大学jyy-操作系统</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">南京大学蒋炎岩-操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1112,15 +1077,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1128,23 +1085,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">递归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1152,19 +1097,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">分治</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">桶排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">递归</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1176,7 +1109,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">快速排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
             
             <div class="clearfix"></div>

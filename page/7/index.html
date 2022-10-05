@@ -122,31 +122,40 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-netty/9.双向通信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java并发编程/9.ReentrantLock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/netty/9.%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1/">9.双向通信</a>
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/9.ReentrantLock/">9.ReentrantLock</a>
     </h1>
   
 
         
-        <a href="/2022/09/26/netty/9.%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1/" class="archive-article-date">
-  	<time datetime="2022-09-26T05:39:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/9.ReentrantLock/" class="archive-article-date">
+  	<time datetime="2022-09-28T07:58:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="9-1-练习"><a href="#9-1-练习" class="headerlink" title="9.1 练习"></a>9.1 练习</h3><p>实现一个 echo server</p>
-<p>编写 server</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>()</span><br><span class="line">    .group(<span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>())</span><br><span class="line">    .channel(NioServerSocketChannel.class)</span><br><span class="line">    .childHandler(<span class="keyword">new</span> <span class="title class_">ChannelInitializer</span>&lt;NioSocketChannel&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">initChannel</span><span class="params">(NioSocketChannel ch)</span> &#123;</span><br><span class="line">            ch.pipeline().addLast(<span class="keyword">new</span> <span class="title class_">ChannelInboundHandlerAdapter</span>()&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> &#123;</span><br><span class="line">                    <span class="type">ByteBuf</span> <span class="variable">buffer</span> <span class="operator">=</span> (ByteBuf) msg;</span><br><span class="line">                    System.out.println(buffer.toString(Charset.defaultCharset()));</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 建议使用 ctx.alloc() 创建 ByteBuf</span></span><br><span class="line">                    <span class="type">ByteBuf</span> <span class="variable">response</span> <span class="operator">=</span> ctx.alloc().buffer();</span><br><span class="line">                    response.writeBytes(buffer);</span><br><span class="line">                    ctx.writeAndFlush(response);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 思考：需要释放 buffer 吗</span></span><br><span class="line">                    <span class="comment">// 思考：需要释放 response 吗</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).bind(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure>
+        <p>相对于 synchronized 它具备如下特点</p>
+<ul>
+<li><p>可中断</p>
+</li>
+<li><p>可以设置超时时间</p>
+</li>
+<li><p>可以设置为公平锁</p>
+</li>
+<li><p>支持多个条件变量</p>
+</li>
+</ul>
+<p>与 synchronized 一样，都支持可重入</p>
         
-          <a class="article-more-a" href="/2022/09/26/netty/9.%E5%8F%8C%E5%90%91%E9%80%9A%E4%BF%A1/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/9.ReentrantLock/#more">more >></a>
         
       
 
@@ -160,7 +169,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
         		</li>
       		
 		</ul>
@@ -196,39 +205,266 @@
 
 
   
-    <article id="post-netty/8.组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java并发编程/8. 活跃性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/netty/8.%E7%BB%84%E4%BB%B6/">8.组件</a>
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/8.%20%E6%B4%BB%E8%B7%83%E6%80%A7/">8.活跃性</a>
     </h1>
   
 
         
-        <a href="/2022/09/26/netty/8.%E7%BB%84%E4%BB%B6/" class="archive-article-date">
-  	<time datetime="2022-09-26T05:38:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/8.%20%E6%B4%BB%E8%B7%83%E6%80%A7/" class="archive-article-date">
+  	<time datetime="2022-09-28T07:49:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="8-1-EventLoop"><a href="#8-1-EventLoop" class="headerlink" title="8.1 EventLoop"></a>8.1 EventLoop</h3><p>事件循环对象</p>
-<p>EventLoop 本质是一个单线程执行器（同时维护了一个 Selector），里面有 run 方法处理 Channel 上源源不断的 io 事件。</p>
-<p>它的继承关系比较复杂</p>
+        <h3 id="1-死锁"><a href="#1-死锁" class="headerlink" title="1.死锁"></a>1.死锁</h3><p>有这样的情况：一个线程需要同时获取多把锁，这时就容易发生死锁</p>
+<p>t1 线程 获得 A对象 锁，接下来想获取 B对象 的锁 t2 线程 获得 B对象 锁，接下来想获取 A对象 的锁 例：</p>
+        
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/8.%20%E6%B4%BB%E8%B7%83%E6%80%A7/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java并发编程/7.wait notify" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/7.wait%20notify/">7.wait notify</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/7.wait%20notify/" class="archive-article-date">
+  	<time datetime="2022-09-28T07:28:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-API-介绍"><a href="#1-API-介绍" class="headerlink" title="1.API 介绍"></a>1.API 介绍</h3><ul>
+<li><p>obj.wait() 让进入 object 监视器的线程到 waitSet 等待</p>
+</li>
+<li><p>obj.notify() 在 object 上正在 waitSet 等待的线程中挑一个唤醒</p>
+</li>
+<li><p>obj.notifyAll() 让 object 上正在 waitSet 等待的线程全部唤醒</p>
+        
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/7.wait%20notify/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java并发编程/6.Monitor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/6.Monitor/">6.Monitor</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/6.Monitor/" class="archive-article-date">
+  	<time datetime="2022-09-28T06:15:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Java-对象头"><a href="#1-Java-对象头" class="headerlink" title="1.Java 对象头"></a>1.Java 对象头</h3><p><strong>以 32 位虚拟机为例</strong></p>
+<p>普通对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|--------------------------------------------------------------| </span><br><span class="line">| Object <span class="title function_">Header</span> <span class="params">(<span class="number">64</span> bits)</span>                                      |</span><br><span class="line">|------------------------------------|-------------------------| </span><br><span class="line">| Mark <span class="title function_">Word</span> <span class="params">(<span class="number">32</span> bits)</span>                | Klass <span class="title function_">Word</span> <span class="params">(<span class="number">32</span> bits)</span>    |</span><br><span class="line">|------------------------------------|-------------------------|</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/6.Monitor/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java并发编程/5.共享模型之管程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/5.%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E7%AE%A1%E7%A8%8B/">5.共享模型之管程</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/5.%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E7%AE%A1%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2022-09-28T05:51:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-临界区-Critical-Section"><a href="#1-临界区-Critical-Section" class="headerlink" title="1.临界区 Critical Section"></a>1.临界区 Critical Section</h3><ul>
+<li><p>一个程序运行多个线程本身是没有问题的</p>
+</li>
+<li><p>问题出在多个线程访问<strong>共享资源</strong></p>
 <ul>
-<li>一条线是继承自 j.u.c.ScheduledExecutorService 因此包含了线程池中所有的方法</li>
-<li>另一条线是继承自 netty 自己的 OrderedEventExecutor，<ul>
-<li>提供了 boolean inEventLoop(Thread thread) 方法判断一个线程是否属于此 EventLoop</li>
-<li>提供了 parent 方法来看看自己属于哪个 EventLoopGroup</li>
+<li><p>多个线程读<strong>共享资源</strong>其实也没有问题</p>
+</li>
+<li><p>在多个线程对<strong>共享资源</strong>读写操作时发生指令交错，就会出现问题</p>
+</li>
 </ul>
+</li>
+<li><p>一段代码块内如果存在对<strong>共享资源</strong>的多线程读写操作，称这段代码块为<strong>临界区</strong></p>
 </li>
 </ul>
         
-          <a class="article-more-a" href="/2022/09/26/netty/8.%E7%BB%84%E4%BB%B6/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/5.%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E7%AE%A1%E7%A8%8B/#more">more >></a>
         
       
 
@@ -242,7 +478,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
         		</li>
       		
 		</ul>
@@ -278,35 +514,182 @@
 
 
   
-    <article id="post-netty/7.Hello World" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java并发编程/4.线程状态" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/netty/7.Hello%20World/">7.Hello World</a>
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/">4.线程状态</a>
     </h1>
   
 
         
-        <a href="/2022/09/26/netty/7.Hello%20World/" class="archive-article-date">
-  	<time datetime="2022-09-26T05:31:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/" class="archive-article-date">
+  	<time datetime="2022-09-28T05:31:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="7-1-目标"><a href="#7-1-目标" class="headerlink" title="7.1 目标"></a>7.1 目标</h3><p>开发一个简单的服务器端和客户端</p>
+        <h3 id="1-五种状态"><a href="#1-五种状态" class="headerlink" title="1.五种状态"></a>1.五种状态</h3><p>从 <strong>操作系统</strong> 层面来描述</p>
+<p><img src="http://www.codekenan.icu/img/juc/1.png"></p>
+        
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java并发编程/3.两阶段终止模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/">3.两阶段终止模式</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2022-09-28T05:31:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Two-Phase-Termination"><a href="#Two-Phase-Termination" class="headerlink" title="Two Phase Termination"></a>Two Phase Termination</h3><p>在一个线程 T1 中如何“优雅”终止线程 T2？这里的【优雅】指的是给 T2 一个料理后事的机会。</p>
+        
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java并发编程/2.线程运行原理及方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/2.%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95/">2.线程运行原理及方法</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/2.%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2022-09-28T05:12:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-栈与栈帧"><a href="#1-栈与栈帧" class="headerlink" title="1.栈与栈帧"></a>1.栈与栈帧</h3><p>Java Virtual Machine Stacks （Java 虚拟机栈）</p>
+<p>JVM 中由堆、栈、方法区所组成，其中栈内存是给谁用的呢？其实就是线程，每个线程启动后，虚拟</p>
+<p>机就会为其分配一块栈内存。</p>
 <ul>
-<li>客户端向服务器端发送 hello, world</li>
-<li>服务器仅接收，不返回</li>
+<li><p>每个栈由多个栈帧（Frame）组成，对应着每次方法调用时所占用的内存</p>
+</li>
+<li><p>每个线程只能有一个活动栈帧，对应着当前正在执行的那个方法</p>
+</li>
 </ul>
-<p>加入依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.netty<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>netty-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.39.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2022/09/26/netty/7.Hello%20World/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/2.%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%E5%8F%8A%E6%96%B9%E6%B3%95/#more">more >></a>
         
       
 
@@ -320,7 +703,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
         		</li>
       		
 		</ul>
@@ -356,31 +739,29 @@
 
 
   
-    <article id="post-netty/6.netty概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java并发编程/1.创建和运行线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/netty/6.netty%E6%A6%82%E8%BF%B0/">6.netty概述</a>
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/1.%E5%88%9B%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C%E7%BA%BF%E7%A8%8B/">1.创建和运行线程</a>
     </h1>
   
 
         
-        <a href="/2022/09/26/netty/6.netty%E6%A6%82%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2022-09-26T05:29:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/1.%E5%88%9B%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2022-09-28T05:00:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="6-1-Netty-是什么？"><a href="#6-1-Netty-是什么？" class="headerlink" title="6.1 Netty 是什么？"></a>6.1 Netty 是什么？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Netty is an asynchronous event-driven network application framework</span><br><span class="line">for rapid development of maintainable high performance protocol servers &amp; clients.</span><br></pre></td></tr></table></figure>
-
-<p>Netty 是一个异步的、基于事件驱动的网络应用框架，用于快速开发可维护、高性能的网络服务器和客户端</p>
+        <h3 id="1-直接使用-Thread"><a href="#1-直接使用-Thread" class="headerlink" title="1.直接使用 Thread"></a>1.<strong>直接使用</strong> Thread</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">t1.setName(<span class="string">&quot;t1&quot;</span>);</span><br><span class="line">t1.start();</span><br></pre></td></tr></table></figure>
         
-          <a class="article-more-a" href="/2022/09/26/netty/6.netty%E6%A6%82%E8%BF%B0/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/1.%E5%88%9B%E5%BB%BA%E5%92%8C%E8%BF%90%E8%A1%8C%E7%BA%BF%E7%A8%8B/#more">more >></a>
         
       
 
@@ -394,7 +775,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
         		</li>
       		
 		</ul>
@@ -430,131 +811,34 @@
 
 
   
-    <article id="post-南京大学jyy-操作系统/15.A fork() in the Road" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode/1000/LC_938. 二叉搜索树的范围和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6jyy-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/15.A%20fork()%20in%20the%20Road/">15.A fork() in the Road</a>
+      <a class="article-title" href="/2022/09/27/leetcode/1000/LC_938.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E8%8C%83%E5%9B%B4%E5%92%8C/">LC_938.二叉搜索树的范围和</a>
     </h1>
   
 
         
-        <a href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6jyy-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/15.A%20fork()%20in%20the%20Road/" class="archive-article-date">
-  	<time datetime="2022-09-26T04:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+        <a href="/2022/09/27/leetcode/1000/LC_938.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E8%8C%83%E5%9B%B4%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2022-09-27T12:11:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="并发求和"><a href="#并发求和" class="headerlink" title="并发求和"></a>并发求和</h4><h5 id="sum-c"><a href="#sum-c" class="headerlink" title="sum.c"></a>sum.c</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="string">&quot;thread.h&quot;</span></span><br><span class="line"></span><br><span class="line">#define N <span class="number">100000000</span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">Tsum</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">    sum++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  create(Tsum);</span><br><span class="line">  create(Tsum);</span><br><span class="line">  join();</span><br><span class="line">  printf(<span class="string">&quot;sum = %ld\n&quot;</span>, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果假设 <a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/sum.c">sum.c</a> 中的 <code>sum++</code> 是如下构成：</p>
-<ul>
-<li><code>t = atomic_fetch(sum)</code></li>
-<li><code>t++</code></li>
-<li><code>atomic_store(sum, t)</code></li>
-</ul>
-<p>那么 k 个线程，输出的最小 <code>sum</code> 是多少？</p>
-<hr>
-<p>结论有些反直觉：</p>
-<ul>
-<li>对于所有 n,k≥2，<code>sum</code> 的最小值都是 2</li>
-<li>只要有一个线程在最后一轮循环 “持有” 2，再保持到最后写入</li>
-</ul>
-<h3 id="生产者-消费者"><a href="#生产者-消费者" class="headerlink" title="生产者-消费者"></a>生产者-消费者</h3><p>投机取巧的方法：C 标准库是线程安全的！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void Tworker() &#123;</span><br><span class="line">  while (!feof(stdin) &amp;&amp; scanf(&quot;%d&quot;, &amp;x) == 1) &#123;</span><br><span class="line">    long res = f(x);</span><br><span class="line">    lock(&amp;lk);</span><br><span class="line">    sum += res;</span><br><span class="line">    unlock(&amp;lk);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果限制只有一个线程可以读，那就需要生产者-消费者了</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学jyy-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/其他/面试题 17.19. 消失的两个数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/leetcode/%E5%85%B6%E4%BB%96/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97/">面试题 17.19.消失的两个数字</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/26/leetcode/%E5%85%B6%E4%BB%96/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2022-09-26T02:18:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/missing-two-lcci/">面试题 17.19.消失的两个数字</a></p>
-<p>给定一个数组，包含从 1 到 N 所有的整数，但其中缺了两个数字。你能在 O(N) 时间内只用 O(1) 的空间找到它们吗？</p>
-<p>以任意顺序返回这两个数字均可。</p>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-sum-of-bst/">938. 二叉搜索树的范围和 - 力扣（LeetCode）</a></p>
+<p>给定二叉搜索树的根结点 <code>root</code>，返回值位于范围 <em><code>[low, high]</code></em> 之间的所有结点的值的和。</p>
 <p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>]</span><br><span class="line">输出: [<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [<span class="number">10</span>,<span class="number">5</span>,<span class="number">15</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="literal">null</span>,<span class="number">18</span>], low = <span class="number">7</span>, high = <span class="number">15</span></span><br><span class="line">输出：<span class="number">32</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="1-模拟-不符合要求"><a href="#1-模拟-不符合要求" class="headerlink" title="1.模拟(不符合要求)"></a>1.模拟(不符合要求)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">pos</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; nums.length; )&#123;</span><br><span class="line">        sum = nums[i] - pos;</span><br><span class="line">        <span class="keyword">if</span>(sum != <span class="number">0</span>)&#123;</span><br><span class="line">            ans[index++] = pos;</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            i++;</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(index == <span class="number">0</span>)&#123;</span><br><span class="line">        ans[<span class="number">0</span>] = pos;</span><br><span class="line">        ans[<span class="number">1</span>] = pos + <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(index == <span class="number">1</span>)&#123;</span><br><span class="line">        ans[<span class="number">1</span>] = pos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-位运算"><a href="#2-位运算" class="headerlink" title="2.位运算"></a>2.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">xorsum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        xorsum ^= num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        xorsum ^= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 防止溢出</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">lsb</span> <span class="operator">=</span> (xorsum == Integer.MIN_VALUE ? xorsum : xorsum &amp; (-xorsum));</span><br><span class="line">    <span class="type">int</span> <span class="variable">type1</span> <span class="operator">=</span> <span class="number">0</span>, type2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((num &amp; lsb) != <span class="number">0</span>) &#123;</span><br><span class="line">            type1 ^= num;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type2 ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((i &amp; lsb) != <span class="number">0</span>) &#123;</span><br><span class="line">            type1 ^= i;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type2 ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;type1, type2&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-求和"><a href="#3-求和" class="headerlink" title="3.求和"></a>3.求和</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length + <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        sum += i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sumTow</span> <span class="operator">=</span> n * (n + <span class="number">1</span>) / <span class="number">2</span> - sum;</span><br><span class="line">    <span class="type">int</span> <span class="variable">limint</span> <span class="operator">=</span> sumTow / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt;= limint)&#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ans[<span class="number">0</span>] = limint * (limint + <span class="number">1</span>) / <span class="number">2</span> -sum;</span><br><span class="line">    ans[<span class="number">1</span>] = sumTow - ans[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1.DFS"></a>1.DFS</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rangeSumBST</span><span class="params">(TreeNode root, <span class="type">int</span> low, <span class="type">int</span> high)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(root.val &gt;= low &amp;&amp; root.val &lt;= high)&#123;</span><br><span class="line">        sum = root.val;</span><br><span class="line">        sum += rangeSumBST(root.right,low,high);</span><br><span class="line">        sum += rangeSumBST(root.left,low,high);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(root.val &lt; low)&#123;</span><br><span class="line">        sum += rangeSumBST(root.right,low,high);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(root.val &gt; high)&#123;</span><br><span class="line">        sum += rangeSumBST(root.left,low,high);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -573,327 +857,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/1600/LC_1503. 所有蚂蚁掉下来前的最后一刻" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/1600/LC_1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/">LC_1503.所有蚂蚁掉下来前的最后一刻</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/1600/LC_1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/" class="archive-article-date">
-  	<time datetime="2022-09-25T13:34:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-moment-before-all-ants-fall-out-of-a-plank/">1503.所有蚂蚁掉下来前的最后一刻</a></p>
-<p>有一块木板，长度为 n 个 单位 。一些蚂蚁在木板上移动，每只蚂蚁都以 每秒一个单位 的速度移动。其中，一部分蚂蚁向 左 移动，其他蚂蚁向 右 移动。</p>
-<p>当两只向 不同 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。</p>
-<p>而当蚂蚁在某一时刻 t 到达木板的一端时，它立即从木板上掉下来。</p>
-<p>给你一个整数 n 和两个整数数组 left 以及 right 。两个数组分别标识向左或者向右移动的蚂蚁在 t = 0 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">4</span>, left = [<span class="number">4</span>,<span class="number">3</span>], right = [<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">输出：<span class="number">4</span></span><br><span class="line">解释：如上图所示：</span><br><span class="line">-下标 <span class="number">0</span> 处的蚂蚁命名为 A 并向右移动。</span><br><span class="line">-下标 <span class="number">1</span> 处的蚂蚁命名为 B 并向右移动。</span><br><span class="line">-下标 <span class="number">3</span> 处的蚂蚁命名为 C 并向左移动。</span><br><span class="line">-下标 <span class="number">4</span> 处的蚂蚁命名为 D 并向左移动。</span><br><span class="line">请注意，蚂蚁在木板上的最后时刻是 t = <span class="number">4</span> 秒，之后蚂蚁立即从木板上掉下来。（也就是说在 t = <span class="number">4.0000000001</span> 时，木板上没有蚂蚁）。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-模拟"><a href="#1-模拟" class="headerlink" title="1.模拟"></a>1.模拟</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getLastMoment</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span>[] left, <span class="type">int</span>[] right)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">lastMoment</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> ant : left) &#123;</span><br><span class="line">        lastMoment = Math.max(lastMoment, ant);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> ant : right) &#123;</span><br><span class="line">        lastMoment = Math.max(lastMoment, n - ant);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lastMoment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/200/LC_124. 二叉树中的最大路径和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/200/LC_124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/">LC_124.二叉树中的最大路径和</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/200/LC_124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2022-09-25T10:35:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和 - 力扣（LeetCode）</a></p>
-<p>路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。</p>
-<p>路径和 是路径中各节点值的总和。</p>
-<p>给你一个二叉树的根节点 root ，返回其 最大路径和 。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">输出：<span class="number">6</span></span><br><span class="line">解释：最优路径是 <span class="number">2</span> -&gt; <span class="number">1</span> -&gt; <span class="number">3</span> ，路径和为 <span class="number">2</span> + <span class="number">1</span> + <span class="number">3</span> = <span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-分治"><a href="#1-分治" class="headerlink" title="1.分治"></a>1.分治</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxPathSum</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> sum(root.left);</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> sum(root.right);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">max1</span> <span class="operator">=</span> sum(root);</span><br><span class="line">        <span class="type">int</span> <span class="variable">max2</span> <span class="operator">=</span> left + root.val;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max3</span> <span class="operator">=</span> right + root.val;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max4</span> <span class="operator">=</span> left + right + root.val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Math.max(Math.max(Math.max(Math.max(Math.max(root.val,max4),max3),max2),max1),sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sum</span><span class="params">(TreeNode tree)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tree == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> sum(tree.left);</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> sum(tree.right);</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Math.max(left,right);</span><br><span class="line">        <span class="type">int</span> <span class="variable">thisSum</span> <span class="operator">=</span> tree.val + (max &gt; <span class="number">0</span> ? max : <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(thisSum &gt; sum) &#123;</span><br><span class="line">            sum = thisSum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> tree.val + left + right;</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; sum) &#123;</span><br><span class="line">            sum = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> thisSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-递归"><a href="#2-递归" class="headerlink" title="2.递归"></a>2.递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">maxSum</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxPathSum</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        maxGain(root);</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxGain</span><span class="params">(TreeNode node)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 递归计算左右子节点的最大贡献值</span></span><br><span class="line">        <span class="comment">// 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">leftGain</span> <span class="operator">=</span> Math.max(maxGain(node.left), <span class="number">0</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">rightGain</span> <span class="operator">=</span> Math.max(maxGain(node.right), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">priceNewpath</span> <span class="operator">=</span> node.val + leftGain + rightGain;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新答案</span></span><br><span class="line">        maxSum = Math.max(maxSum, priceNewpath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">return</span> node.val + Math.max(leftGain, rightGain);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/400/LC_344. 反转字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/400/LC_344.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/">LC_344.反转字符串</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/400/LC_344.%20%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="archive-article-date">
-  	<time datetime="2022-09-25T07:36:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串 - 力扣（LeetCode）</a></p>
-<p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。</p>
-<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = [<span class="string">&quot;h&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;o&quot;</span>]</span><br><span class="line">输出：[<span class="string">&quot;o&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;h&quot;</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">reverseString</span><span class="params">(<span class="type">char</span>[] s)</span> &#123;</span><br><span class="line">    <span class="type">char</span> temp;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> s.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len &gt;&gt; <span class="number">1</span>; i++)&#123;</span><br><span class="line">        temp = s[i];</span><br><span class="line">        s[i] = s[len - <span class="number">1</span> - i];</span><br><span class="line">        s[len - <span class="number">1</span> - i] = temp; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/600/LC_509. 斐波那契数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/600/LC_509.%20%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/">LC_509.斐波那契数</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/600/LC_509.%20%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2022-09-25T07:20:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/">509. 斐波那契数 - 力扣（LeetCode）</a></p>
-<p>斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F(<span class="number">0</span>) = <span class="number">0</span>，F(<span class="number">1</span>) = <span class="number">1</span></span><br><span class="line">F(n) = F(n - <span class="number">1</span>) + F(n - <span class="number">2</span>)，其中 n &gt; <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>给定 n ，请计算 F(n) 。</p>
-<h3 id="1-模拟"><a href="#1-模拟" class="headerlink" title="1.模拟"></a>1.模拟</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] arr = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        arr[i] = arr[i - <span class="number">1</span>] + arr[i - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">递归</a>
         		</li>
       		
 		</ul>
@@ -931,7 +895,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1010,11 +974,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1022,15 +982,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1038,15 +990,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">南京大学jyy-操作系统</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">南京大学蒋炎岩-操作系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1086,15 +1050,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1102,23 +1058,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">递归</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1126,19 +1070,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">分治</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">桶排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">递归</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1150,7 +1082,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">快速排序</a>
+                <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">位运算</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
             
             <div class="clearfix"></div>
