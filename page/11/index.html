@@ -122,6 +122,251 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode/200/LC_144. 二叉树的前序遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/24/leetcode/200/LC_144.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/">LC_144.二叉树的前序遍历</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/24/leetcode/200/LC_144.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/" class="archive-article-date">
+  	<time datetime="2022-09-24T08:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144. 二叉树的前序遍历 - 力扣（LeetCode）</a></p>
+<p>给你二叉树的根节点 <code>root</code> ，返回它节点值的 <strong>前序</strong> 遍历。</p>
+<h3 id="1-递归"><a href="#1-递归" class="headerlink" title="1.递归"></a>1.递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">    preorderTraversal(root,list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root,List&lt;Integer&gt; list)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">null</span>) &#123;</span><br><span class="line">        list.add(root.val);</span><br><span class="line">        preorderTraversal(root.left,list);</span><br><span class="line">        preorderTraversal(root.right,list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/200/LC_136. 只出现一次的数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/24/leetcode/200/LC_136.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/">LC_136.只出现一次的数字</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/24/leetcode/200/LC_136.%20%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2022-09-24T07:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字 - 力扣（LeetCode）</a></p>
+<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p>说明：</p>
+<p>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line">输出: <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-位运算"><a href="#1-位运算" class="headerlink" title="1.位运算"></a>1.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">singleNumber</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        ans ^= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/400/LC_389. 找不同" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/24/leetcode/400/LC_389.%20%E6%89%BE%E4%B8%8D%E5%90%8C/">LC_389.找不同</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/24/leetcode/400/LC_389.%20%E6%89%BE%E4%B8%8D%E5%90%8C/" class="archive-article-date">
+  	<time datetime="2022-09-24T06:54:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-difference/">389. 找不同 - 力扣（LeetCode）</a></p>
+<p>给定两个字符串 <code>s</code> 和 <code>t</code> ，它们只包含小写字母。</p>
+<p>字符串 <code>t</code> 由字符串 <code>s</code> 随机重排，然后在随机位置添加一个字母。</p>
+<p>请找出在 <code>t</code> 中被添加的字母。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;abcd&quot;</span>, t = <span class="string">&quot;abcde&quot;</span></span><br><span class="line">输出：<span class="string">&quot;e&quot;</span></span><br><span class="line">解释：<span class="string">&#x27;e&#x27;</span> 是那个被添加的字母。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-位运算"><a href="#1-位运算" class="headerlink" title="1.位运算"></a>1.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">char</span> <span class="title function_">findTheDifference</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ret</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); ++i) &#123;</span><br><span class="line">        ret ^= s.charAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; t.length(); ++i) &#123;</span><br><span class="line">        ret ^= t.charAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">char</span>) ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode/600/LC_496. 下一个更大元素 I" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -823,357 +1068,6 @@
 
 
   
-    <article id="post-leetcode/200/LC_162. 寻找峰值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/23/leetcode/200/LC_162.%20%E5%AF%BB%E6%89%BE%E5%B3%B0%E5%80%BC/">LC_162.寻找峰值</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/23/leetcode/200/LC_162.%20%E5%AF%BB%E6%89%BE%E5%B3%B0%E5%80%BC/" class="archive-article-date">
-  	<time datetime="2022-09-23T15:55:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-peak-element/">162. 寻找峰值 - 力扣（LeetCode）</a></p>
-<p>峰值元素是指其值严格大于左右相邻值的元素。</p>
-<p>给你一个整数数组 nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回 任何一个峰值 所在位置即可。</p>
-<p>你可以假设 nums[-1] = nums[n] = -∞ 。</p>
-<p>你必须实现时间复杂度为 O(log n) 的算法来解决此问题。</p>
-<p>示例1</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">3</span> 是峰值元素，你的函数应该返回其索引 <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>示例2</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">4</span>]</span><br><span class="line">输出：<span class="number">1</span> 或 <span class="number">5</span> </span><br><span class="line">解释：你的函数可以返回索引 <span class="number">1</span>，其峰值元素为 <span class="number">2</span>；</span><br><span class="line">     或者返回索引 <span class="number">5</span>， 其峰值元素为 <span class="number">6</span>。</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="1-二分"><a href="#1-二分" class="headerlink" title="1.二分"></a>1.二分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findPeakElement</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>, r = n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + r &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt; nums[mid + <span class="number">1</span>]) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-南京大学蒋炎岩-操作系统/10.状态机模型的应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/23/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/10.%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BA%94%E7%94%A8/">10.状态机模型的应用</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/23/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/10.%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BA%94%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2022-09-23T10:12:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="查看状态机执行"><a href="#查看状态机执行" class="headerlink" title="查看状态机执行"></a>查看状态机执行</h2><h3 id="Trace-和调试器"><a href="#Trace-和调试器" class="headerlink" title="Trace 和调试器"></a>Trace 和调试器</h3><p>程序执行 = 状态机执行</p>
-<ul>
-<li>我们能不能 “hack” 进这个状态机<ul>
-<li>观察状态机的执行<ul>
-<li>strace/gdb</li>
-</ul>
-</li>
-<li>甚至记录和改变状态机的执行</li>
-</ul>
-</li>
-</ul>
-<h3 id="应用-1-Time-Travel-Debugging"><a href="#应用-1-Time-Travel-Debugging" class="headerlink" title="应用 (1): Time-Travel Debugging"></a>应用 (1): Time-Travel Debugging</h3><p>程序执行是随时间 “前进” 的 s<em>0→</em>s<em>1→</em>s2→…</p>
-<ul>
-<li>能否在时间上 “后退”？ (time-travel)<ul>
-<li>经常 gdb 不小心 step 过了，从头再来……</li>
-<li>记录所有的 si，就能实现任意的 time-traveling</li>
-</ul>
-</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本次课回答的问题</p>
-<ul>
-<li><strong>Q</strong>: 状态机的视角给了我们什么？</li>
-</ul>
-<hr>
-<p>Take-away messages</p>
-<ul>
-<li>编程 (状态机) 就是全世界</li>
-<li>状态机可以帮我们<ul>
-<li>建立物理世界的公理体系</li>
-<li>理解调试器、Trace, profiler</li>
-<li>自动分析程序的执行 (model checker)</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-南京大学蒋炎岩-操作系统/9.操作系统的状态机模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/23/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/">9.操作系统的状态机模型</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/23/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2022-09-23T02:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>软件和硬件的桥梁</li>
-<li>操作系统的加载和初始化</li>
-<li>AbstractMachine 代码导读</li>
-</ul>
-<h2 id="硬件和软件的桥梁"><a href="#硬件和软件的桥梁" class="headerlink" title="硬件和软件的桥梁"></a>硬件和软件的桥梁</h2><p>我们已经知道如何写一个 “最小” 的 C 程序了：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/minimal.S">minimal.S</a></li>
-<li>不需要链接任何库，就能在操作系统上运行</li>
-</ul>
-<hr>
-<p>“程序 = 状态机” 没问题</p>
-<ul>
-<li>带来更多的疑问<ul>
-<li>但谁创建的这个状态机？？？<ul>
-<li>当然是操作系统了……呃……</li>
-</ul>
-</li>
-<li>这个程序可以在没有操作系统的硬件上运行吗？<ul>
-<li>“启动” 状态机是由 “加载器” 完成的</li>
-<li>加载器也是一段程序 (状态机)</li>
-<li>这个程序由是由谁加载的？</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Bare-metal-与程序员的约定"><a href="#Bare-metal-与程序员的约定" class="headerlink" title="Bare-metal 与程序员的约定"></a>Bare-metal 与程序员的约定</h3><p>为了让计算机能运行任何我们的程序，一定存在软件/硬件的约定</p>
-<ul>
-<li>CPU reset 后，处理器处于某个确定的状态<ul>
-<li>PC 指针一般指向一段 memory-mapped ROM<ul>
-<li>ROM 存储了厂商提供的 firmware (固件)</li>
-</ul>
-</li>
-<li>处理器的大部分特性处于关闭状态<ul>
-<li>缓存、虚拟存储、……</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Firmware (固件，厂商提供的代码)<ul>
-<li>将用户数据加载到内存<ul>
-<li>例如存储介质上的第二级 loader (加载器)</li>
-<li>或者直接加载操作系统 (嵌入式系统)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="CPU-Reset-之后：发生了什么？"><a href="#CPU-Reset-之后：发生了什么？" class="headerlink" title="CPU Reset 之后：发生了什么？"></a>CPU Reset 之后：发生了什么？</h3><p>《计算机系统基础》：不仅是程序，整个计算机系统也是一个状态机</p>
-<ul>
-<li>从 PC (<code>CS:IP</code>) 指针处取指令、译码、执行……</li>
-<li>从 firmware 开始执行<ul>
-<li><code>ffff0</code> 通常是一条向 firmware 跳转的 jmp 指令</li>
-</ul>
-</li>
-</ul>
-<h3 id="Legacy-BIOS-约定"><a href="#Legacy-BIOS-约定" class="headerlink" title="Legacy BIOS: 约定"></a>Legacy BIOS: 约定</h3><p>Firmware 必须提供机制，将用户数据载入内存</p>
-<ul>
-<li>Legacy BIOS 把第一个可引导设备的第一个扇区加载到物理内存的7c00位置<ul>
-<li>此时处理器处于 16-bit 模式</li>
-<li>规定CS:IP = 0x7c00,  (R[CS] &lt;&lt; 4) | R[IP] == 0x7c00<ul>
-<li>可能性1：<code>CS = 0x07c0, IP = 0</code></li>
-<li>可能性2：<code>CS = 0, IP = 0x7c00</code></li>
-</ul>
-</li>
-<li>其他没有任何约束</li>
-</ul>
-</li>
-</ul>
-<h3 id="计算机系统公理：你想到的就一定有人做到。"><a href="#计算机系统公理：你想到的就一定有人做到。" class="headerlink" title="计算机系统公理：你想到的就一定有人做到。"></a>计算机系统公理：你想到的就一定有人做到。</h3><ul>
-<li>模拟方案：QEMU<ul>
-<li>传奇黑客、天才程序员<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28388113">Fabrice Bellard</a>的杰作<ul>
-<li><a target="_blank" rel="noopener" href="https://www.usenix.org/legacy/publications/library/proceedings/usenix05/tech/freenix/full_papers/bellard/bellard.pdf">QEMU, A fast and portable dynamic translator</a> (USENIX ATC’05)</li>
-<li>Android Virtual Device, VirtualBox, … 背后都是 QEMU</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>真机方案：JTAG (Joint Test Action Group) debugger<ul>
-<li>一系列 (物理) 调试寄存器，可以实现 gdb 接口 (!!!)</li>
-</ul>
-</li>
-</ul>
-<h2 id="操作系统的状态机模型"><a href="#操作系统的状态机模型" class="headerlink" title="操作系统的状态机模型"></a>操作系统的状态机模型</h2><h3 id="操作系统：是个-C-程序"><a href="#操作系统：是个-C-程序" class="headerlink" title="操作系统：是个 C 程序"></a>操作系统：是个 C 程序</h3><p>一个迷你 “操作系统” <a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/thread-os.c">thread-os.c</a></p>
-<ul>
-<li>make 会得到一个 “磁盘镜像”，好像魔法一样<ul>
-<li>就跟你们第一次用 IDE 的时候按一个键就可以编译运行一样</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
@@ -1255,7 +1149,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1267,6 +1161,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
@@ -1275,11 +1177,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+                <a href="javascript:void(0)" class="js-tag color3">南京大学蒋炎岩-操作系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1287,7 +1189,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">南京大学蒋炎岩-操作系统</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1307,11 +1213,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1331,19 +1237,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">面试题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1375,15 +1269,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">分治</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
