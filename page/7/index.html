@@ -668,19 +668,19 @@
 
 
   
-    <article id="post-Java并发编程/3.两阶段终止模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java并发编程/4.线程状态" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/">3.两阶段终止模式</a>
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/">4.线程状态</a>
     </h1>
   
 
         
-        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/" class="archive-article-date">
   	<time datetime="2022-09-28T05:31:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
 </a>
         
@@ -688,9 +688,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Two-Phase-Termination"><a href="#Two-Phase-Termination" class="headerlink" title="Two Phase Termination"></a>Two Phase Termination</h3><p>在一个线程 T1 中如何“优雅”终止线程 T2？这里的【优雅】指的是给 T2 一个料理后事的机会。</p>
+        <h3 id="1-五种状态"><a href="#1-五种状态" class="headerlink" title="1.五种状态"></a>1.五种状态</h3><p>从 <strong>操作系统</strong> 层面来描述</p>
+<p><img src="http://www.codekenan.icu/img/juc/1.png"></p>
         
-          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/#more">more >></a>
         
       
 
@@ -740,19 +741,19 @@
 
 
   
-    <article id="post-Java并发编程/4.线程状态" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java并发编程/3.两阶段终止模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/">4.线程状态</a>
+      <a class="article-title" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/">3.两阶段终止模式</a>
     </h1>
   
 
         
-        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/" class="archive-article-date">
+        <a href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
   	<time datetime="2022-09-28T05:31:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-28</time>
 </a>
         
@@ -760,10 +761,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-五种状态"><a href="#1-五种状态" class="headerlink" title="1.五种状态"></a>1.五种状态</h3><p>从 <strong>操作系统</strong> 层面来描述</p>
-<p><img src="http://www.codekenan.icu/img/juc/1.png"></p>
+        <h3 id="Two-Phase-Termination"><a href="#Two-Phase-Termination" class="headerlink" title="Two Phase Termination"></a>Two Phase Termination</h3><p>在一个线程 T1 中如何“优雅”终止线程 T2？这里的【优雅】指的是给 T2 一个料理后事的机会。</p>
         
-          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/4.%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/#more">more >></a>
+          <a class="article-more-a" href="/2022/09/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/3.%E4%B8%A4%E9%98%B6%E6%AE%B5%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F/#more">more >></a>
         
       
 
@@ -974,10 +974,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
@@ -986,15 +982,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1002,23 +998,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">南京大学蒋炎岩-操作系统</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1059,6 +1047,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线性表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">汇编语言(实模式)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
