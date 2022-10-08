@@ -122,6 +122,623 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-南京大学蒋炎岩-操作系统/16.未完待述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/16.%E6%9C%AA%E5%AE%8C%E5%BE%85%E8%BF%B0/">16.未完待述</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/16.%E6%9C%AA%E5%AE%8C%E5%BE%85%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:00:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>计算机系统里没有魔法。处理器/操作系统/程序就是状态机。</p>
+</blockquote>
+<p>但这就是魔法啊！</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cs.nju.edu.cn/ics/recruit/index.html">签订契约，成为魔法少女</a>~~ )</li>
+</ul>
+<hr>
+<p><img src="http://jyywiki.cn/pages/OS/img/qb.webp" alt="img"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-南京大学蒋炎岩-操作系统/15.A fork() in the Road" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/15.A%20fork()%20in%20the%20Road/">15.A fork() in the Road</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/15.A%20fork()%20in%20the%20Road/" class="archive-article-date">
+  	<time datetime="2022-09-26T04:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="并发求和"><a href="#并发求和" class="headerlink" title="并发求和"></a>并发求和</h4><h5 id="sum-c"><a href="#sum-c" class="headerlink" title="sum.c"></a>sum.c</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="string">&quot;thread.h&quot;</span></span><br><span class="line"></span><br><span class="line">#define N <span class="number">100000000</span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">Tsum</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">    sum++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  create(Tsum);</span><br><span class="line">  create(Tsum);</span><br><span class="line">  join();</span><br><span class="line">  printf(<span class="string">&quot;sum = %ld\n&quot;</span>, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果假设 <a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/sum.c">sum.c</a> 中的 <code>sum++</code> 是如下构成：</p>
+<ul>
+<li><code>t = atomic_fetch(sum)</code></li>
+<li><code>t++</code></li>
+<li><code>atomic_store(sum, t)</code></li>
+</ul>
+<p>那么 k 个线程，输出的最小 <code>sum</code> 是多少？</p>
+<hr>
+<p>结论有些反直觉：</p>
+<ul>
+<li>对于所有 n,k≥2，<code>sum</code> 的最小值都是 2</li>
+<li>只要有一个线程在最后一轮循环 “持有” 2，再保持到最后写入</li>
+</ul>
+<h3 id="生产者-消费者"><a href="#生产者-消费者" class="headerlink" title="生产者-消费者"></a>生产者-消费者</h3><p>投机取巧的方法：C 标准库是线程安全的！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void Tworker() &#123;</span><br><span class="line">  while (!feof(stdin) &amp;&amp; scanf(&quot;%d&quot;, &amp;x) == 1) &#123;</span><br><span class="line">    long res = f(x);</span><br><span class="line">    lock(&amp;lk);</span><br><span class="line">    sum += res;</span><br><span class="line">    unlock(&amp;lk);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果限制只有一个线程可以读，那就需要生产者-消费者了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/剑指offer/面试题 17.19. 消失的两个数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/leetcode/%E5%89%91%E6%8C%87offer/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97/">面试题 17.19.消失的两个数字</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/leetcode/%E5%89%91%E6%8C%87offer/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97/" class="archive-article-date">
+  	<time datetime="2022-09-26T02:18:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/missing-two-lcci/">面试题 17.19.消失的两个数字</a></p>
+<p>给定一个数组，包含从 1 到 N 所有的整数，但其中缺了两个数字。你能在 O(N) 时间内只用 O(1) 的空间找到它们吗？</p>
+<p>以任意顺序返回这两个数字均可。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>]</span><br><span class="line">输出: [<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-模拟-不符合要求"><a href="#1-模拟-不符合要求" class="headerlink" title="1.模拟(不符合要求)"></a>1.模拟(不符合要求)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">pos</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; nums.length; )&#123;</span><br><span class="line">        sum = nums[i] - pos;</span><br><span class="line">        <span class="keyword">if</span>(sum != <span class="number">0</span>)&#123;</span><br><span class="line">            ans[index++] = pos;</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            i++;</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(index == <span class="number">0</span>)&#123;</span><br><span class="line">        ans[<span class="number">0</span>] = pos;</span><br><span class="line">        ans[<span class="number">1</span>] = pos + <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(index == <span class="number">1</span>)&#123;</span><br><span class="line">        ans[<span class="number">1</span>] = pos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-位运算"><a href="#2-位运算" class="headerlink" title="2.位运算"></a>2.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">xorsum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        xorsum ^= num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        xorsum ^= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 防止溢出</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">lsb</span> <span class="operator">=</span> (xorsum == Integer.MIN_VALUE ? xorsum : xorsum &amp; (-xorsum));</span><br><span class="line">    <span class="type">int</span> <span class="variable">type1</span> <span class="operator">=</span> <span class="number">0</span>, type2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((num &amp; lsb) != <span class="number">0</span>) &#123;</span><br><span class="line">            type1 ^= num;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type2 ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((i &amp; lsb) != <span class="number">0</span>) &#123;</span><br><span class="line">            type1 ^= i;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type2 ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;type1, type2&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-求和"><a href="#3-求和" class="headerlink" title="3.求和"></a>3.求和</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length + <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        sum += i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sumTow</span> <span class="operator">=</span> n * (n + <span class="number">1</span>) / <span class="number">2</span> - sum;</span><br><span class="line">    <span class="type">int</span> <span class="variable">limint</span> <span class="operator">=</span> sumTow / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt;= limint)&#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ans[<span class="number">0</span>] = limint * (limint + <span class="number">1</span>) / <span class="number">2</span> -sum;</span><br><span class="line">    ans[<span class="number">1</span>] = sumTow - ans[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">剑指offer</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/1600/LC_1503. 所有蚂蚁掉下来前的最后一刻" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/25/leetcode/1600/LC_1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/">LC_1503.所有蚂蚁掉下来前的最后一刻</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/25/leetcode/1600/LC_1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/" class="archive-article-date">
+  	<time datetime="2022-09-25T13:34:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-moment-before-all-ants-fall-out-of-a-plank/">1503.所有蚂蚁掉下来前的最后一刻</a></p>
+<p>有一块木板，长度为 n 个 单位 。一些蚂蚁在木板上移动，每只蚂蚁都以 每秒一个单位 的速度移动。其中，一部分蚂蚁向 左 移动，其他蚂蚁向 右 移动。</p>
+<p>当两只向 不同 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。</p>
+<p>而当蚂蚁在某一时刻 t 到达木板的一端时，它立即从木板上掉下来。</p>
+<p>给你一个整数 n 和两个整数数组 left 以及 right 。两个数组分别标识向左或者向右移动的蚂蚁在 t = 0 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">4</span>, left = [<span class="number">4</span>,<span class="number">3</span>], right = [<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">输出：<span class="number">4</span></span><br><span class="line">解释：如上图所示：</span><br><span class="line">-下标 <span class="number">0</span> 处的蚂蚁命名为 A 并向右移动。</span><br><span class="line">-下标 <span class="number">1</span> 处的蚂蚁命名为 B 并向右移动。</span><br><span class="line">-下标 <span class="number">3</span> 处的蚂蚁命名为 C 并向左移动。</span><br><span class="line">-下标 <span class="number">4</span> 处的蚂蚁命名为 D 并向左移动。</span><br><span class="line">请注意，蚂蚁在木板上的最后时刻是 t = <span class="number">4</span> 秒，之后蚂蚁立即从木板上掉下来。（也就是说在 t = <span class="number">4.0000000001</span> 时，木板上没有蚂蚁）。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-模拟"><a href="#1-模拟" class="headerlink" title="1.模拟"></a>1.模拟</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getLastMoment</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span>[] left, <span class="type">int</span>[] right)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">lastMoment</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> ant : left) &#123;</span><br><span class="line">        lastMoment = Math.max(lastMoment, ant);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> ant : right) &#123;</span><br><span class="line">        lastMoment = Math.max(lastMoment, n - ant);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lastMoment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/200/LC_124. 二叉树中的最大路径和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/25/leetcode/200/LC_124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/">LC_124.二叉树中的最大路径和</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/25/leetcode/200/LC_124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2022-09-25T10:35:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和 - 力扣（LeetCode）</a></p>
+<p>路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。</p>
+<p>路径和 是路径中各节点值的总和。</p>
+<p>给你一个二叉树的根节点 root ，返回其 最大路径和 。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">输出：<span class="number">6</span></span><br><span class="line">解释：最优路径是 <span class="number">2</span> -&gt; <span class="number">1</span> -&gt; <span class="number">3</span> ，路径和为 <span class="number">2</span> + <span class="number">1</span> + <span class="number">3</span> = <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-分治"><a href="#1-分治" class="headerlink" title="1.分治"></a>1.分治</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxPathSum</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> sum(root.left);</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> sum(root.right);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">max1</span> <span class="operator">=</span> sum(root);</span><br><span class="line">        <span class="type">int</span> <span class="variable">max2</span> <span class="operator">=</span> left + root.val;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max3</span> <span class="operator">=</span> right + root.val;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max4</span> <span class="operator">=</span> left + right + root.val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Math.max(Math.max(Math.max(Math.max(Math.max(root.val,max4),max3),max2),max1),sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sum</span><span class="params">(TreeNode tree)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tree == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> sum(tree.left);</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> sum(tree.right);</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Math.max(left,right);</span><br><span class="line">        <span class="type">int</span> <span class="variable">thisSum</span> <span class="operator">=</span> tree.val + (max &gt; <span class="number">0</span> ? max : <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(thisSum &gt; sum) &#123;</span><br><span class="line">            sum = thisSum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> tree.val + left + right;</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; sum) &#123;</span><br><span class="line">            sum = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> thisSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-递归"><a href="#2-递归" class="headerlink" title="2.递归"></a>2.递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">maxSum</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxPathSum</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        maxGain(root);</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxGain</span><span class="params">(TreeNode node)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 递归计算左右子节点的最大贡献值</span></span><br><span class="line">        <span class="comment">// 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">leftGain</span> <span class="operator">=</span> Math.max(maxGain(node.left), <span class="number">0</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">rightGain</span> <span class="operator">=</span> Math.max(maxGain(node.right), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">priceNewpath</span> <span class="operator">=</span> node.val + leftGain + rightGain;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新答案</span></span><br><span class="line">        maxSum = Math.max(maxSum, priceNewpath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">return</span> node.val + Math.max(leftGain, rightGain);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-南京大学蒋炎岩-操作系统/14.C 标准库的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/25/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/14.C%20%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%AE%9E%E7%8E%B0/">14.C 标准库的实现</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/25/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/14.C%20%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+  	<time datetime="2022-09-25T09:51:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>C 标准库设计与实现</li>
+<li>基于 libc 的应用程序</li>
+</ul>
+<h2 id="熟悉又陌生的-libc"><a href="#熟悉又陌生的-libc" class="headerlink" title="熟悉又陌生的 libc"></a>熟悉又陌生的 libc</h2><h3 id="为什么需要-libc"><a href="#为什么需要-libc" class="headerlink" title="为什么需要 libc?"></a>为什么需要 libc?</h3><p>“裸奔” 编程：能用 (而且绝对够用)，但不好用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">long syscall(int num, ...) &#123;</span><br><span class="line">  va_list ap;</span><br><span class="line">  va_start(ap, num);</span><br><span class="line">  register long a0 asm (&quot;rax&quot;) = num;</span><br><span class="line">  register long a1 asm (&quot;rdi&quot;) = va_arg(ap, long);</span><br><span class="line">  register long a2 asm (&quot;rsi&quot;) = va_arg(ap, long);</span><br><span class="line">  register long a3 asm (&quot;rdx&quot;) = va_arg(ap, long);</span><br><span class="line">  register long a4 asm (&quot;r10&quot;) = va_arg(ap, long);</span><br><span class="line">  va_end(ap);</span><br><span class="line">  asm volatile(&quot;syscall&quot;</span><br><span class="line">    : &quot;+r&quot;(a0) : &quot;r&quot;(a1), &quot;r&quot;(a2), &quot;r&quot;(a3), &quot;r&quot;(a4)</span><br><span class="line">    : &quot;memory&quot;, &quot;rcx&quot;, &quot;r8&quot;, &quot;r9&quot;, &quot;r11&quot;);</span><br><span class="line">  return a0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="任何程序都用得上的定义"><a href="#任何程序都用得上的定义" class="headerlink" title="任何程序都用得上的定义"></a>任何程序都用得上的定义</h3><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/freestanding">Freestanding 环境</a>下也可以使用的定义</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstddef/">stddef.h</a> - <code>size_t</code></li>
+<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdint/">stdint.h</a> - <code>int32_t</code>, <code>uint64_t</code></li>
+<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdbool/">stdbool.h</a> - <code>bool</code>, <code>true</code>, <code>false</code></li>
+<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cfloat/">float.h</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/climits/">limits.h</a></li>
+<li>stdarg.h<ul>
+<li>syscall 就用到了 (但 syscall0, syscall1, … 更高效)</li>
+</ul>
+</li>
+<li>inttypes.h<ul>
+<li>回答了你多年来的疑问！</li>
+<li>在你读过了小白阶段以后，就真的是 friendly manual 了</li>
+</ul>
+</li>
+</ul>
+<h2 id="封装-1-纯粹的计算"><a href="#封装-1-纯粹的计算" class="headerlink" title="封装 (1): 纯粹的计算"></a>封装 (1): 纯粹的计算</h2><h3 id="string-h-字符串-数组操作"><a href="#string-h-字符串-数组操作" class="headerlink" title="string.h: 字符串/数组操作"></a><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstring/">string.h</a>: 字符串/数组操作</h3><p>简单，不简单</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">memset</span><span class="params">(<span class="type">void</span> *s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    ((<span class="type">char</span> *)s)[i] = c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>让我们看看 clang 把它编译成了什么……</p>
+<ul>
+<li>以及，线程安全性？<a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/memset-race.c">memset-race.c</a></li>
+<li>标准库只对 “标准库内部数据” 的线程安全性负责<ul>
+<li>例子：printf 的 buffer</li>
+</ul>
+</li>
+</ul>
+<h2 id="封装-2-文件描述符"><a href="#封装-2-文件描述符" class="headerlink" title="封装 (2): 文件描述符"></a>封装 (2): 文件描述符</h2><h3 id="stdio-h-你熟悉的味道"><a href="#stdio-h-你熟悉的味道" class="headerlink" title="stdio.h: 你熟悉的味道"></a><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdio/">stdio.h</a>: 你熟悉的味道</h3><p><code>FILE *</code> 背后其实是一个文件描述符</p>
+<ul>
+<li>我们可以用 gdb 查看具体的FILE *(例如 stdout)<ul>
+<li>可以 “窥探” 到 glibc 的一些内部实现</li>
+<li>可以加载 glibc 的 debug symbols<ul>
+<li>在这门课上不推荐：你调试起来会很浪费时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>封装了文件描述符上的系统调用 (fseek, fgetpos, ftell, feof, …)</li>
+</ul>
+<hr>
+<p>vprintf 系列</p>
+<ul>
+<li>使用了 <code>stdarg.h</code> 的参数列表</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">vfprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vasprintf</span><span class="params">(<span class="type">char</span> **ret, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="封装-3-更多的进程-操作系统功能"><a href="#封装-3-更多的进程-操作系统功能" class="headerlink" title="封装 (3): 更多的进程/操作系统功能"></a>封装 (3): 更多的进程/操作系统功能</h2><h3 id="err-error-perror"><a href="#err-error-perror" class="headerlink" title="err, error, perror"></a>err, error, perror</h3><p>所有 API 都可能失败</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc nonexist.c</span><br><span class="line">gcc: error: nonexist.c: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>这个 “No such file or directory” 似乎见得有点多？</p>
+<ul>
+<li><code>cat nonexist.c, wc nonexist.c</code> 都是同样的 error message</li>
+<li>这不是巧合！<ul>
+<li>我们也可以 “山寨” 出同样的效果</li>
+<li>warn(“%s”, fname);(观察 strace)<ul>
+<li><code>err</code> 可以额外退出程序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>errno 是进程共享还是线程独享？<ul>
+<li>这下知道协程的轻量了吧</li>
+</ul>
+</li>
+</ul>
+<h2 id="封装-4-地址空间"><a href="#封装-4-地址空间" class="headerlink" title="封装 (4): 地址空间"></a>封装 (4): 地址空间</h2><h3 id="malloc-和-free"><a href="#malloc-和-free" class="headerlink" title="malloc 和 free"></a>malloc 和 free</h3><p>Specification 很简单 (同 <a target="_blank" rel="noopener" href="http://jyywiki.cn/OS/2022/Labs/L1">Lab1</a>)</p>
+<ul>
+<li><p>在大区间 [L, R)[<em>L</em>,<em>R</em>) 中维护互不相交的区间的集合</p>
+</li>
+<li><p>malloc(s<em>s</em>) - 返回一段大小为s<em>s</em>的区间</p>
+<ul>
+<li>必要时可以向操作系统申请额外的 [L, R)[<em>L</em>,<em>R</em>) (观察 strace)</li>
+<li>允许在内存不足时 “拒绝” 请求</li>
+</ul>
+</li>
+</ul>
+<h3 id="malloc-Fast-and-Slow"><a href="#malloc-Fast-and-Slow" class="headerlink" title="malloc, Fast and Slow"></a>malloc, Fast and Slow</h3><p>设置两套系统：</p>
+<ul>
+<li>fast path<ul>
+<li>性能极好、并行度极高、覆盖大部分情况</li>
+<li>但有小概率会失败 (fall back to slow path)</li>
+</ul>
+</li>
+<li>slow path<ul>
+<li>不在乎那么快</li>
+<li>但把困难的事情做好<ul>
+<li>计算机系统里有很多这样的例子 (比如 cache)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="我们还可以……"><a href="#我们还可以……" class="headerlink" title="我们还可以……"></a>我们还可以……</h2><p>走出 C 的领域，基于 libc 实现</p>
+<ul>
+<li>C++ 编译器<ul>
+<li>继续实现 C++ Standard Library</li>
+<li>继续实现 <a target="_blank" rel="noopener" href="https://openjdk.java.net/groups/hotspot/">OpenJDK (HotSpot)</a></li>
+<li>继续实现 <a target="_blank" rel="noopener" href="https://v8.dev/">V8</a> (JavaScript)</li>
+</ul>
+</li>
+<li>CPython</li>
+<li>Go<ul>
+<li>再之后 Go 就可以自己编译自己了 (Goodbye, C!)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>Eventually, (千疮百孔) 的整个计算机世界！</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3209212">C is not a low-level language</a> (CACM’18)</li>
+<li><a target="_blank" rel="noopener" href="https://gankra.github.io/blah/c-isnt-a-language/">C isn’t a programming language any more</a> (Gankra’s Blog)</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode/400/LC_344. 反转字符串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -457,588 +1074,9 @@
 
 
   
-    <article id="post-leetcode/100/LC_74. 搜索二维矩阵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/100/LC_74.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/">LC_74.搜索二维矩阵</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/100/LC_74.%20%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/" class="archive-article-date">
-  	<time datetime="2022-09-25T05:37:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix/">74. 搜索二维矩阵 - 力扣（LeetCode）</a></p>
-<p>编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：</p>
-<p>每行中的整数从左到右按升序排列。<br>每行的第一个整数大于前一行的最后一个整数。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>],[<span class="number">10</span>,<span class="number">11</span>,<span class="number">16</span>,<span class="number">20</span>],[<span class="number">23</span>,<span class="number">30</span>,<span class="number">34</span>,<span class="number">60</span>]], target = <span class="number">3</span></span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-二分查找"><a href="#1-二分查找" class="headerlink" title="1.二分查找"></a>1.二分查找</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/">240. 搜索二维矩阵 II - 力扣（LeetCode）</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">searchMatrix</span><span class="params">(<span class="type">int</span>[][] matrix, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> matrix.length, n = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>, r = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + r &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (matrix[i][mid] == target)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (matrix[i][mid] &lt; target)&#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">二分</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/400/LC_264. 丑数 II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/400/LC_264.%20%E4%B8%91%E6%95%B0%20II/">LC_264.丑数 II</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/400/LC_264.%20%E4%B8%91%E6%95%B0%20II/" class="archive-article-date">
-  	<time datetime="2022-09-25T04:37:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ugly-number-ii/">264.丑数 II - 力扣（LeetCode）</a></p>
-<p>给你一个整数 <code>n</code> ，请你找出并返回第 <code>n</code> 个 <strong>丑数</strong> 。</p>
-<p><strong>丑数</strong> 就是只包含质因数 <code>2</code>、<code>3</code> 和/或 <code>5</code> 的正整数。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">10</span></span><br><span class="line">输出：<span class="number">12</span></span><br><span class="line">解释：[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">12</span>] 是由前 <span class="number">10</span> 个丑数组成的序列。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-优先队列"><a href="#1-优先队列" class="headerlink" title="1.优先队列"></a>1.优先队列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">nthUglyNumber</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] factors = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    Set&lt;Long&gt; seen = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;Long&gt;();</span><br><span class="line">    PriorityQueue&lt;Long&gt; heap = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;Long&gt;();</span><br><span class="line">    seen.add(<span class="number">1L</span>);</span><br><span class="line">    heap.offer(<span class="number">1L</span>);</span><br><span class="line">    <span class="type">int</span> <span class="variable">ugly</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">curr</span> <span class="operator">=</span> heap.poll();</span><br><span class="line">        ugly = (<span class="type">int</span>) curr;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> factor : factors) &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">next</span> <span class="operator">=</span> curr * factor;</span><br><span class="line">            <span class="keyword">if</span> (seen.add(next)) &#123;</span><br><span class="line">                heap.offer(next);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ugly;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-动态规划"><a href="#2-动态规划" class="headerlink" title="2.动态规划"></a>2.动态规划</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">nthUglyNumber</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="number">1</span>, p3 = <span class="number">1</span>, p5 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> dp[p2] * <span class="number">2</span>, num3 = dp[p3] * <span class="number">3</span>, num5 = dp[p5] * <span class="number">5</span>;</span><br><span class="line">        dp[i] = Math.min(Math.min(num2, num3), num5);</span><br><span class="line">        <span class="keyword">if</span> (dp[i] == num2) &#123;</span><br><span class="line">            p2++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[i] == num3) &#123;</span><br><span class="line">            p3++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (dp[i] == num5) &#123;</span><br><span class="line">            p5++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/800/LC_797. 所有可能的路径" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/800/LC_797.%20%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/">LC_797.所有可能的路径</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/800/LC_797.%20%E6%89%80%E6%9C%89%E5%8F%AF%E8%83%BD%E7%9A%84%E8%B7%AF%E5%BE%84/" class="archive-article-date">
-  	<time datetime="2022-09-25T02:33:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/all-paths-from-source-to-target/">797. 所有可能的路径 - 力扣（LeetCode）</a></p>
-<p>给你一个有 n 个节点的 有向无环图（DAG），请你找出所有从节点 0 到节点 n-1 的路径并输出（不要求按特定顺序）</p>
-<p> graph[i] 是一个从节点 i 可以访问的所有节点的列表（即从节点 i 到节点 graph[i][j]存在一条有向边）。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：graph = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>],[<span class="number">3</span>],[]]</span><br><span class="line">输出：[[<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>],[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line">解释：有两条路径 <span class="number">0</span> -&gt; <span class="number">1</span> -&gt; <span class="number">3</span> 和 <span class="number">0</span> -&gt; <span class="number">2</span> -&gt; <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-DFS"><a href="#1-DFS" class="headerlink" title="1.DFS"></a>1.DFS</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">allPathsSourceTarget</span><span class="params">(<span class="type">int</span>[][] graph)</span> &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    List&lt;Integer&gt; temp = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    temp.add(<span class="number">0</span>);</span><br><span class="line">    DFS(graph,result,<span class="number">0</span>,temp);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span>[][] graph,List&lt;List&lt;Integer&gt;&gt; result,<span class="type">int</span> v,List&lt;Integer&gt; temp)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(v == graph.length - <span class="number">1</span>)&#123;</span><br><span class="line">        result.add(<span class="keyword">new</span> <span class="title class_">ArrayList</span>(temp));</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : graph[v])&#123;</span><br><span class="line">        temp.add(i);</span><br><span class="line">        DFS(graph,result,i,temp);</span><br><span class="line">        temp.remove((Integer) i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-南京大学蒋炎岩-操作系统/12.进程的地址空间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/">12.进程的地址空间</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/24/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/12.%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4/" class="archive-article-date">
-  	<time datetime="2022-09-24T12:06:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="进程的地址空间"><a href="#进程的地址空间" class="headerlink" title="进程的地址空间"></a>进程的地址空间</h2><h3 id="进程的地址空间-1"><a href="#进程的地址空间-1" class="headerlink" title="进程的地址空间"></a>进程的地址空间</h3><p><code>char *p</code> 可以和 <code>intptr_t</code> 互相转换</p>
-<ul>
-<li>可以指向 “任何地方”</li>
-<li>合法的地址 (可读或可写)<ul>
-<li>代码 (<code>main</code>, <code>%rip</code> 会从此处取出待执行的指令)，只读</li>
-<li>数据 (<code>static int x</code>)，读写</li>
-<li>堆栈 (<code>int y</code>)，读写</li>
-<li>运行时分配的内存 (???)，读写</li>
-<li>动态链接库 (???)</li>
-</ul>
-</li>
-<li>非法的地址<ul>
-<li><code>NULL</code>，导致 segmentation fault</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>它们停留在概念中，但实际呢？</p>
-<h3 id="查看进程的地址空间"><a href="#查看进程的地址空间" class="headerlink" title="查看进程的地址空间"></a>查看进程的地址空间</h3><p>pmap (1) - report memory of a process</p>
-<ul>
-<li>Claim: pmap 是通过访问 procfs (<code>/proc/</code>) 实现的</li>
-</ul>
-<h3 id="操作系统提供查看进程地址空间的机制"><a href="#操作系统提供查看进程地址空间的机制" class="headerlink" title="操作系统提供查看进程地址空间的机制"></a>操作系统提供查看进程地址空间的机制</h3><p>RTFM: <code>/proc/[pid]/maps</code> (man 5 proc)</p>
-<ul>
-<li>进程地址空间中的每一段<ul>
-<li>地址 (范围) 和权限 (rwxsp)</li>
-<li>对应的文件: offset, dev, inode, pathname<ul>
-<li>TFM 里有更详细的解释</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>和 readelf (<code>-l</code>) 里的信息互相验证</li>
-</ul>
-<h2 id="进程的地址空间管理"><a href="#进程的地址空间管理" class="headerlink" title="进程的地址空间管理"></a>进程的地址空间管理</h2><h3 id="Execve-之后……"><a href="#Execve-之后……" class="headerlink" title="Execve 之后……"></a>Execve 之后……</h3><p>进程只有少量内存映射</p>
-<ul>
-<li>静态链接：代码、数据、堆栈、堆区</li>
-<li>动态链接：代码、数据、堆栈、堆区、INTERP (ld.so)</li>
-</ul>
-<hr>
-<p>地址空间里剩下的部分是怎么创建的？</p>
-<ul>
-<li>libc.so 都没有啊……</li>
-<li>创建了以后，我们还能修改它吗？<ul>
-<li>肯定是能的：动态链接库可以动态加载 (M4)</li>
-<li>当然是通过系统调用了</li>
-</ul>
-</li>
-</ul>
-<h3 id="进程的地址空间-cont’d"><a href="#进程的地址空间-cont’d" class="headerlink" title="进程的地址空间 (cont’d)"></a>进程的地址空间 (cont’d)</h3><p>进程的地址空间 = 内存里若干连续的 “段”</p>
-<ul>
-<li>每一段是可访问 (读/写/执行) 的内存<ul>
-<li>可能映射到某个文件和/或在进程间共享</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>管理进程地址空间的系统调用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 映射</span><br><span class="line">void *mmap(void *addr, size_t length, int prot, int flags,</span><br><span class="line">           int fd, off_t offset);</span><br><span class="line">int munmap(void *addr, size_t length);</span><br><span class="line"></span><br><span class="line">// 修改映射权限</span><br><span class="line">int mprotect(void *addr, size_t length, int prot);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>RTFM<ul>
-<li>说人话：状态上增加/删除/修改一段可访问的内存</li>
-</ul>
-</li>
-</ul>
-<h2 id="地址空间的隔离"><a href="#地址空间的隔离" class="headerlink" title="地址空间的隔离"></a>地址空间的隔离</h2><h3 id="地址空间：实现进程隔离"><a href="#地址空间：实现进程隔离" class="headerlink" title="地址空间：实现进程隔离"></a>地址空间：实现进程隔离</h3><p>每个 <code>*ptr</code> 都只能访问本进程 (状态机) 的内存</p>
-<ul>
-<li>除非 mmap 显示指定、映射共享文件或共享内存多线程</li>
-<li>实现了操作系统最重要的功能：进程之间的隔离</li>
-</ul>
-<hr>
-<p>任何一个程序都不能因为 bug 或恶意行为侵犯其他程序执行</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本次课回答的问题</p>
-<ul>
-<li><strong>Q</strong>: 进程的地址空间是如何创建、如何更改的？</li>
-</ul>
-<hr>
-<p>Take-away messages</p>
-<ul>
-<li>进程的地址空间<ul>
-<li>能文件关联的、带有访问权限的连续内存段<ul>
-<li>a.out, ld.so, libc.so, heap, stack, vdso</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>进程地址空间的管理 API<ul>
-<li>mmap</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/800/LC_692. 前K个高频单词" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/800/LC_692.%20%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/">LC_692.前K个高频单词</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/24/leetcode/800/LC_692.%20%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D/" class="archive-article-date">
-  	<time datetime="2022-09-24T10:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-words/">692. 前K个高频单词 - 力扣（LeetCode）</a></p>
-<p>给定一个单词列表 words 和一个整数 k ，返回前 k 个出现次数最多的单词。</p>
-<p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率， 按字典顺序 排序。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: words = [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;leetcode&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;coding&quot;</span>], k = <span class="number">2</span></span><br><span class="line">输出: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;i&quot;</span> 和 <span class="string">&quot;love&quot;</span> 为出现次数最多的两个单词，均为<span class="number">2</span>次。</span><br><span class="line">    注意，按字母顺序 <span class="string">&quot;i&quot;</span> 在 <span class="string">&quot;love&quot;</span> 之前</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-哈希，优先队列"><a href="#1-哈希，优先队列" class="headerlink" title="1.哈希，优先队列"></a>1.哈希，优先队列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;String&gt; <span class="title function_">topKFrequent</span><span class="params">(String[] ws, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">    Map&lt;String, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (String w : ws) map.put(w, map.getOrDefault(w, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">    PriorityQueue&lt;Object[]&gt; q = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(k, (a, b)-&gt;&#123; </span><br><span class="line">        <span class="comment">// 如果词频不同，根据词频升序</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">c1</span> <span class="operator">=</span> (Integer)a[<span class="number">0</span>], c2 = (Integer)b[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">if</span> (c1 != c2) <span class="keyword">return</span> c1 - c2;</span><br><span class="line">        <span class="comment">// 如果词频相同，根据字典序倒序</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> (String)a[<span class="number">1</span>], s2 = (String)b[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> s2.compareTo(s1);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">for</span> (String s : map.keySet()) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cnt</span> <span class="operator">=</span> map.get(s);</span><br><span class="line">        <span class="keyword">if</span> (q.size() &lt; k) &#123; <span class="comment">// 不足 k 个，直接入堆</span></span><br><span class="line">            q.add(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;cnt, s&#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Object[] peek = q.peek();</span><br><span class="line">            <span class="keyword">if</span> (cnt &gt; (Integer)peek[<span class="number">0</span>]) &#123; <span class="comment">// 词频比堆顶元素大，弹出堆顶元素，入堆</span></span><br><span class="line">                q.poll();</span><br><span class="line">                q.add(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;cnt, s&#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cnt == (Integer)peek[<span class="number">0</span>]) &#123; <span class="comment">// 词频与堆顶元素相同</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">top</span> <span class="operator">=</span> (String)peek[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (s.compareTo(top) &lt; <span class="number">0</span>) &#123; <span class="comment">// 且字典序大小比堆顶元素小，弹出堆顶元素，入堆</span></span><br><span class="line">                    q.poll();</span><br><span class="line">                    q.add(<span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;cnt, s&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;String&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (!q.isEmpty()) ans.add((String)q.poll()[<span class="number">1</span>]);</span><br><span class="line">    Collections.reverse(ans);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">哈希</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/200/LC_145. 二叉树的后序遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/24/leetcode/200/LC_145.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/">LC_145.二叉树的后序遍历</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/24/leetcode/200/LC_145.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/" class="archive-article-date">
-  	<time datetime="2022-09-24T08:10:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145. 二叉树的后序遍历 - 力扣（LeetCode）</a></p>
-<p>给你一棵二叉树的根节点 <code>root</code> ，返回其节点值的 <strong>后序遍历</strong> 。</p>
-<h3 id="1-递归"><a href="#1-递归" class="headerlink" title="1.递归"></a>1.递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">postorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">    postorderTraversal(root,list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">postorderTraversal</span><span class="params">(TreeNode root,List&lt;Integer&gt; list)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root != <span class="literal">null</span>) &#123;</span><br><span class="line">        postorderTraversal(root.left,list);</span><br><span class="line">        postorderTraversal(root.right,list);</span><br><span class="line">        list.add(root.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1117,23 +1155,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1197,6 +1231,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
               </li>
              
@@ -1205,7 +1243,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1241,6 +1279,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
@@ -1249,7 +1291,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
               </li>
             
             <div class="clearfix"></div>

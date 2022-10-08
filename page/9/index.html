@@ -122,6 +122,494 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-other/linux命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/other/linux%E5%91%BD%E4%BB%A4/">linux命令</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/other/linux%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2022-09-26T06:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关机-重启-注销"><a href="#关机-重启-注销" class="headerlink" title="关机/重启/注销"></a>关机/重启/注销</h3><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shutdown -h now</td>
+<td>即刻关机</td>
+</tr>
+<tr>
+<td>shutdown -h 10</td>
+<td>10分钟后关机</td>
+</tr>
+<tr>
+<td>shutdown -h 11:00</td>
+<td>11：00关机</td>
+</tr>
+<tr>
+<td>shutdown -h +10</td>
+<td>预定时间关机（10分钟后）</td>
+</tr>
+<tr>
+<td>shutdown -c</td>
+<td>取消指定时间关机</td>
+</tr>
+<tr>
+<td>shutdown -r now</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>reboot</td>
+<td>重启</td>
+</tr>
+<tr>
+<td>halt</td>
+<td>关机</td>
+</tr>
+<tr>
+<td>sync</td>
+<td>buff数据同步到磁盘</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>退出登录Shell</td>
+</tr>
+</tbody></table>
+        
+          <a class="article-more-a" href="/2022/09/26/other/linux%E5%91%BD%E4%BB%A4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-netty/14.源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/netty/14.%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">14.源码分析</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/netty/14.%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:48:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="14-1-启动剖析"><a href="#14-1-启动剖析" class="headerlink" title="14.1 启动剖析"></a>14.1 启动剖析</h3><p>我们就来看看 netty 中对下面的代码是怎样进行处理的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1 netty 中使用 NioEventLoopGroup （简称 nio boss 线程）来封装线程和 selector</span></span><br><span class="line"><span class="type">Selector</span> <span class="variable">selector</span> <span class="operator">=</span> Selector.open(); </span><br><span class="line"></span><br><span class="line"><span class="comment">//2 创建 NioServerSocketChannel，同时会初始化它关联的 handler，以及为原生 ssc 存储 config</span></span><br><span class="line"><span class="type">NioServerSocketChannel</span> <span class="variable">attachment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioServerSocketChannel</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//3 创建 NioServerSocketChannel 时，创建了 java 原生的 ServerSocketChannel</span></span><br><span class="line"><span class="type">ServerSocketChannel</span> <span class="variable">serverSocketChannel</span> <span class="operator">=</span> ServerSocketChannel.open(); </span><br><span class="line">serverSocketChannel.configureBlocking(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//4 启动 nio boss 线程执行接下来的操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//5 注册（仅关联 selector 和 NioServerSocketChannel），未关注事件</span></span><br><span class="line"><span class="type">SelectionKey</span> <span class="variable">selectionKey</span> <span class="operator">=</span> serverSocketChannel.register(selector, <span class="number">0</span>, attachment);</span><br><span class="line"></span><br><span class="line"><span class="comment">//6 head -&gt; 初始化器 -&gt; ServerBootstrapAcceptor -&gt; tail，初始化器是一次性的，只为添加 acceptor</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//7 绑定端口</span></span><br><span class="line">serverSocketChannel.bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">8080</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//8 触发 channel active 事件，在 head 中关注 op_accept 事件</span></span><br><span class="line">selectionKey.interestOps(SelectionKey.OP_ACCEPT);</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/14.%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-netty/13.优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/netty/13.%E4%BC%98%E5%8C%96/">13.优化</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/netty/13.%E4%BC%98%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:47:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="13-1-扩展序列化算法"><a href="#13-1-扩展序列化算法" class="headerlink" title="13.1 扩展序列化算法"></a>13.1 扩展序列化算法</h3><p>序列化，反序列化主要用在消息正文的转换上</p>
+<ul>
+<li>序列化时，需要将 Java 对象变为要传输的数据（可以是 byte[]，或 json 等，最终都需要变成 byte[]）</li>
+<li>反序列化时，需要将传入的正文数据还原成 Java 对象，便于处理</li>
+</ul>
+<p>目前的代码仅支持 Java 自带的序列化，反序列化机制，核心代码如下</p>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/13.%E4%BC%98%E5%8C%96/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-netty/12.聊天室案例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/netty/12.%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%A1%88%E4%BE%8B/">12.聊天室案例</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/netty/12.%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%A1%88%E4%BE%8B/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:45:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="12-1-聊天室业务介绍"><a href="#12-1-聊天室业务介绍" class="headerlink" title="12.1 聊天室业务介绍"></a>12.1 聊天室业务介绍</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用户管理接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 登录</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> password 密码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 登录成功返回 true, 否则返回 false</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">login</span><span class="params">(String username, String password)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/12.%E8%81%8A%E5%A4%A9%E5%AE%A4%E6%A1%88%E4%BE%8B/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-netty/11.协议设计与解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/netty/11.%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%A7%A3%E6%9E%90/">11.协议设计与解析</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/netty/11.%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%A7%A3%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:43:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="11-1-为什么需要协议？"><a href="#11-1-为什么需要协议？" class="headerlink" title="11.1 为什么需要协议？"></a>11.1 为什么需要协议？</h3><p>TCP/IP 中消息传输基于流的方式，没有边界。</p>
+<p>协议的目的就是划定消息的边界，制定通信双方要共同遵守的通信规则</p>
+<p>例如：在网络上传输</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">下雨天留客天留我不留</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/11.%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E4%B8%8E%E8%A7%A3%E6%9E%90/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-netty/10.粘包与半包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/26/netty/10.%E7%B2%98%E5%8C%85%E4%B8%8E%E5%8D%8A%E5%8C%85/">10.粘包与半包</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/26/netty/10.%E7%B2%98%E5%8C%85%E4%B8%8E%E5%8D%8A%E5%8C%85/" class="archive-article-date">
+  	<time datetime="2022-09-26T05:41:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="10-1-粘包现象"><a href="#10-1-粘包现象" class="headerlink" title="10.1 粘包现象"></a>10.1 粘包现象</h3><p>服务端代码</p>
+        
+          <a class="article-more-a" href="/2022/09/26/netty/10.%E7%B2%98%E5%8C%85%E4%B8%8E%E5%8D%8A%E5%8C%85/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">netty</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-netty/9.双向通信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -430,626 +918,9 @@
 
 
   
-    <article id="post-南京大学蒋炎岩-操作系统/16.未完待述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/16.%E6%9C%AA%E5%AE%8C%E5%BE%85%E8%BF%B0/">16.未完待述</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/16.%E6%9C%AA%E5%AE%8C%E5%BE%85%E8%BF%B0/" class="archive-article-date">
-  	<time datetime="2022-09-26T05:00:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>计算机系统里没有魔法。处理器/操作系统/程序就是状态机。</p>
-</blockquote>
-<p>但这就是魔法啊！</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://cs.nju.edu.cn/ics/recruit/index.html">签订契约，成为魔法少女</a>~~ )</li>
-</ul>
-<hr>
-<p><img src="http://jyywiki.cn/pages/OS/img/qb.webp" alt="img"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-南京大学蒋炎岩-操作系统/15.A fork() in the Road" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/15.A%20fork()%20in%20the%20Road/">15.A fork() in the Road</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/26/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/15.A%20fork()%20in%20the%20Road/" class="archive-article-date">
-  	<time datetime="2022-09-26T04:46:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="并发求和"><a href="#并发求和" class="headerlink" title="并发求和"></a>并发求和</h4><h5 id="sum-c"><a href="#sum-c" class="headerlink" title="sum.c"></a>sum.c</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="string">&quot;thread.h&quot;</span></span><br><span class="line"></span><br><span class="line">#define N <span class="number">100000000</span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">Tsum</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">    sum++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  create(Tsum);</span><br><span class="line">  create(Tsum);</span><br><span class="line">  join();</span><br><span class="line">  printf(<span class="string">&quot;sum = %ld\n&quot;</span>, sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果假设 <a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/sum.c">sum.c</a> 中的 <code>sum++</code> 是如下构成：</p>
-<ul>
-<li><code>t = atomic_fetch(sum)</code></li>
-<li><code>t++</code></li>
-<li><code>atomic_store(sum, t)</code></li>
-</ul>
-<p>那么 k 个线程，输出的最小 <code>sum</code> 是多少？</p>
-<hr>
-<p>结论有些反直觉：</p>
-<ul>
-<li>对于所有 n,k≥2，<code>sum</code> 的最小值都是 2</li>
-<li>只要有一个线程在最后一轮循环 “持有” 2，再保持到最后写入</li>
-</ul>
-<h3 id="生产者-消费者"><a href="#生产者-消费者" class="headerlink" title="生产者-消费者"></a>生产者-消费者</h3><p>投机取巧的方法：C 标准库是线程安全的！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void Tworker() &#123;</span><br><span class="line">  while (!feof(stdin) &amp;&amp; scanf(&quot;%d&quot;, &amp;x) == 1) &#123;</span><br><span class="line">    long res = f(x);</span><br><span class="line">    lock(&amp;lk);</span><br><span class="line">    sum += res;</span><br><span class="line">    unlock(&amp;lk);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果限制只有一个线程可以读，那就需要生产者-消费者了</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/其他/面试题 17.19. 消失的两个数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/26/leetcode/%E5%85%B6%E4%BB%96/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97/">面试题 17.19.消失的两个数字</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/26/leetcode/%E5%85%B6%E4%BB%96/%E9%9D%A2%E8%AF%95%E9%A2%98%2017.19.%20%E6%B6%88%E5%A4%B1%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2022-09-26T02:18:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/missing-two-lcci/">面试题 17.19.消失的两个数字</a></p>
-<p>给定一个数组，包含从 1 到 N 所有的整数，但其中缺了两个数字。你能在 O(N) 时间内只用 O(1) 的空间找到它们吗？</p>
-<p>以任意顺序返回这两个数字均可。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>]</span><br><span class="line">输出: [<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-模拟-不符合要求"><a href="#1-模拟-不符合要求" class="headerlink" title="1.模拟(不符合要求)"></a>1.模拟(不符合要求)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">pos</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; nums.length; )&#123;</span><br><span class="line">        sum = nums[i] - pos;</span><br><span class="line">        <span class="keyword">if</span>(sum != <span class="number">0</span>)&#123;</span><br><span class="line">            ans[index++] = pos;</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            i++;</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(index == <span class="number">0</span>)&#123;</span><br><span class="line">        ans[<span class="number">0</span>] = pos;</span><br><span class="line">        ans[<span class="number">1</span>] = pos + <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(index == <span class="number">1</span>)&#123;</span><br><span class="line">        ans[<span class="number">1</span>] = pos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-位运算"><a href="#2-位运算" class="headerlink" title="2.位运算"></a>2.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">xorsum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        xorsum ^= num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        xorsum ^= i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 防止溢出</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">lsb</span> <span class="operator">=</span> (xorsum == Integer.MIN_VALUE ? xorsum : xorsum &amp; (-xorsum));</span><br><span class="line">    <span class="type">int</span> <span class="variable">type1</span> <span class="operator">=</span> <span class="number">0</span>, type2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((num &amp; lsb) != <span class="number">0</span>) &#123;</span><br><span class="line">            type1 ^= num;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type2 ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((i &amp; lsb) != <span class="number">0</span>) &#123;</span><br><span class="line">            type1 ^= i;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            type2 ^= i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;type1, type2&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-求和"><a href="#3-求和" class="headerlink" title="3.求和"></a>3.求和</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] missingTwo(<span class="type">int</span>[] nums) &#123;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length + <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        sum += i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sumTow</span> <span class="operator">=</span> n * (n + <span class="number">1</span>) / <span class="number">2</span> - sum;</span><br><span class="line">    <span class="type">int</span> <span class="variable">limint</span> <span class="operator">=</span> sumTow / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i : nums)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt;= limint)&#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ans[<span class="number">0</span>] = limint * (limint + <span class="number">1</span>) / <span class="number">2</span> -sum;</span><br><span class="line">    ans[<span class="number">1</span>] = sumTow - ans[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/1600/LC_1503. 所有蚂蚁掉下来前的最后一刻" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/1600/LC_1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/">LC_1503.所有蚂蚁掉下来前的最后一刻</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/1600/LC_1503.%20%E6%89%80%E6%9C%89%E8%9A%82%E8%9A%81%E6%8E%89%E4%B8%8B%E6%9D%A5%E5%89%8D%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%88%BB/" class="archive-article-date">
-  	<time datetime="2022-09-25T13:34:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-moment-before-all-ants-fall-out-of-a-plank/">1503.所有蚂蚁掉下来前的最后一刻</a></p>
-<p>有一块木板，长度为 n 个 单位 。一些蚂蚁在木板上移动，每只蚂蚁都以 每秒一个单位 的速度移动。其中，一部分蚂蚁向 左 移动，其他蚂蚁向 右 移动。</p>
-<p>当两只向 不同 方向移动的蚂蚁在某个点相遇时，它们会同时改变移动方向并继续移动。假设更改方向不会花费任何额外时间。</p>
-<p>而当蚂蚁在某一时刻 t 到达木板的一端时，它立即从木板上掉下来。</p>
-<p>给你一个整数 n 和两个整数数组 left 以及 right 。两个数组分别标识向左或者向右移动的蚂蚁在 t = 0 时的位置。请你返回最后一只蚂蚁从木板上掉下来的时刻。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：n = <span class="number">4</span>, left = [<span class="number">4</span>,<span class="number">3</span>], right = [<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">输出：<span class="number">4</span></span><br><span class="line">解释：如上图所示：</span><br><span class="line">-下标 <span class="number">0</span> 处的蚂蚁命名为 A 并向右移动。</span><br><span class="line">-下标 <span class="number">1</span> 处的蚂蚁命名为 B 并向右移动。</span><br><span class="line">-下标 <span class="number">3</span> 处的蚂蚁命名为 C 并向左移动。</span><br><span class="line">-下标 <span class="number">4</span> 处的蚂蚁命名为 D 并向左移动。</span><br><span class="line">请注意，蚂蚁在木板上的最后时刻是 t = <span class="number">4</span> 秒，之后蚂蚁立即从木板上掉下来。（也就是说在 t = <span class="number">4.0000000001</span> 时，木板上没有蚂蚁）。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-模拟"><a href="#1-模拟" class="headerlink" title="1.模拟"></a>1.模拟</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getLastMoment</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span>[] left, <span class="type">int</span>[] right)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">lastMoment</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> ant : left) &#123;</span><br><span class="line">        lastMoment = Math.max(lastMoment, ant);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> ant : right) &#123;</span><br><span class="line">        lastMoment = Math.max(lastMoment, n - ant);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lastMoment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode/200/LC_124. 二叉树中的最大路径和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/leetcode/200/LC_124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/">LC_124.二叉树中的最大路径和</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/leetcode/200/LC_124.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2022-09-25T10:35:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和 - 力扣（LeetCode）</a></p>
-<p>路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。</p>
-<p>路径和 是路径中各节点值的总和。</p>
-<p>给你一个二叉树的根节点 root ，返回其 最大路径和 。</p>
-<p>示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">输出：<span class="number">6</span></span><br><span class="line">解释：最优路径是 <span class="number">2</span> -&gt; <span class="number">1</span> -&gt; <span class="number">3</span> ，路径和为 <span class="number">2</span> + <span class="number">1</span> + <span class="number">3</span> = <span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-分治"><a href="#1-分治" class="headerlink" title="1.分治"></a>1.分治</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxPathSum</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> sum(root.left);</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> sum(root.right);</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">max1</span> <span class="operator">=</span> sum(root);</span><br><span class="line">        <span class="type">int</span> <span class="variable">max2</span> <span class="operator">=</span> left + root.val;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max3</span> <span class="operator">=</span> right + root.val;</span><br><span class="line">        <span class="type">int</span> <span class="variable">max4</span> <span class="operator">=</span> left + right + root.val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Math.max(Math.max(Math.max(Math.max(Math.max(root.val,max4),max3),max2),max1),sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sum</span><span class="params">(TreeNode tree)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tree == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> sum(tree.left);</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> sum(tree.right);</span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Math.max(left,right);</span><br><span class="line">        <span class="type">int</span> <span class="variable">thisSum</span> <span class="operator">=</span> tree.val + (max &gt; <span class="number">0</span> ? max : <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span>(thisSum &gt; sum) &#123;</span><br><span class="line">            sum = thisSum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> tree.val + left + right;</span><br><span class="line">        <span class="keyword">if</span>(temp &gt; sum) &#123;</span><br><span class="line">            sum = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> thisSum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-递归"><a href="#2-递归" class="headerlink" title="2.递归"></a>2.递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">maxSum</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxPathSum</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        maxGain(root);</span><br><span class="line">        <span class="keyword">return</span> maxSum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxGain</span><span class="params">(TreeNode node)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 递归计算左右子节点的最大贡献值</span></span><br><span class="line">        <span class="comment">// 只有在最大贡献值大于 0 时，才会选取对应子节点</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">leftGain</span> <span class="operator">=</span> Math.max(maxGain(node.left), <span class="number">0</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">rightGain</span> <span class="operator">=</span> Math.max(maxGain(node.right), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">priceNewpath</span> <span class="operator">=</span> node.val + leftGain + rightGain;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新答案</span></span><br><span class="line">        maxSum = Math.max(maxSum, priceNewpath);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回节点的最大贡献值</span></span><br><span class="line">        <span class="keyword">return</span> node.val + Math.max(leftGain, rightGain);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-南京大学蒋炎岩-操作系统/14.C 标准库的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/25/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/14.C%20%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%AE%9E%E7%8E%B0/">14.C 标准库的实现</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/25/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/14.C%20%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2022-09-25T09:51:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>C 标准库设计与实现</li>
-<li>基于 libc 的应用程序</li>
-</ul>
-<h2 id="熟悉又陌生的-libc"><a href="#熟悉又陌生的-libc" class="headerlink" title="熟悉又陌生的 libc"></a>熟悉又陌生的 libc</h2><h3 id="为什么需要-libc"><a href="#为什么需要-libc" class="headerlink" title="为什么需要 libc?"></a>为什么需要 libc?</h3><p>“裸奔” 编程：能用 (而且绝对够用)，但不好用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">long syscall(int num, ...) &#123;</span><br><span class="line">  va_list ap;</span><br><span class="line">  va_start(ap, num);</span><br><span class="line">  register long a0 asm (&quot;rax&quot;) = num;</span><br><span class="line">  register long a1 asm (&quot;rdi&quot;) = va_arg(ap, long);</span><br><span class="line">  register long a2 asm (&quot;rsi&quot;) = va_arg(ap, long);</span><br><span class="line">  register long a3 asm (&quot;rdx&quot;) = va_arg(ap, long);</span><br><span class="line">  register long a4 asm (&quot;r10&quot;) = va_arg(ap, long);</span><br><span class="line">  va_end(ap);</span><br><span class="line">  asm volatile(&quot;syscall&quot;</span><br><span class="line">    : &quot;+r&quot;(a0) : &quot;r&quot;(a1), &quot;r&quot;(a2), &quot;r&quot;(a3), &quot;r&quot;(a4)</span><br><span class="line">    : &quot;memory&quot;, &quot;rcx&quot;, &quot;r8&quot;, &quot;r9&quot;, &quot;r11&quot;);</span><br><span class="line">  return a0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="任何程序都用得上的定义"><a href="#任何程序都用得上的定义" class="headerlink" title="任何程序都用得上的定义"></a>任何程序都用得上的定义</h3><p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/freestanding">Freestanding 环境</a>下也可以使用的定义</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstddef/">stddef.h</a> - <code>size_t</code></li>
-<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdint/">stdint.h</a> - <code>int32_t</code>, <code>uint64_t</code></li>
-<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdbool/">stdbool.h</a> - <code>bool</code>, <code>true</code>, <code>false</code></li>
-<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cfloat/">float.h</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/climits/">limits.h</a></li>
-<li>stdarg.h<ul>
-<li>syscall 就用到了 (但 syscall0, syscall1, … 更高效)</li>
-</ul>
-</li>
-<li>inttypes.h<ul>
-<li>回答了你多年来的疑问！</li>
-<li>在你读过了小白阶段以后，就真的是 friendly manual 了</li>
-</ul>
-</li>
-</ul>
-<h2 id="封装-1-纯粹的计算"><a href="#封装-1-纯粹的计算" class="headerlink" title="封装 (1): 纯粹的计算"></a>封装 (1): 纯粹的计算</h2><h3 id="string-h-字符串-数组操作"><a href="#string-h-字符串-数组操作" class="headerlink" title="string.h: 字符串/数组操作"></a><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstring/">string.h</a>: 字符串/数组操作</h3><p>简单，不简单</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">memset</span><span class="params">(<span class="type">void</span> *s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    ((<span class="type">char</span> *)s)[i] = c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>让我们看看 clang 把它编译成了什么……</p>
-<ul>
-<li>以及，线程安全性？<a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/memset-race.c">memset-race.c</a></li>
-<li>标准库只对 “标准库内部数据” 的线程安全性负责<ul>
-<li>例子：printf 的 buffer</li>
-</ul>
-</li>
-</ul>
-<h2 id="封装-2-文件描述符"><a href="#封装-2-文件描述符" class="headerlink" title="封装 (2): 文件描述符"></a>封装 (2): 文件描述符</h2><h3 id="stdio-h-你熟悉的味道"><a href="#stdio-h-你熟悉的味道" class="headerlink" title="stdio.h: 你熟悉的味道"></a><a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/cstdio/">stdio.h</a>: 你熟悉的味道</h3><p><code>FILE *</code> 背后其实是一个文件描述符</p>
-<ul>
-<li>我们可以用 gdb 查看具体的FILE *(例如 stdout)<ul>
-<li>可以 “窥探” 到 glibc 的一些内部实现</li>
-<li>可以加载 glibc 的 debug symbols<ul>
-<li>在这门课上不推荐：你调试起来会很浪费时间</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>封装了文件描述符上的系统调用 (fseek, fgetpos, ftell, feof, …)</li>
-</ul>
-<hr>
-<p>vprintf 系列</p>
-<ul>
-<li>使用了 <code>stdarg.h</code> 的参数列表</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">vfprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vasprintf</span><span class="params">(<span class="type">char</span> **ret, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="封装-3-更多的进程-操作系统功能"><a href="#封装-3-更多的进程-操作系统功能" class="headerlink" title="封装 (3): 更多的进程/操作系统功能"></a>封装 (3): 更多的进程/操作系统功能</h2><h3 id="err-error-perror"><a href="#err-error-perror" class="headerlink" title="err, error, perror"></a>err, error, perror</h3><p>所有 API 都可能失败</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc nonexist.c</span><br><span class="line">gcc: error: nonexist.c: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>这个 “No such file or directory” 似乎见得有点多？</p>
-<ul>
-<li><code>cat nonexist.c, wc nonexist.c</code> 都是同样的 error message</li>
-<li>这不是巧合！<ul>
-<li>我们也可以 “山寨” 出同样的效果</li>
-<li>warn(“%s”, fname);(观察 strace)<ul>
-<li><code>err</code> 可以额外退出程序</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>errno 是进程共享还是线程独享？<ul>
-<li>这下知道协程的轻量了吧</li>
-</ul>
-</li>
-</ul>
-<h2 id="封装-4-地址空间"><a href="#封装-4-地址空间" class="headerlink" title="封装 (4): 地址空间"></a>封装 (4): 地址空间</h2><h3 id="malloc-和-free"><a href="#malloc-和-free" class="headerlink" title="malloc 和 free"></a>malloc 和 free</h3><p>Specification 很简单 (同 <a target="_blank" rel="noopener" href="http://jyywiki.cn/OS/2022/Labs/L1">Lab1</a>)</p>
-<ul>
-<li><p>在大区间 [L, R)[<em>L</em>,<em>R</em>) 中维护互不相交的区间的集合</p>
-</li>
-<li><p>malloc(s<em>s</em>) - 返回一段大小为s<em>s</em>的区间</p>
-<ul>
-<li>必要时可以向操作系统申请额外的 [L, R)[<em>L</em>,<em>R</em>) (观察 strace)</li>
-<li>允许在内存不足时 “拒绝” 请求</li>
-</ul>
-</li>
-</ul>
-<h3 id="malloc-Fast-and-Slow"><a href="#malloc-Fast-and-Slow" class="headerlink" title="malloc, Fast and Slow"></a>malloc, Fast and Slow</h3><p>设置两套系统：</p>
-<ul>
-<li>fast path<ul>
-<li>性能极好、并行度极高、覆盖大部分情况</li>
-<li>但有小概率会失败 (fall back to slow path)</li>
-</ul>
-</li>
-<li>slow path<ul>
-<li>不在乎那么快</li>
-<li>但把困难的事情做好<ul>
-<li>计算机系统里有很多这样的例子 (比如 cache)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="我们还可以……"><a href="#我们还可以……" class="headerlink" title="我们还可以……"></a>我们还可以……</h2><p>走出 C 的领域，基于 libc 实现</p>
-<ul>
-<li>C++ 编译器<ul>
-<li>继续实现 C++ Standard Library</li>
-<li>继续实现 <a target="_blank" rel="noopener" href="https://openjdk.java.net/groups/hotspot/">OpenJDK (HotSpot)</a></li>
-<li>继续实现 <a target="_blank" rel="noopener" href="https://v8.dev/">V8</a> (JavaScript)</li>
-</ul>
-</li>
-<li>CPython</li>
-<li>Go<ul>
-<li>再之后 Go 就可以自己编译自己了 (Goodbye, C!)</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>Eventually, (千疮百孔) 的整个计算机世界！</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3209212">C is not a low-level language</a> (CACM’18)</li>
-<li><a target="_blank" rel="noopener" href="https://gankra.github.io/blah/c-isnt-a-language/">C isn’t a programming language any more</a> (Gankra’s Blog)</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/10/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1128,23 +999,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1208,6 +1075,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
               </li>
              
@@ -1216,7 +1087,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1252,6 +1123,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
@@ -1260,7 +1135,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+                <a href="javascript:void(0)" class="js-tag color3">剑指offer</a>
               </li>
             
             <div class="clearfix"></div>
