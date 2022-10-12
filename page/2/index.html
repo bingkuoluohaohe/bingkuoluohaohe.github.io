@@ -122,6 +122,222 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-面试题/26.finalize" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/04/%E9%9D%A2%E8%AF%95%E9%A2%98/26.finalize/">finalize</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/04/%E9%9D%A2%E8%AF%95%E9%A2%98/26.finalize/" class="archive-article-date">
+  	<time datetime="2022-10-04T12:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>finalize</strong></p>
+<ul>
+<li>它是 Object 中的一个方法，如果子类重写它，垃圾回收时此方法会被调用，可以在其中进行资源释放和清理工作</li>
+<li>将资源释放和清理放在 finalize 方法中非常不好，非常影响性能，严重时甚至会引起 OOM，从 Java9 开始就被标注为 @Deprecated，不建议被使用了</li>
+</ul>
+<p><strong>finalize 原理</strong></p>
+<ol>
+<li>对 finalize 方法进行处理的核心逻辑位于 java.lang.ref.Finalizer 类中，它包含了名为 unfinalized 的静态变量（双向链表结构），Finalizer 也可被视为另一种引用对象（地位与软、弱、虚相当，只是不对外，无法直接使用）</li>
+<li>当重写了 finalize 方法的对象，在构造方法调用之时，JVM 都会将其包装成一个 Finalizer 对象，并加入 unfinalized 链表中</li>
+</ol>
+<p><img src="http://www.codekenan.icu/img/image-20210901121032813.png" alt="image-20210901121032813"></p>
+<ol start="3">
+<li>Finalizer 类中还有另一个重要的静态变量，即 ReferenceQueue 引用队列，刚开始它是空的。当狗对象可以被当作垃圾回收时，就会把这些狗对象对应的 Finalizer 对象加入此引用队列</li>
+<li>但此时 Dog 对象还没法被立刻回收，因为 unfinalized -&gt; Finalizer 这一引用链还在引用它嘛，为的是【先别着急回收啊，等我调完 finalize 方法，再回收】</li>
+<li>FinalizerThread 线程会从 ReferenceQueue 中逐一取出每个 Finalizer 对象，把它们从链表断开并真正调用 finallize 方法</li>
+</ol>
+<p><img src="http://www.codekenan.icu/img/image-20210901122228916.png" alt="image-20210901122228916"></p>
+<ol start="6">
+<li>由于整个 Finalizer 对象已经从 unfinalized 链表中断开，这样没谁能引用到它和狗对象，所以下次 gc 时就被回收了</li>
+</ol>
+<p><strong>finalize 缺点</strong></p>
+<ul>
+<li>无法保证资源释放：FinalizerThread 是守护线程，代码很有可能没来得及执行完，线程就结束了</li>
+<li>无法判断是否发生错误：执行 finalize 方法时，会吞掉任意异常（Throwable）</li>
+<li>内存释放不及时：重写了 finalize 方法的对象在第一次被 gc 时，并不能及时释放它占用的内存，因为要等着 FinalizerThread 调用完 finalize，把它从 unfinalized 队列移除后，第二次 gc 时才能真正释放内存</li>
+<li>有的文章提到【Finalizer 线程会和我们的主线程进行竞争，不过由于它的优先级较低，获取到的CPU时间较少，因此它永远也赶不上主线程的步伐】这个显然是错误的，FinalizerThread 的优先级较普通线程更高，原因应该是 finalize 串行执行慢等原因综合导致</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-面试题/25.四种引用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/04/%E9%9D%A2%E8%AF%95%E9%A2%98/25.%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8/">四种引用</a>
+    </h1>
+  
+
+        
+        <a href="/2022/10/04/%E9%9D%A2%E8%AF%95%E9%A2%98/25.%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2022-10-04T12:25:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>强引用</strong></p>
+<ol>
+<li><p>普通变量赋值即为强引用，如 A a = new A();</p>
+</li>
+<li><p>通过 GC Root 的引用链，如果强引用不到该对象，该对象才能被回收</p>
+</li>
+</ol>
+<img src="http://www.codekenan.icu/img/image-20210901111903574.png" alt="image-20210901111903574" style="zoom:80%;" />
+
+<p><strong>软引用（SoftReference）</strong></p>
+<ol>
+<li><p>例如：SoftReference a = new SoftReference(new A());</p>
+</li>
+<li><p>如果仅有软引用该对象时，首次垃圾回收不会回收该对象，如果内存仍不足，再次回收时才会释放对象</p>
+</li>
+<li><p>软引用自身需要配合引用队列来释放</p>
+</li>
+<li><p>典型例子是反射数据</p>
+</li>
+</ol>
+<img src="http://www.codekenan.icu/img/image-20210901111957328.png" alt="image-20210901111957328" style="zoom:80%;" />
+
+
+
+<p><strong>弱引用（WeakReference）</strong></p>
+<ol>
+<li><p>例如：WeakReference a = new WeakReference(new A());</p>
+</li>
+<li><p>如果仅有弱引用引用该对象时，只要发生垃圾回收，就会释放该对象</p>
+</li>
+<li><p>弱引用自身需要配合引用队列来释放</p>
+</li>
+<li><p>典型例子是 ThreadLocalMap 中的 Entry 对象</p>
+</li>
+</ol>
+<img src="http://www.codekenan.icu/img/image-20210901112107707.png" alt="image-20210901112107707" style="zoom:80%;" />
+
+
+
+<p><strong>虚引用（PhantomReference）</strong></p>
+<ol>
+<li><p>例如： PhantomReference a = new PhantomReference(new A(), referenceQueue);</p>
+</li>
+<li><p>必须配合引用队列一起使用，当虚引用所引用的对象被回收时，由 Reference Handler 线程将虚引用对象入队，这样就可以知道哪些对象被回收，从而对它们关联的资源做进一步处理</p>
+</li>
+<li><p>典型例子是 Cleaner 释放 DirectByteBuffer 关联的直接内存</p>
+</li>
+</ol>
+<img src="http://www.codekenan.icu/img/image-20210901112157901.png" alt="image-20210901112157901" style="zoom:80%;" />
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-面试题/24.类加载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1200,173 +1416,6 @@
 
 
   
-    <article id="post-sql/175.组合两个表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/04/sql/175.%E7%BB%84%E5%90%88%E4%B8%A4%E4%B8%AA%E8%A1%A8/">175.组合两个表</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/04/sql/175.%E7%BB%84%E5%90%88%E4%B8%A4%E4%B8%AA%E8%A1%A8/" class="archive-article-date">
-  	<time datetime="2022-10-04T08:57:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combine-two-tables/">175. 组合两个表 - 力扣（LeetCode）</a></p>
-<p>表: <code>Person</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> FirstName   <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> LastName    <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">personId 是该表的主键列。</span><br><span class="line">该表包含一些人的 ID 和他们的姓和名的信息。</span><br></pre></td></tr></table></figure>
-
-<p>表: <code>Address</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> 列名         <span class="operator">|</span> 类型    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> AddressId   <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> PersonId    <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> City        <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> State       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">addressId 是该表的主键列。</span><br><span class="line">该表的每一行都包含一个 ID <span class="operator">=</span> PersonId 的人的城市和州的信息。</span><br></pre></td></tr></table></figure>
-
-<p>编写一个SQL查询来报告 Person 表中每个人的姓、名、城市和州。如果 personId 的地址不在 Address 表中，则报告为空  null 。</p>
-<p>以 任意顺序 返回结果表。</p>
-<p>查询结果格式如下所示。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> personId <span class="operator">|</span> lastName <span class="operator">|</span> firstName <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>        <span class="operator">|</span> Wang     <span class="operator">|</span> Allen     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> Alice    <span class="operator">|</span> Bob       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+-----------+</span></span><br><span class="line">Address表:</span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> addressId <span class="operator">|</span> personId <span class="operator">|</span> city          <span class="operator">|</span> state      <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>         <span class="operator">|</span> <span class="number">2</span>        <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York   <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>         <span class="operator">|</span> <span class="number">3</span>        <span class="operator">|</span> Leetcode      <span class="operator">|</span> California <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> firstName <span class="operator">|</span> lastName <span class="operator">|</span> city          <span class="operator">|</span> state    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line"><span class="operator">|</span> Allen     <span class="operator">|</span> Wang     <span class="operator">|</span> <span class="keyword">Null</span>          <span class="operator">|</span> <span class="keyword">Null</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> Bob       <span class="operator">|</span> Alice    <span class="operator">|</span> <span class="keyword">New</span> York City <span class="operator">|</span> <span class="keyword">New</span> York <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-----------+----------+---------------+----------+</span></span><br><span class="line">解释: </span><br><span class="line">地址表中没有 personId <span class="operator">=</span> <span class="number">1</span> 的地址，所以它们的城市和州返回 <span class="keyword">null</span>。</span><br><span class="line">addressId <span class="operator">=</span> <span class="number">1</span> 包含了 personId <span class="operator">=</span> <span class="number">2</span> 的地址信息。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-LEFT-JOIN"><a href="#1-LEFT-JOIN" class="headerlink" title="1.LEFT JOIN"></a>1.LEFT JOIN</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t1.firstName,t1.lastName,t2.city,t2.state</span><br><span class="line"><span class="keyword">FROM</span> Person t1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address t2</span><br><span class="line"><span class="keyword">ON</span> t1.personId <span class="operator">=</span> t2.personId</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sql/196.删除重复的电子邮箱" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/10/04/sql/196.%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E7%AE%B1/">196.删除重复的电子邮箱</a>
-    </h1>
-  
-
-        
-        <a href="/2022/10/04/sql/196.%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E7%AE%B1/" class="archive-article-date">
-  	<time datetime="2022-10-04T08:48:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-duplicate-emails/">196. 删除重复的电子邮箱 - 力扣（LeetCode）</a></p>
-<p>表: <code>Person</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span> Name <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> id          <span class="operator">|</span> <span class="type">int</span>     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> email       <span class="operator">|</span> <span class="type">varchar</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line">id是该表的主键列。</span><br><span class="line">该表的每一行包含一封电子邮件。电子邮件将不包含大写字母</span><br></pre></td></tr></table></figure>
-
-<p>编写一个 SQL 删除语句来 删除 所有重复的电子邮件，只保留一个id最小的唯一电子邮件。</p>
-<p>以 任意顺序 返回结果表。 （注意： 仅需要写删除语句，将自动对剩余结果进行查询）</p>
-<p>查询结果格式如下所示。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">Person 表:</span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">输出: </span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> email            <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> john<span class="variable">@example</span>.com <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> bob<span class="variable">@example</span>.com  <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+------------------+</span></span><br><span class="line">解释: john<span class="variable">@example</span>.com重复两次。我们保留最小的Id <span class="operator">=</span> <span class="number">1</span>。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-LEFT-JOIN"><a href="#1-LEFT-JOIN" class="headerlink" title="1.LEFT JOIN"></a>1.LEFT JOIN</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> t1</span><br><span class="line"><span class="keyword">FROM</span> Person t1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Person t2</span><br><span class="line"><span class="keyword">ON</span> t1.email <span class="operator">=</span> t2.email</span><br><span class="line"><span class="keyword">WHERE</span> t1.id <span class="operator">&gt;</span> t2.id</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1448,15 +1497,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1464,11 +1509,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1477,6 +1522,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1524,11 +1573,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1572,15 +1621,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">分治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">

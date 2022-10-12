@@ -122,6 +122,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-面试题/16.volatile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/10/%E9%9D%A2%E8%AF%95%E9%A2%98/16.volatile/">volatile</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/10/%E9%9D%A2%E8%AF%95%E9%A2%98/16.volatile/" class="archive-article-date">
+  	<time datetime="2022-09-10T12:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>原子性</strong></p>
+<ul>
+<li>起因：多线程下，不同线程的<strong>指令发生了交错</strong>导致的共享变量的读写混乱</li>
+<li>解决：用悲观锁或乐观锁解决，volatile 并不能解决原子性</li>
+</ul>
+<p><strong>可见性</strong></p>
+<ul>
+<li>起因：由于<strong>编译器优化、或缓存优化、或 CPU 指令重排序优化</strong>导致的对共享变量所做的修改另外的线程看不到</li>
+<li>解决：用 volatile 修饰共享变量，能够防止编译器等优化发生，让一个线程对共享变量的修改对另一个线程可见</li>
+</ul>
+<p><strong>有序性</strong></p>
+<ul>
+<li>起因：由于<strong>编译器优化、或缓存优化、或 CPU 指令重排序优化</strong>导致指令的实际执行顺序与编写顺序不一致</li>
+<li>解决：用 volatile 修饰共享变量会在读、写共享变量时加入不同的屏障，阻止其他读写操作越过屏障，从而达到阻止重排序的效果</li>
+<li>注意：<ul>
+<li><strong>volatile 变量写</strong>加的屏障是阻止上方其它写操作越过屏障排到 <strong>volatile 变量写</strong>之下</li>
+<li><strong>volatile 变量读</strong>加的屏障是阻止下方其它读操作越过屏障排到 <strong>volatile 变量读</strong>之上</li>
+<li>volatile 读写加入的屏障只能防止同一线程内的指令重排</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-面试题/15.lock vs synchronized" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -180,6 +270,103 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestReentrantLock</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">MyReentrantLock</span> <span class="variable">LOCK</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyReentrantLock</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="type">Condition</span> <span class="variable">c1</span> <span class="operator">=</span> LOCK.newCondition(<span class="string">&quot;c1&quot;</span>);</span><br><span class="line">    <span class="keyword">static</span> <span class="type">Condition</span> <span class="variable">c2</span> <span class="operator">=</span> LOCK.newCondition(<span class="string">&quot;c2&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="type">boolean</span> <span class="variable">stop</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException, IOException &#123;</span><br><span class="line">        learnLock();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">learnLock</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        System.out.println(LOCK);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">        &#125;, <span class="string">&quot;t1&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">        &#125;, <span class="string">&quot;t2&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">        &#125;, <span class="string">&quot;t3&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">        &#125;, <span class="string">&quot;t4&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">fairVsUnfair</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">            sleep1s();</span><br><span class="line">            LOCK.unlock();</span><br><span class="line">        &#125;, <span class="string">&quot;t1&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">            sleep1s();</span><br><span class="line">            LOCK.unlock();</span><br><span class="line">        &#125;, <span class="string">&quot;t2&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">            sleep1s();</span><br><span class="line">            LOCK.unlock();</span><br><span class="line">        &#125;, <span class="string">&quot;t3&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">MyThread</span>(() -&gt; &#123;</span><br><span class="line">            LOCK.lock();</span><br><span class="line">            get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;acquire lock...&quot;</span>);</span><br><span class="line">            sleep1s();</span><br><span class="line">            LOCK.unlock();</span><br><span class="line">        &#125;, <span class="string">&quot;t4&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        get(<span class="string">&quot;t&quot;</span>).debug(<span class="string">&quot;&#123;&#125;&quot;</span>, LOCK);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!stop) &#123;</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> LOCK.tryLock(<span class="number">10</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">                    <span class="keyword">if</span> (b) &#123;</span><br><span class="line">                        System.out.println(Thread.currentThread().getName() + <span class="string">&quot; acquire lock...&quot;</span>);</span><br><span class="line">                        stop = <span class="literal">true</span>;</span><br><span class="line">                        sleep1s();</span><br><span class="line">                        LOCK.unlock();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sleep1s</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">MyReentrantLock</span> <span class="keyword">extends</span> <span class="title class_">ReentrantLock</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Condition&gt; conditions = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">MyReentrantLock</span><span class="params">(<span class="type">boolean</span> fair)</span> &#123;</span><br><span class="line">            <span class="built_in">super</span>(fair);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Condition <span class="title function_">newCondition</span><span class="params">(String name)</span> &#123;</span><br><span class="line">            <span class="type">Condition</span> <span class="variable">condition</span> <span class="operator">=</span> <span class="built_in">super</span>.newCondition();</span><br><span class="line">            conditions.put(name, condition);</span><br><span class="line">            <span class="keyword">return</span> condition;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="number">512</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">queuedInfo</span> <span class="operator">=</span> getQueuedInfo();</span><br><span class="line">            List&lt;String&gt; all = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            all.add(String.format(<span class="string">&quot;| owner[%s] state[%s]&quot;</span>, <span class="built_in">this</span>.getOwner(), <span class="built_in">this</span>.getState()));</span><br><span class="line">            all.add(String.format(<span class="string">&quot;| blocked queue %s&quot;</span>, queuedInfo));</span><br><span class="line">            <span class="keyword">for</span> (Map.Entry&lt;String, Condition&gt; entry : <span class="built_in">this</span>.conditions.entrySet()) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">waitingInfo</span> <span class="operator">=</span> getWaitingInfo(entry.getValue());</span><br><span class="line">                all.add(String.format(<span class="string">&quot;| waiting queue [%s] %s&quot;</span>, entry.getKey(), waitingInfo));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> <span class="variable">maxLength</span> <span class="operator">=</span> all.stream().map(String::length).max(Comparator.naturalOrder()).orElse(<span class="number">100</span>);</span><br><span class="line">            <span class="keyword">for</span> (String s : all) &#123;</span><br><span class="line">                sb.append(s);</span><br><span class="line">                <span class="type">String</span> <span class="variable">space</span> <span class="operator">=</span> IntStream.range(<span class="number">0</span>, maxLength - s.length() + <span class="number">7</span>).mapToObj(i -&gt; <span class="string">&quot; &quot;</span>).collect(Collectors.joining(<span class="string">&quot;&quot;</span>));</span><br><span class="line">                sb.append(space).append(<span class="string">&quot;|\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            sb.deleteCharAt(sb.length() - <span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">line1</span> <span class="operator">=</span> IntStream.range(<span class="number">0</span>, maxLength ).mapToObj(i -&gt; <span class="string">&quot;-&quot;</span>).collect(Collectors.joining(<span class="string">&quot;&quot;</span>));</span><br><span class="line">            sb.insert(<span class="number">0</span>, String.format(<span class="string">&quot;%n| Lock %s|%n&quot;</span>, line1));</span><br><span class="line">            maxLength += <span class="number">6</span>;</span><br><span class="line">            <span class="type">String</span> <span class="variable">line3</span> <span class="operator">=</span> IntStream.range(<span class="number">0</span>, maxLength).mapToObj(i -&gt; <span class="string">&quot;-&quot;</span>).collect(Collectors.joining(<span class="string">&quot;&quot;</span>));</span><br><span class="line">            sb.append(String.format(<span class="string">&quot;%n|%s|&quot;</span>, line3));</span><br><span class="line">            <span class="keyword">return</span> sb.toString();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> Object <span class="title function_">getState</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">Field</span> <span class="variable">syncField</span> <span class="operator">=</span> ReentrantLock.class.getDeclaredField(<span class="string">&quot;sync&quot;</span>);</span><br><span class="line">                Class&lt;?&gt; aqsClass = Class.forName(<span class="string">&quot;java.util.concurrent.locks.AbstractQueuedSynchronizer&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">stateField</span> <span class="operator">=</span> aqsClass.getDeclaredField(<span class="string">&quot;state&quot;</span>);</span><br><span class="line">                syncField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                <span class="type">AbstractQueuedSynchronizer</span> <span class="variable">sync</span> <span class="operator">=</span> (AbstractQueuedSynchronizer) syncField.get(<span class="built_in">this</span>);</span><br><span class="line">                stateField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                <span class="keyword">return</span> stateField.get(sync);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> String <span class="title function_">getWaitingInfo</span><span class="params">(Condition condition)</span> &#123;</span><br><span class="line">            List&lt;String&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">Field</span> <span class="variable">firstWaiterField</span> <span class="operator">=</span> AbstractQueuedSynchronizer.ConditionObject.class.getDeclaredField(<span class="string">&quot;firstWaiter&quot;</span>);</span><br><span class="line">                Class&lt;?&gt; conditionNodeClass = Class.forName(<span class="string">&quot;java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode&quot;</span>);</span><br><span class="line">                Class&lt;?&gt; nodeClass = Class.forName(<span class="string">&quot;java.util.concurrent.locks.AbstractQueuedSynchronizer$Node&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">waiterField</span> <span class="operator">=</span> nodeClass.getDeclaredField(<span class="string">&quot;waiter&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">statusField</span> <span class="operator">=</span> nodeClass.getDeclaredField(<span class="string">&quot;status&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">nextWaiterField</span> <span class="operator">=</span> conditionNodeClass.getDeclaredField(<span class="string">&quot;nextWaiter&quot;</span>);</span><br><span class="line">                firstWaiterField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                waiterField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                statusField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                nextWaiterField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                <span class="type">Object</span> <span class="variable">fistWaiter</span> <span class="operator">=</span> firstWaiterField.get(condition);</span><br><span class="line">                <span class="keyword">while</span> (fistWaiter != <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="type">Object</span> <span class="variable">waiter</span> <span class="operator">=</span> waiterField.get(fistWaiter);</span><br><span class="line">                    <span class="type">Object</span> <span class="variable">status</span> <span class="operator">=</span> statusField.get(fistWaiter);</span><br><span class="line">                    result.add(String.format(<span class="string">&quot;([%s]%s)&quot;</span>, status, waiter));</span><br><span class="line">                    fistWaiter = nextWaiterField.get(fistWaiter);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> String.join(<span class="string">&quot;-&gt;&quot;</span>, result);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> String <span class="title function_">getQueuedInfo</span><span class="params">()</span> &#123;</span><br><span class="line">            List&lt;String&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">Field</span> <span class="variable">syncField</span> <span class="operator">=</span> ReentrantLock.class.getDeclaredField(<span class="string">&quot;sync&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">headField</span> <span class="operator">=</span> AbstractQueuedSynchronizer.class.getDeclaredField(<span class="string">&quot;head&quot;</span>);</span><br><span class="line">                Class&lt;?&gt; nodeClass = Class.forName(<span class="string">&quot;java.util.concurrent.locks.AbstractQueuedSynchronizer$Node&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">waiterField</span> <span class="operator">=</span> nodeClass.getDeclaredField(<span class="string">&quot;waiter&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">statusField</span> <span class="operator">=</span> nodeClass.getDeclaredField(<span class="string">&quot;status&quot;</span>);</span><br><span class="line">                <span class="type">Field</span> <span class="variable">nextField</span> <span class="operator">=</span> nodeClass.getDeclaredField(<span class="string">&quot;next&quot;</span>);</span><br><span class="line">                syncField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                <span class="type">AbstractQueuedSynchronizer</span> <span class="variable">sync</span> <span class="operator">=</span> (AbstractQueuedSynchronizer) syncField.get(<span class="built_in">this</span>);</span><br><span class="line">                waiterField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                statusField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                nextField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                headField.setAccessible(<span class="literal">true</span>);</span><br><span class="line">                <span class="type">Object</span> <span class="variable">head</span> <span class="operator">=</span> headField.get(sync);</span><br><span class="line">                <span class="keyword">while</span> (head != <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="type">Object</span> <span class="variable">waiter</span> <span class="operator">=</span> waiterField.get(head);</span><br><span class="line">                    <span class="type">Object</span> <span class="variable">status</span> <span class="operator">=</span> statusField.get(head);</span><br><span class="line">                    result.add(String.format(<span class="string">&quot;(&#123;%s&#125;%s)&quot;</span>, status, waiter));</span><br><span class="line">                    head = nextField.get(head);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> String.join(<span class="string">&quot;-&gt;&quot;</span>, result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">MyThread</span><span class="params">(Runnable target, String name)</span> &#123;</span><br><span class="line">            <span class="built_in">super</span>(target, name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-面试题/14.wait vs sleep" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/10/%E9%9D%A2%E8%AF%95%E9%A2%98/14.wait%20vs%20sleep/">wait vs sleep</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/10/%E9%9D%A2%E8%AF%95%E9%A2%98/14.wait%20vs%20sleep/" class="archive-article-date">
+  	<time datetime="2022-09-10T12:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>一个共同点，三个不同点</strong></p>
+<p>共同点</p>
+<ul>
+<li>wait() ，wait(long) 和 sleep(long) 的效果都是让当前线程暂时放弃 CPU 的使用权，进入阻塞状态</li>
+</ul>
+<p>不同点</p>
+<ul>
+<li><p>方法归属不同</p>
+<ul>
+<li>sleep(long) 是 Thread 的静态方法</li>
+<li>而 wait()，wait(long) 都是 Object 的成员方法，每个对象都有</li>
+</ul>
+</li>
+<li><p>醒来时机不同</p>
+<ul>
+<li>执行 sleep(long) 和 wait(long) 的线程都会在等待相应毫秒后醒来</li>
+<li>wait(long) 和 wait() 还可以被 notify 唤醒，wait() 如果不唤醒就一直等下去</li>
+<li>它们都可以被打断唤醒</li>
+</ul>
+</li>
+<li><p>锁特性不同（重点）</p>
+<ul>
+<li>wait 方法的调用必须先获取 wait 对象的锁，而 sleep 则无此限制</li>
+<li>wait 方法执行后会释放对象锁，允许其它线程获得该对象锁（我放弃 cpu，但你们还可以用）</li>
+<li>而 sleep 如果在 synchronized 代码块中执行，并不会释放对象锁（我放弃 cpu，你们也用不了）</li>
+</ul>
+</li>
+</ul>
 
       
 
@@ -842,158 +1029,6 @@
 
 
   
-    <article id="post-面试题/6.快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/6.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/6.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2022-09-09T03:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="http://codekenan.icu/static/quick_sort.html">快速排序 </a></p>
-<p><strong>单边循环快排（lomuto 洛穆托分区方案）</strong></p>
-<ol>
-<li><p>选择最右元素作为基准点元素</p>
-</li>
-<li><p>j 指针负责找到比基准点小的元素，一旦找到则与 i 进行交换</p>
-</li>
-<li><p>i 指针维护小于基准点元素的边界，也是每次交换的目标索引</p>
-</li>
-<li><p>最后基准点与 i 交换，i 即为分区位置</p>
-        
-          <a class="article-more-a" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/6.%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-面试题/5.希尔排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/5.%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">希尔排序</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/09/%E9%9D%A2%E8%AF%95%E9%A2%98/5.%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2022-09-09T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">shellSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span>[] dlta)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; dlta.length; i++) &#123;</span><br><span class="line">        shellInsert(arr, dlta[i]);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">shellInsert</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> dk)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> dk; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt; arr[i - dk]) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            <span class="keyword">for</span> (j = i - dk; j &gt;= <span class="number">0</span>; j = j - dk) &#123;</span><br><span class="line">                <span class="keyword">if</span> (temp &lt; arr[j]) &#123;</span><br><span class="line">                    arr[j + dk] = arr[j];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[j + dk] = temp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/16/">Next &amp;raquo;</a>
@@ -1075,15 +1110,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1091,11 +1122,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1104,6 +1135,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1151,11 +1186,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1199,15 +1234,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">分治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">

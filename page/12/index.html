@@ -122,6 +122,176 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode/400/LC_389. 找不同" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/24/leetcode/400/LC_389.%20%E6%89%BE%E4%B8%8D%E5%90%8C/">LC_389.找不同</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/24/leetcode/400/LC_389.%20%E6%89%BE%E4%B8%8D%E5%90%8C/" class="archive-article-date">
+  	<time datetime="2022-09-24T06:54:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-difference/">389. 找不同 - 力扣（LeetCode）</a></p>
+<p>给定两个字符串 <code>s</code> 和 <code>t</code> ，它们只包含小写字母。</p>
+<p>字符串 <code>t</code> 由字符串 <code>s</code> 随机重排，然后在随机位置添加一个字母。</p>
+<p>请找出在 <code>t</code> 中被添加的字母。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;abcd&quot;</span>, t = <span class="string">&quot;abcde&quot;</span></span><br><span class="line">输出：<span class="string">&quot;e&quot;</span></span><br><span class="line">解释：<span class="string">&#x27;e&#x27;</span> 是那个被添加的字母。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-位运算"><a href="#1-位运算" class="headerlink" title="1.位运算"></a>1.位运算</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">char</span> <span class="title function_">findTheDifference</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ret</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); ++i) &#123;</span><br><span class="line">        ret ^= s.charAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; t.length(); ++i) &#123;</span><br><span class="line">        ret ^= t.charAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">char</span>) ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">位运算</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode/600/LC_496. 下一个更大元素 I" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/24/leetcode/600/LC_496.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20I/">LC_496.下一个更大元素 I</a>
+    </h1>
+  
+
+        
+        <a href="/2022/09/24/leetcode/600/LC_496.%20%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0%20I/" class="archive-article-date">
+  	<time datetime="2022-09-24T06:10:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/">496. 下一个更大元素 I - 力扣（LeetCode）</a></p>
+<p>nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。</p>
+<p>给你两个 没有重复元素 的数组 nums1 和 nums2 ，下标从 0 开始计数，其中nums1 是 nums2 的子集。</p>
+<p>对于每个 0 &lt;= i &lt; nums1.length ，找出满足 nums1[i] == nums2[j] 的下标 j ，并且在 nums2 确定 nums2[j] 的 下一个更大元素 。如果不存在下一个更大元素，那么本次查询的答案是 -1 。</p>
+<p>返回一个长度为 nums1.length 的数组 ans 作为答案，满足 ans[i] 是如上所述的 下一个更大元素 。</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：nums1 = [<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>], nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>].</span><br><span class="line">输出：[-<span class="number">1</span>,<span class="number">3</span>,-<span class="number">1</span>]</span><br><span class="line">解释：nums1 中每个值的下一个更大元素如下所述：</span><br><span class="line">- <span class="number">4</span> ，用加粗斜体标识，nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>]。不存在下一个更大元素，所以答案是 -<span class="number">1</span> 。</span><br><span class="line">- <span class="number">1</span> ，用加粗斜体标识，nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>]。下一个更大元素是 <span class="number">3</span> 。</span><br><span class="line">- <span class="number">2</span> ，用加粗斜体标识，nums2 = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>]。不存在下一个更大元素，所以答案是 -<span class="number">1</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-单调栈"><a href="#1-单调栈" class="headerlink" title="1.单调栈"></a>1.单调栈</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/solution/gong-shui-san-xie-yi-ti-shuang-jie-bian-n6nwz/">【宫水三叶】一题双解 :「遍历」&amp;「单调栈」 - 下一个更大元素 I - 力扣（LeetCode）</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] nextGreaterElement(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums1.length;</span><br><span class="line">    <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> nums2.length;</span><br><span class="line">    Deque&lt;Integer&gt; d = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">    Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i : nums2) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!d.isEmpty() &amp;&amp; d.peekLast() &lt; i) &#123;</span><br><span class="line">            map.put(d.pollLast(), i);</span><br><span class="line">        &#125;</span><br><span class="line">        d.addLast(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        ans[i] = map.getOrDefault(nums1[i], -<span class="number">1</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-南京大学蒋炎岩-操作系统/11.操作系统上的进程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -928,235 +1098,6 @@
 
 
   
-    <article id="post-南京大学蒋炎岩-操作系统/9.操作系统的状态机模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/23/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/">9.操作系统的状态机模型</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/23/%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%AD%A6%E8%92%8B%E7%82%8E%E5%B2%A9-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/9.%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2022-09-23T02:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>软件和硬件的桥梁</li>
-<li>操作系统的加载和初始化</li>
-<li>AbstractMachine 代码导读</li>
-</ul>
-<h2 id="硬件和软件的桥梁"><a href="#硬件和软件的桥梁" class="headerlink" title="硬件和软件的桥梁"></a>硬件和软件的桥梁</h2><p>我们已经知道如何写一个 “最小” 的 C 程序了：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/minimal.S">minimal.S</a></li>
-<li>不需要链接任何库，就能在操作系统上运行</li>
-</ul>
-<hr>
-<p>“程序 = 状态机” 没问题</p>
-<ul>
-<li>带来更多的疑问<ul>
-<li>但谁创建的这个状态机？？？<ul>
-<li>当然是操作系统了……呃……</li>
-</ul>
-</li>
-<li>这个程序可以在没有操作系统的硬件上运行吗？<ul>
-<li>“启动” 状态机是由 “加载器” 完成的</li>
-<li>加载器也是一段程序 (状态机)</li>
-<li>这个程序由是由谁加载的？</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Bare-metal-与程序员的约定"><a href="#Bare-metal-与程序员的约定" class="headerlink" title="Bare-metal 与程序员的约定"></a>Bare-metal 与程序员的约定</h3><p>为了让计算机能运行任何我们的程序，一定存在软件/硬件的约定</p>
-<ul>
-<li>CPU reset 后，处理器处于某个确定的状态<ul>
-<li>PC 指针一般指向一段 memory-mapped ROM<ul>
-<li>ROM 存储了厂商提供的 firmware (固件)</li>
-</ul>
-</li>
-<li>处理器的大部分特性处于关闭状态<ul>
-<li>缓存、虚拟存储、……</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Firmware (固件，厂商提供的代码)<ul>
-<li>将用户数据加载到内存<ul>
-<li>例如存储介质上的第二级 loader (加载器)</li>
-<li>或者直接加载操作系统 (嵌入式系统)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="CPU-Reset-之后：发生了什么？"><a href="#CPU-Reset-之后：发生了什么？" class="headerlink" title="CPU Reset 之后：发生了什么？"></a>CPU Reset 之后：发生了什么？</h3><p>《计算机系统基础》：不仅是程序，整个计算机系统也是一个状态机</p>
-<ul>
-<li>从 PC (<code>CS:IP</code>) 指针处取指令、译码、执行……</li>
-<li>从 firmware 开始执行<ul>
-<li><code>ffff0</code> 通常是一条向 firmware 跳转的 jmp 指令</li>
-</ul>
-</li>
-</ul>
-<h3 id="Legacy-BIOS-约定"><a href="#Legacy-BIOS-约定" class="headerlink" title="Legacy BIOS: 约定"></a>Legacy BIOS: 约定</h3><p>Firmware 必须提供机制，将用户数据载入内存</p>
-<ul>
-<li>Legacy BIOS 把第一个可引导设备的第一个扇区加载到物理内存的7c00位置<ul>
-<li>此时处理器处于 16-bit 模式</li>
-<li>规定CS:IP = 0x7c00,  (R[CS] &lt;&lt; 4) | R[IP] == 0x7c00<ul>
-<li>可能性1：<code>CS = 0x07c0, IP = 0</code></li>
-<li>可能性2：<code>CS = 0, IP = 0x7c00</code></li>
-</ul>
-</li>
-<li>其他没有任何约束</li>
-</ul>
-</li>
-</ul>
-<h3 id="计算机系统公理：你想到的就一定有人做到。"><a href="#计算机系统公理：你想到的就一定有人做到。" class="headerlink" title="计算机系统公理：你想到的就一定有人做到。"></a>计算机系统公理：你想到的就一定有人做到。</h3><ul>
-<li>模拟方案：QEMU<ul>
-<li>传奇黑客、天才程序员<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28388113">Fabrice Bellard</a>的杰作<ul>
-<li><a target="_blank" rel="noopener" href="https://www.usenix.org/legacy/publications/library/proceedings/usenix05/tech/freenix/full_papers/bellard/bellard.pdf">QEMU, A fast and portable dynamic translator</a> (USENIX ATC’05)</li>
-<li>Android Virtual Device, VirtualBox, … 背后都是 QEMU</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>真机方案：JTAG (Joint Test Action Group) debugger<ul>
-<li>一系列 (物理) 调试寄存器，可以实现 gdb 接口 (!!!)</li>
-</ul>
-</li>
-</ul>
-<h2 id="操作系统的状态机模型"><a href="#操作系统的状态机模型" class="headerlink" title="操作系统的状态机模型"></a>操作系统的状态机模型</h2><h3 id="操作系统：是个-C-程序"><a href="#操作系统：是个-C-程序" class="headerlink" title="操作系统：是个 C 程序"></a>操作系统：是个 C 程序</h3><p>一个迷你 “操作系统” <a target="_blank" rel="noopener" href="http://jyywiki.cn/pages/OS/2022/demos/thread-os.c">thread-os.c</a></p>
-<ul>
-<li>make 会得到一个 “磁盘镜像”，好像魔法一样<ul>
-<li>就跟你们第一次用 IDE 的时候按一个键就可以编译运行一样</li>
-</ul>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">南京大学蒋炎岩-操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-计算机系统基础/1.1--为什么要学习计算机系统？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/1.1--%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%9F/">1.1--为什么要学习计算机系统？</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/1.1--%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%9F/" class="archive-article-date">
-  	<time datetime="2022-09-22T09:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">计算机系统基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1238,15 +1179,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">netty</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color1">netty</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1254,11 +1191,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color5">springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1267,6 +1204,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">sql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1314,11 +1255,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">计算机系统基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1362,15 +1303,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">位运算</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">分治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
               </li>
              
               <li class="article-tag-list-item">
